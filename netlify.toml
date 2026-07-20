@@ -1,12 +1,14 @@
+# afterlight-stewardship.netlify.app publishes Afterlight at the site root.
+# The studio site should use a separate Netlify site with publish = "."
 [build]
-  publish = "."
-
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+  publish = "afterlight"
 
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.{css,js,ico,png,jpg,webp,svg}"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
