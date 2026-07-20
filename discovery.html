@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Complete the Brandon Fonville Creative Studio discovery questionnaire before your project proposal." />
+  <title>Discovery Questionnaire :  Brandon Fonville Creative Studio</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="discovery.css" />
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body class="discovery-page">
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">BF</span>
+      <span class="brand-name">Brandon Fonville<small>Creative Studio</small></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">← Back to site</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch color theme" title="Switch theme">
+        <span class="theme-icon theme-icon-moon">☾</span>
+        <span class="theme-icon theme-icon-sun">☀</span>
+      </button>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  </header>
+
+  <main class="discovery-main">
+    <div class="discovery-intro">
+      <p class="eyebrow">Step 1 :  Discovery</p>
+      <h1>Client discovery questionnaire</h1>
+      <p>
+        Complete this form before we prepare your proposal. Your answers help define scope,
+        creative direction, timeline, and the right studio package for your project.
+      </p>
+      <p class="discovery-note">
+        This is not a contract. After review, you'll receive a proposal with scope, timeline,
+        and investment. A signed agreement and deposit are required before design work begins.
+      </p>
+    </div>
+
+    <form
+      class="discovery-form"
+      id="discoveryForm"
+      action="https://formspree.io/f/xwvjkpva"
+      method="POST"
+    >
+      <input type="hidden" name="_subject" value="Discovery questionnaire: Brandon Fonville Creative Studio" />
+
+      <!-- Contact -->
+      <section class="discovery-section">
+        <h2>Your information</h2>
+        <p>How we can reach you after reviewing your answers.</p>
+        <div class="discovery-fields">
+          <div class="field">
+            <label for="contactName">Full name</label>
+            <input id="contactName" name="contact_name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="contactEmail">Email</label>
+            <input id="contactEmail" name="contact_email" type="email" placeholder="you@company.com" required />
+          </div>
+          <div class="field">
+            <label for="companyName">Business / brand name</label>
+            <input id="companyName" name="company_name" type="text" placeholder="Company or brand" required />
+          </div>
+          <div class="field">
+            <label for="contactPhone">Phone (optional)</label>
+            <input id="contactPhone" name="contact_phone" type="tel" placeholder="(555) 555-5555" />
+          </div>
+          <div class="field field-full">
+            <label for="website">Website or social (if any)</label>
+            <input id="website" name="website" type="text" placeholder="https://yoursite.com · @yourbrand" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Company overview -->
+      <section class="discovery-section">
+        <h2>Company overview</h2>
+        <p>Tell us what you do and where you're headed.</p>
+        <div class="discovery-fields">
+          <div class="field field-full">
+            <label for="companyOverview">What does your company or brand do?</label>
+            <textarea id="companyOverview" name="company_overview" rows="3" placeholder="Brief overview of your business, products, or services…" required></textarea>
+          </div>
+          <div class="field field-full">
+            <label for="tagline">Tagline or slogan (if any)</label>
+            <input id="tagline" name="tagline" type="text" placeholder="e.g. Earned, Not Given" />
+          </div>
+          <div class="field field-full">
+            <label for="brandPersonality">Brand personality (3 to 5 words)</label>
+            <input id="brandPersonality" name="brand_personality" type="text" placeholder="e.g. bold, premium, approachable, heritage" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Goals -->
+      <section class="discovery-section">
+        <h2>Project goals</h2>
+        <p>What you're trying to achieve with this project.</p>
+        <div class="discovery-fields">
+          <div class="field field-full">
+            <label for="primaryGoal">What do you want to achieve?</label>
+            <textarea id="primaryGoal" name="primary_goal" rows="3" placeholder="Launch a brand, redesign a logo, build a website, prepare a product for market…" required></textarea>
+          </div>
+          <div class="field field-full">
+            <label for="problemSolved">What problem does this solve?</label>
+            <textarea id="problemSolved" name="problem_solved" rows="2" placeholder="What's not working today or what's missing?" required></textarea>
+          </div>
+          <div class="field field-full">
+            <label for="successMetrics">How will you measure success?</label>
+            <textarea id="successMetrics" name="success_metrics" rows="2" placeholder="Sales, leads, brand recognition, launch date, etc."></textarea>
+          </div>
+          <div class="field">
+            <label for="packageInterest">Package you're interested in</label>
+            <select id="packageInterest" name="package_interest" required>
+              <option value="">Select a package</option>
+              <option>Brand Launch ($2,500 to $5,000)</option>
+              <option>Product Launch ($3,500 to $8,000)</option>
+              <option>Digital Product ($5,000 to $15,000+)</option>
+              <option>Creative Partner Retainer</option>
+              <option>Starter Design ($75 to $150)</option>
+              <option>Brand Builder ($250 to $500)</option>
+              <option>Website / E-commerce</option>
+              <option>Not sure yet :  help me choose</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="timeline">Timeline or launch date</label>
+            <input id="timeline" name="timeline" type="text" placeholder="e.g. 4 weeks, Q3 2026, ASAP" required />
+          </div>
+        </div>
+      </section>
+
+      <!-- Audience -->
+      <section class="discovery-section">
+        <h2>Target audience</h2>
+        <p>Who this work needs to connect with.</p>
+        <div class="discovery-fields">
+          <div class="field field-full">
+            <label for="idealCustomer">Who is your ideal customer?</label>
+            <textarea id="idealCustomer" name="ideal_customer" rows="2" placeholder="Describe your primary audience…" required></textarea>
+          </div>
+          <div class="field">
+            <label for="demographics">Age range / demographics</label>
+            <input id="demographics" name="demographics" type="text" placeholder="e.g. 25 to 45, homeowners, tradespeople" />
+          </div>
+          <div class="field">
+            <label for="audienceOnline">Where do they spend time online?</label>
+            <input id="audienceOnline" name="audience_online" type="text" placeholder="Instagram, LinkedIn, in-store, etc." />
+          </div>
+        </div>
+      </section>
+
+      <!-- Competitors -->
+      <section class="discovery-section">
+        <h2>Competitors &amp; references</h2>
+        <p>What to aim for :  and what to avoid.</p>
+        <div class="discovery-fields">
+          <div class="field field-full">
+            <label for="competitors">Main competitors (names + URLs)</label>
+            <textarea id="competitors" name="competitors" rows="2" placeholder="List competitors and links if available…"></textarea>
+          </div>
+          <div class="field field-full">
+            <label for="admireBrands">Brands you admire (and why)</label>
+            <textarea id="admireBrands" name="admire_brands" rows="2" placeholder="What do you like about their look, tone, or positioning?"></textarea>
+          </div>
+          <div class="field field-full">
+            <label for="stylesAvoid">Design styles or directions to avoid</label>
+            <textarea id="stylesAvoid" name="styles_avoid" rows="2" placeholder="Anything that doesn't fit your brand…"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Budget & requirements -->
+      <section class="discovery-section">
+        <h2>Budget &amp; requirements</h2>
+        <p>Helps us recommend the right scope and package.</p>
+        <div class="discovery-fields">
+          <div class="field">
+            <label for="budget">Budget expectations (USD)</label>
+            <select id="budget" name="budget_expectations" required>
+              <option value="">Select a range</option>
+              <option>Under $500</option>
+              <option>$500  to  $1,500</option>
+              <option>$1,500  to  $3,500</option>
+              <option>$3,500  to  $8,000</option>
+              <option>$8,000  to  $15,000</option>
+              <option>$15,000+</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fileFormats">File formats needed</label>
+            <input id="fileFormats" name="file_formats" type="text" placeholder="PNG, PDF, AI, Figma, print ready, etc." />
+          </div>
+          <div class="field">
+            <label for="colorPrefs">Color preferences</label>
+            <input id="colorPrefs" name="color_preferences" type="text" placeholder="e.g. navy, gold, avoid red" />
+          </div>
+          <div class="field">
+            <label for="typographyPrefs">Typography preferences</label>
+            <input id="typographyPrefs" name="typography_preferences" type="text" placeholder="e.g. modern sans, heritage serif" />
+          </div>
+          <div class="field field-full">
+            <label for="mustHaves">Must-have elements or deliverables</label>
+            <textarea id="mustHaves" name="must_have_elements" rows="2" placeholder="Logo, packaging, website, apparel, social templates…"></textarea>
+          </div>
+          <div class="field field-full">
+            <label for="additionalNotes">Anything else we should know?</label>
+            <textarea id="additionalNotes" name="additional_notes" rows="3" placeholder="Decision makers, existing assets, deadlines, inspiration links…"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <div class="discovery-submit">
+        <button type="submit" class="btn btn-primary" id="discoverySubmit">Submit discovery questionnaire</button>
+        <p class="form-status" id="discoveryStatus" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand"><span class="brand-mark">BF</span><span>Brandon Fonville Creative Studio</span></div>
+    <nav class="footer-links" aria-label="Studio links">
+      <a href="index.html">Studio site</a>
+      <a href="ownership.html" class="footer-login">Login</a>
+    </nav>
+    <p class="footer-meta">Discovery questionnaire · © <span id="year"></span></p>
+    <a href="index.html#top" class="to-top">Back to top ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="discovery.js"></script>
+</body>
+</html>

@@ -1,0 +1,652 @@
+/* Ownership / portfolio manager page */
+
+.ownership-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.ownership-header {
+  position: sticky;
+}
+
+.ownership-nav {
+  gap: 12px;
+}
+
+.ownership-main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 56px) 80px;
+}
+
+.ownership-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(24px, 4vw, 36px);
+  margin-bottom: 28px;
+}
+
+.ownership-card-narrow {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.ownership-card-head {
+  margin-bottom: 24px;
+}
+
+.ownership-card-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  margin-bottom: 6px;
+}
+
+.ownership-card-head p,
+.ownership-lead {
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.ownership-card-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ownership-intro {
+  margin-bottom: 32px;
+}
+
+.ownership-intro h1,
+.ownership-login h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+  margin: 10px 0 12px;
+  line-height: 1.05;
+}
+
+.ownership-login {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.ownership-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ownership-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.ownership-import-label {
+  cursor: pointer;
+  margin: 0;
+}
+
+.btn-small {
+  padding: 8px 14px;
+  font-size: 0.82rem;
+}
+
+.ownership-danger {
+  color: #ff8a7a;
+  border-color: rgba(255, 106, 94, 0.35);
+}
+
+.ownership-danger:hover {
+  color: #ffb4aa;
+  border-color: rgba(255, 106, 94, 0.6);
+  background: rgba(255, 106, 94, 0.08);
+}
+
+.ownership-status {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+  min-height: 1.2em;
+}
+
+.ownership-status.success {
+  color: #38ef7d;
+}
+
+.ownership-status.error {
+  color: #ff6a5e;
+}
+
+.ownership-empty {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Contract library */
+.contract-stage-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.contract-stage-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.contract-stage-btn:hover {
+  border-color: var(--accent);
+}
+
+.contract-stage-btn.active {
+  border-color: var(--accent);
+  background: rgba(255, 93, 46, 0.08);
+}
+
+.contract-stage-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+  color: #110a06;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.contract-stage-btn.active .contract-stage-icon {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.contract-stage-text strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.contract-stage-text span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.contract-stage-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.contract-library-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.contract-library-meta > span {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.contract-search {
+  flex: 1;
+  max-width: 320px;
+  min-width: 180px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+}
+
+.contract-search:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contract-library {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.contract-category {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contract-category-head h3 {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.contract-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.contract-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-soft);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.contract-card:hover {
+  border-color: rgba(255, 93, 46, 0.45);
+}
+
+.contract-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.contract-card-head h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.contract-frequency {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--surface-2);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.contract-frequency.frequency-always {
+  background: rgba(56, 239, 125, 0.12);
+  color: #38ef7d;
+}
+
+.contract-frequency.frequency-often {
+  background: rgba(255, 209, 102, 0.12);
+  color: #ffd166;
+}
+
+.contract-card p {
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.contract-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.contract-tag {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text-2);
+}
+
+.contract-card-example {
+  font-size: 0.8rem;
+  color: var(--text-2);
+  font-style: italic;
+  padding: 8px 10px;
+  border-left: 2px solid var(--accent);
+  background: rgba(255, 93, 46, 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+.contract-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.contract-card-actions .doc-link {
+  font-size: 0.88rem;
+}
+
+.contract-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* License list */
+.license-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.license-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-soft);
+}
+
+.license-item p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.ownership-inline-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr auto;
+  gap: 14px;
+  align-items: end;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.field-grow {
+  min-width: 0;
+}
+
+/* Project editor */
+.ownership-project {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+
+.ownership-project-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  list-style: none;
+}
+
+.ownership-project-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ownership-project-meta {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.ownership-project-body {
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.ownership-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.ownership-subsection {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.ownership-subsection h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+
+.ownership-subsection-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ownership-subsection-head h3 {
+  margin-bottom: 0;
+}
+
+.ownership-subsection .field span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+.ownership-subsection input,
+.ownership-subsection textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  resize: vertical;
+}
+
+.ownership-subsection input:focus,
+.ownership-subsection textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.ownership-fact-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr auto;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.ownership-item-panel {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background: var(--surface);
+}
+
+.ownership-item-panel summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 500;
+}
+
+.ownership-item-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.ownership-item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 14px 14px;
+}
+
+.ownership-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.ownership-icon-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.ownership-preview {
+  pointer-events: none;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.ownership-preview .work-group-preview {
+  margin-top: 0;
+  opacity: 1;
+  transform: none;
+}
+
+.ownership-preview .work-group-head .group-tag {
+  margin-left: 0;
+}
+
+.ownership-preview .case-study-btn {
+  display: none;
+}
+
+.ownership-preview .work-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.ownership-preview .work-item figcaption {
+  opacity: 1;
+  transform: none;
+}
+
+.ownership-project-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ownership-missing {
+  margin-bottom: 20px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 209, 102, 0.35);
+  border-radius: 14px;
+  background: rgba(255, 209, 102, 0.08);
+}
+
+.ownership-missing p {
+  margin-bottom: 12px;
+  color: var(--text-2);
+}
+
+.ownership-missing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+code {
+  font-size: 0.88em;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+@media (max-width: 920px) {
+  .ownership-inline-form,
+  .ownership-grid-2,
+  .ownership-item-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ownership-fact-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .ownership-fact-row input:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .contract-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contract-stage-btn {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .ownership-preview .work-grid {
+    grid-template-columns: 1fr;
+  }
+}

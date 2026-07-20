@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Ownership :  Brandon Fonville Creative Studio</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="ownership.css" />
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body class="ownership-page">
+  <header class="site-header ownership-header">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">BF</span>
+      <span class="brand-name">Brandon Fonville<small>Ownership</small></span>
+    </a>
+    <nav class="nav ownership-nav">
+      <a href="index.html">← Back to site</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch color theme" title="Switch theme">
+        <span class="theme-icon theme-icon-moon">☾</span>
+        <span class="theme-icon theme-icon-sun">☀</span>
+      </button>
+      <button type="button" class="btn btn-ghost ownership-logout" id="logoutBtn" hidden>Log out</button>
+    </nav>
+  </header>
+
+  <main class="ownership-main">
+    <!-- Login -->
+    <section class="ownership-login" id="loginPanel">
+      <div class="ownership-card ownership-card-narrow">
+        <p class="eyebrow">Studio ownership</p>
+        <h1>Sign in to manage your portfolio</h1>
+        <p class="ownership-lead">Update the Work section, preview changes on the live site, and access your full contract library :  no Netlify deploy needed.</p>
+        <form id="loginForm" class="ownership-form">
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+          <p class="form-status" id="loginStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Admin -->
+    <section class="ownership-admin" id="adminPanel" hidden>
+      <div class="ownership-intro">
+        <p class="eyebrow">Portfolio manager</p>
+        <h1>Work &amp; contract library</h1>
+        <p class="ownership-lead">Changes save to this browser automatically. Open <a href="index.html#work">the public site</a> to preview. Place new images in <code>assets/work/</code> and reference their paths below.</p>
+      </div>
+
+      <!-- Contract library -->
+      <div class="ownership-card" id="contractLibrarySection">
+        <div class="ownership-card-head">
+          <h2>Contract library</h2>
+          <p>Every agreement template for each stage of a client relationship :  open, fill, sign, and export as PDF.</p>
+        </div>
+        <div class="contract-stage-nav" id="contractStageNav"></div>
+        <div class="contract-library-meta">
+          <span id="contractCount"></span>
+          <input type="search" id="contractSearch" class="contract-search" placeholder="Search contracts…" aria-label="Search contracts" />
+        </div>
+        <div class="contract-library" id="contractLibrary"></div>
+      </div>
+
+      <!-- Client agreements -->
+      <div class="ownership-card" id="licensesSection">
+        <div class="ownership-card-head">
+          <h2>Client agreements</h2>
+          <p>Signed or in-progress agreements for specific clients.</p>
+        </div>
+        <div class="license-list" id="licenseList"></div>
+        <form id="addLicenseForm" class="ownership-inline-form">
+          <div class="field">
+            <label for="licenseTitle">Title</label>
+            <input id="licenseTitle" type="text" placeholder="Client or project name" required />
+          </div>
+          <div class="field">
+            <label for="licenseHref">File path</label>
+            <input id="licenseHref" type="text" placeholder="agreements/example-license.html" required />
+          </div>
+          <div class="field field-grow">
+            <label for="licenseDesc">Description</label>
+            <input id="licenseDesc" type="text" placeholder="Short note (optional)" />
+          </div>
+          <button type="submit" class="btn btn-ghost">Add agreement</button>
+        </form>
+      </div>
+
+      <!-- Work projects -->
+      <div class="ownership-card">
+        <div class="ownership-card-head ownership-card-head-row">
+          <div>
+            <h2>Work section</h2>
+            <p>Add, edit, or remove portfolio projects. Format matches the public site.</p>
+          </div>
+          <div class="ownership-actions">
+            <button type="button" class="btn btn-ghost" id="addProjectBtn">+ Add project</button>
+            <button type="button" class="btn btn-ghost" id="exportBtn">Export JSON</button>
+            <label class="btn btn-ghost ownership-import-label">
+              Import JSON
+              <input type="file" id="importInput" accept="application/json,.json" hidden />
+            </label>
+            <button type="button" class="btn btn-ghost ownership-danger" id="resetBtn">Reset to defaults</button>
+          </div>
+        </div>
+        <div id="missingProjects" class="ownership-missing" hidden></div>
+        <div id="projectEditor"></div>
+      </div>
+
+      <p class="ownership-status" id="saveStatus" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="work-store.js"></script>
+  <script src="contract-library.js"></script>
+  <script src="ownership.js"></script>
+</body>
+</html>

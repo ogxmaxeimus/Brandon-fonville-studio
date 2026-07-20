@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Past Due Statement — KSUSPO8P-0012 — Brandon Fonville Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/fonts/signature-font.css" />
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --ink-soft: #3d3a35;
+      --muted: #6c665d;
+      --line: rgba(20, 16, 12, 0.14);
+      --paper: #ffffff;
+      --paper-tint: #f7f5f1;
+      --accent: #e6481e;
+      --accent-soft: #fff1eb;
+      --warn: #8a3b12;
+      --warn-bg: #fff4e8;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4dd;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 10.5pt;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      background: var(--ink);
+      color: #f4f2ee;
+      font-size: 0.88rem;
+    }
+
+    .toolbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+
+    .toolbar-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .toolbar-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .toolbar button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: transparent;
+      color: inherit;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .toolbar button.primary {
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #150a05;
+      border-color: transparent;
+    }
+
+    .page-wrap {
+      max-width: 8.5in;
+      margin: 32px auto 48px;
+      padding: 0 20px;
+    }
+
+    .document {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 80px -32px rgba(20, 16, 12, 0.28);
+    }
+
+    .doc-page {
+      min-height: 11in;
+      padding: 0.72in 0.78in 0.9in;
+      position: relative;
+    }
+
+    .doc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .brand-block { display: flex; align-items: center; gap: 14px; }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .brand-text p {
+      margin-top: 3px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      min-width: 2.4in;
+    }
+
+    .doc-meta strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .meta-row span:first-child { color: var(--muted); }
+
+    .status-pill {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--warn-bg);
+      color: var(--warn);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .doc-subtitle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 48ch;
+      margin-bottom: 20px;
+    }
+
+    .notice {
+      background: var(--warn-bg);
+      border: 1px solid rgba(138, 59, 18, 0.22);
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      border-radius: 2px 8px 8px 2px;
+    }
+
+    .notice strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--warn);
+    }
+
+    .notice p { color: var(--ink-soft); font-size: 0.9rem; }
+
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .party-card {
+      background: var(--paper-tint);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .party-card h2 {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .party-card p {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      margin-bottom: 2px;
+    }
+
+    .party-card .name {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .amount-box {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .totals {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .totals table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .totals th,
+    .totals td {
+      padding: 11px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+
+    .totals th {
+      color: var(--muted);
+      font-weight: 500;
+      width: 62%;
+    }
+
+    .totals td { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .totals tr:last-child th,
+    .totals tr:last-child td {
+      border-bottom: none;
+      background: var(--ink);
+      color: #f4f2ee;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .due-panel {
+      background: linear-gradient(160deg, #1c1a17 0%, #3a322b 100%);
+      color: #f4f2ee;
+      border-radius: 10px;
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .due-panel .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 242, 238, 0.62);
+      margin-bottom: 8px;
+    }
+
+    .due-panel .figure {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .due-panel .meta {
+      font-size: 0.82rem;
+      color: rgba(244, 242, 238, 0.78);
+      line-height: 1.45;
+    }
+
+    .section { margin-bottom: 20px; }
+
+    .section h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section p,
+    .section li {
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    .section ol,
+    .section ul {
+      padding-left: 18px;
+    }
+
+    .line-items {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.88rem;
+    }
+
+    .line-items th {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 500;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-tint);
+    }
+
+    .line-items td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .line-items td:last-child,
+    .line-items th:last-child {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .pay-box {
+      background: var(--accent-soft);
+      border: 1px solid rgba(230, 72, 30, 0.2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 8px;
+    }
+
+    .pay-box strong { color: var(--ink); }
+
+    .page-footer {
+      position: absolute;
+      left: 0.78in;
+      right: 0.78in;
+      bottom: 0.42in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .page-footer strong { color: var(--ink-soft); font-weight: 500; }
+
+    @media print {
+      body { background: white; }
+      .toolbar { display: none; }
+      .page-wrap { margin: 0; padding: 0; max-width: none; }
+      .document { border: none; box-shadow: none; }
+      .doc-page { min-height: auto; padding: 0.65in 0.72in 0.75in; }
+    }
+
+    @page { size: letter; margin: 0; }
+
+    @media (max-width: 700px) {
+      .parties,
+      .amount-box { grid-template-columns: 1fr; }
+      .doc-header { flex-direction: column; }
+      .doc-meta { text-align: left; }
+      .meta-row { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-brand">
+      <span class="toolbar-mark">BF</span>
+      <span>Past Due Statement — Blue Collar Millionaire</span>
+    </div>
+    <div class="toolbar-actions">
+      <button type="button" onclick="window.print()">Print / Save PDF</button>
+      <button type="button" class="primary" onclick="window.print()">Download PDF</button>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <article class="document">
+      <section class="doc-page">
+        <header class="doc-header">
+          <div class="brand-block">
+            <div class="brand-mark">BF</div>
+            <div class="brand-text">
+              <h1>Brandon Fonville</h1>
+              <p>Creative Studio</p>
+            </div>
+          </div>
+          <div class="doc-meta">
+            <strong>Past Due Statement</strong>
+            <div class="meta-row"><span>Statement #</span><span>BF-PD-2026-001</span></div>
+            <div class="meta-row"><span>Statement date</span><span>July 14, 2026</span></div>
+            <div class="meta-row"><span>Invoice #</span><span>KSUSPO8P-0012</span></div>
+            <div class="meta-row"><span>Agreed pay date</span><span>Upon delivery (same day)</span></div>
+            <span class="status-pill">Past due · payment promised</span>
+          </div>
+        </header>
+
+        <h2 class="doc-title">Account balance past due</h2>
+        <p class="doc-subtitle">
+          Formal notice of unpaid remaining balance on Stripe Invoice #KSUSPO8P-0012 for Blue Collar Millionaire.
+          Payment was promised for the same day the revised agreement and invoice were delivered. That payment
+          has not been received. A $25.00 flat late fee now applies.
+        </p>
+
+        <div class="notice">
+          <strong>This invoice is not part of the Design License / Transfer License Agreement</strong>
+          <p>
+            The Design License Agreement (Agreement #BF-2026-001) and its paid Stripe Invoice
+            <strong>#KSUSPO8P-0002</strong> ($150.00 logo fee, paid in full) are separate documents.
+            They do not govern, absorb, reduce, or replace the remaining balance on Invoice
+            <strong>#KSUSPO8P-0012</strong>. Signing or reviewing the revised license agreement does not
+            satisfy, defer, or replace this payment obligation.
+          </p>
+        </div>
+
+        <div class="notice" style="margin-top: -8px;">
+          <strong>Correction: Stripe due date of August 8, 2026 is a Studio error</strong>
+          <p>
+            Invoice #KSUSPO8P-0012 currently displays a payment due date of <strong>August 8, 2026</strong>.
+            That date was entered in error by Brandon Fonville Creative Studio and does <strong>not</strong>
+            reflect the parties’ arranged payment timing. The controlling arrangement is the Client’s
+            same-day payment commitment described below. This statement corrects the record.
+          </p>
+        </div>
+
+        <div class="parties">
+          <div class="party-card">
+            <h2>From (Studio)</h2>
+            <p class="name">Brandon Fonville Creative Studio</p>
+            <p>Brandon Fonville</p>
+            <p>Raleigh, North Carolina, United States</p>
+            <p>hello@brandonfonville.com</p>
+            <p>brandonfonville.com</p>
+          </div>
+          <div class="party-card">
+            <h2>Bill to (Client)</h2>
+            <p class="name">Blue Collar Millionaire</p>
+            <p>Re: Remaining balance — Invoice #KSUSPO8P-0012</p>
+            <p>Agreed timing: pay same day revised invoice sent</p>
+          </div>
+        </div>
+
+        <div class="amount-box">
+          <div class="totals">
+            <table>
+              <tr>
+                <th>Original invoice total</th>
+                <td>$410.00</td>
+              </tr>
+              <tr>
+                <th>Amount paid to date</th>
+                <td>− $300.00</td>
+              </tr>
+              <tr>
+                <th>Principal remaining</th>
+                <td>$110.00</td>
+              </tr>
+              <tr>
+                <th>Late fee (flat, past due)</th>
+                <td>$25.00</td>
+              </tr>
+              <tr>
+                <th>Amount due now</th>
+                <td>$135.00</td>
+              </tr>
+            </table>
+          </div>
+          <div class="due-panel">
+            <div>
+              <div class="label">Pay this amount</div>
+              <div class="figure">$135.00</div>
+              <p class="meta">
+                Due immediately.<br />
+                Pay within 7 days of this statement to avoid additional monthly fees and work suspension.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>1. Record of arrangement &amp; follow-up</h3>
+          <ol>
+            <li>
+              During a phone call with the Client (Client’s spouse also present), the Client asked the Studio to
+              send the revised agreement and invoice and stated, in substance:
+              <em>“Be sure to send the revised agreement and invoice and I’ll make sure to take care of it today.”</em>
+            </li>
+            <li>
+              The Studio sent the revised agreement and Invoice #KSUSPO8P-0012 as requested. The Client’s
+              commitment was to pay the remaining balance <strong>the same day</strong> those materials were delivered —
+              not on August 8, 2026.
+            </li>
+            <li>
+              On <strong>Sunday, July 12, 2026</strong>, in person at church, the Client stated that he and his wife
+              had not yet had the chance to look at the revised agreement, but that they would. The remaining
+              balance on Invoice #KSUSPO8P-0012 was still unpaid at that time and remains unpaid as of this statement.
+            </li>
+            <li>
+              The Studio has already accommodated this account. Continued delay after an express same-day payment
+              commitment justifies the late fee assessed below.
+            </li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>2. Invoice detail</h3>
+          <table class="line-items">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Stripe Invoice #KSUSPO8P-0012</strong><br />
+                  Remaining balance after partial payment — difference against the original total of $410.00.<br />
+                  <em>Note: Stripe “due August 8, 2026” is a clerical error and is superseded by the same-day payment commitment above.</em>
+                </td>
+                <td>$110.00</td>
+              </tr>
+              <tr>
+                <td>
+                  Flat late fee — assessed because payment was not made on the arranged same-day commitment
+                  after delivery of the revised agreement and invoice, despite prior accommodation
+                </td>
+                <td>$25.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <h3>3. Late fee terms (now in effect)</h3>
+          <ol>
+            <li>Payment timing is governed by the arranged due date or, if sooner, by any express payment commitment made by the Client.</li>
+            <li>Here, the Client expressly committed to pay the remaining balance the same day the revised agreement and invoice were sent. That commitment was not kept.</li>
+            <li>A flat late fee of <strong>$25.00</strong> is assessed on this statement.</li>
+            <li>If any principal remains unpaid into a subsequent month, the unpaid principal also accrues <strong>1.5% per month (18% annually)</strong>, or the maximum permitted by law, until paid in full ($110.00 × 1.5% = <strong>$1.65</strong> per additional month).</li>
+            <li>Late fees are in addition to the principal and do not waive any other rights of the Studio.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>4. Separation from license documents</h3>
+          <ol>
+            <li>
+              Agreement #BF-2026-001 (Design License / Transfer License Agreement) covers logo rights only and is
+              backed by paid Invoice <strong>#KSUSPO8P-0002</strong>.
+            </li>
+            <li>
+              Invoice <strong>#KSUSPO8P-0012</strong> is an independent payment obligation for the remaining project
+              balance described above.
+            </li>
+            <li>
+              Reviewing, delaying review of, or signing the revised license agreement does not cancel, defer, or
+              substitute for payment of Invoice #KSUSPO8P-0012. The agreement and the invoice are separate.
+            </li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>5. Demand &amp; next steps</h3>
+          <ol>
+            <li>Remit <strong>$135.00</strong> within <strong>7 days</strong> of this statement date (by July 21, 2026).</li>
+            <li>Until payment is received in full, the Studio may suspend active or pending work.</li>
+            <li>Deliverables associated with unpaid invoices remain the property of Brandon Fonville Creative Studio and may not be used, published, or distributed.</li>
+            <li>If unpaid after 30 days from this notice, reasonable collection costs may be added as permitted by law.</li>
+            <li>The Studio will correct the Stripe due-date field on Invoice #KSUSPO8P-0012 to reflect that payment is due immediately / past due under the arrangement described herein.</li>
+          </ol>
+          <div class="pay-box">
+            <p>
+              <strong>How to pay:</strong> Remit <strong>$135.00</strong> (principal $110.00 + $25.00 late fee)
+              against Stripe Invoice #KSUSPO8P-0012 using the payment link previously issued, or request a fresh
+              payment link from <strong>hello@brandonfonville.com</strong>. Reference Invoice #KSUSPO8P-0012 on all remittances.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>6. Governing terms</h3>
+          <p>
+            This statement is issued under Brandon Fonville Creative Studio invoice terms (North Carolina law):
+            payment is due on the arranged date or express payment commitment; flat $25.00 late fee when that
+            commitment is missed; additional 1.5% per month on unpaid principal if the balance continues into
+            subsequent months; work may be paused on past-due accounts. A mistaken date printed on a Stripe
+            invoice does not override an express same-day payment commitment. See also the accompanying
+            Invoice Terms &amp; Late Fee Policy for Blue Collar Millionaire.
+          </p>
+        </div>
+
+        <div class="section" style="margin-top: 28px;">
+          <h3>Issued by</h3>
+          <p class="studio-signature" style="margin: 8px 0 6px;">BFonville</p>
+          <p style="color: var(--muted); font-size: 0.82rem;">
+            Brandon Fonville · Brandon Fonville Creative Studio · July 14, 2026
+          </p>
+        </div>
+
+        <footer class="page-footer">
+          <span><strong>Brandon Fonville Creative Studio</strong> · hello@brandonfonville.com</span>
+          <span>Statement BF-PD-2026-001 · Confidential</span>
+        </footer>
+      </section>
+    </article>
+  </div>
+</body>
+</html>

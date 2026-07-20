@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design License Agreement — Brandon Fonville Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/fonts/signature-font.css" />
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --ink-soft: #3d3a35;
+      --muted: #6c665d;
+      --line: rgba(20, 16, 12, 0.14);
+      --paper: #ffffff;
+      --paper-tint: #f7f5f1;
+      --accent: #e6481e;
+      --accent-soft: #fff1eb;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4dd;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 10.5pt;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      background: var(--ink);
+      color: #f4f2ee;
+      font-size: 0.88rem;
+    }
+
+    .toolbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+
+    .toolbar-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .toolbar-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .toolbar button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: transparent;
+      color: inherit;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .toolbar button:hover,
+    .toolbar button.primary {
+      border-color: #ff5d2e;
+      background: rgba(255, 93, 46, 0.14);
+    }
+
+    .toolbar button.primary {
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #150a05;
+      border-color: transparent;
+    }
+
+    .page-wrap {
+      max-width: 8.5in;
+      margin: 32px auto 48px;
+      padding: 0 20px;
+    }
+
+    .document {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 80px -32px rgba(20, 16, 12, 0.28);
+    }
+
+    .doc-page {
+      min-height: 11in;
+      padding: 0.72in 0.78in 0.82in;
+      position: relative;
+      page-break-after: always;
+    }
+
+    .doc-page:last-child { page-break-after: auto; }
+
+    .doc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 22px;
+      margin-bottom: 26px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .brand-block { display: flex; align-items: center; gap: 14px; }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .brand-text p {
+      margin-top: 3px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      min-width: 2.2in;
+    }
+
+    .doc-meta strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .meta-row span:first-child { color: var(--muted); }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .doc-subtitle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 42ch;
+      margin-bottom: 22px;
+    }
+
+    .notice {
+      background: var(--accent-soft);
+      border: 1px solid rgba(230, 72, 30, 0.18);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+    }
+
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .party-card {
+      background: var(--paper-tint);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .party-card h2 {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .field {
+      display: block;
+      width: 100%;
+      border: none;
+      border-bottom: 1px dashed rgba(20, 16, 12, 0.28);
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      padding: 6px 0;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .field::placeholder { color: #a39d94; }
+    .field:focus { border-bottom-color: var(--accent); background: rgba(255, 241, 235, 0.35); }
+    .field-label { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 2px; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .summary-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: var(--paper);
+    }
+
+    .summary-item label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .summary-item input,
+    .summary-item select {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .section { margin-bottom: 22px; }
+
+    .exhibit-block {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper-tint);
+    }
+
+    .exhibit-block h3 { margin-bottom: 10px; }
+
+    .exhibit-note {
+      margin-top: 8px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .exhibit-note a {
+      color: var(--accent);
+      word-break: break-all;
+    }
+
+    .exhibit-note a:hover { text-decoration: underline; }
+
+    .section h3 {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section h3::before {
+      content: "";
+      width: 18px;
+      height: 3px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #ff5d2e, #ffd166);
+      flex-shrink: 0;
+    }
+
+    .section p,
+    .section li {
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+
+    .section ol,
+    .section ul {
+      margin: 0 0 8px 1.1rem;
+      padding: 0;
+    }
+
+    .section li { margin-bottom: 6px; }
+
+    .clause-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 4px;
+      font-size: 0.88rem;
+    }
+
+    .clause-table th,
+    .clause-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .clause-table th {
+      width: 34%;
+      background: var(--paper-tint);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .inline-field {
+      display: inline-block;
+      min-width: 120px;
+      border: none;
+      border-bottom: 1px dashed rgba(20, 16, 12, 0.28);
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: inherit;
+      color: var(--ink);
+      padding: 0 4px 2px;
+      outline: none;
+    }
+
+    .checkbox-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+
+    .checkbox-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .checkbox-list input { margin-top: 3px; accent-color: var(--accent); }
+
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .signature-block h4 {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .sig-line {
+      border-bottom: 1px solid var(--ink);
+      min-height: 48px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .sig-cursive {
+      font-family: var(--font-signature);
+      font-size: 2.35rem;
+      color: var(--ink);
+      line-height: 1;
+      padding-bottom: 2px;
+    }
+
+    .sig-cursive.licensor-sig { font-size: 2.55rem; }
+
+    .client-sig-image {
+      max-height: 46px;
+      max-width: 100%;
+      display: block;
+    }
+
+    .sign-panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper-tint);
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .sign-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .sign-tab {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink-soft);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .sign-tab.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    #clientSigPad {
+      width: 100%;
+      height: 110px;
+      border: 1px dashed rgba(20, 16, 12, 0.22);
+      border-radius: 10px;
+      background: #fff;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .typed-sign-field {
+      width: 100%;
+      border: 1px dashed rgba(20, 16, 12, 0.22);
+      border-radius: 10px;
+      background: #fff;
+      padding: 14px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .typed-sign-field:focus { border-color: var(--accent); }
+
+    .typed-sign-preview {
+      min-height: 48px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .sign-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sign-actions button {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink-soft);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .sign-actions button:hover { border-color: var(--accent); color: var(--accent); }
+
+    .esign-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+    }
+
+    .esign-consent input { margin-top: 3px; accent-color: var(--accent); }
+
+    .sign-mode { display: none; }
+    .sign-mode.active { display: block; }
+
+    .export-sig { display: none; }
+    .is-exporting .screen-only { display: none !important; }
+    .is-exporting .export-sig { display: flex !important; }
+
+    .toolbar-status {
+      font-size: 0.8rem;
+      color: #d2cec7;
+    }
+
+    .sig-meta {
+      display: grid;
+      grid-template-columns: 1fr 0.55fr;
+      gap: 14px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .page-footer {
+      position: absolute;
+      left: 0.78in;
+      right: 0.78in;
+      bottom: 0.42in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .page-footer strong { color: var(--ink-soft); font-weight: 500; }
+
+    @media print {
+      body { background: white; }
+      .toolbar { display: none; }
+      .page-wrap { margin: 0; padding: 0; max-width: none; }
+      .document { border: none; box-shadow: none; }
+      .doc-page { min-height: auto; padding: 0.65in 0.72in 0.75in; }
+      .field,
+      .inline-field,
+      .summary-item input,
+      .summary-item select {
+        border-bottom-style: solid;
+        border-bottom-color: #ccc;
+      }
+      .notice { break-inside: avoid; }
+      .signature-grid { break-inside: avoid; }
+      .screen-only { display: none !important; }
+      .export-sig { display: flex !important; }
+    }
+
+    @page {
+      size: letter;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-brand">
+      <span class="toolbar-mark">BF</span>
+      <span>Design License Agreement Template</span>
+    </div>
+    <div class="toolbar-actions">
+      <span class="toolbar-status" id="toolbarStatus" role="status"></span>
+      <button type="button" onclick="window.print()">Print</button>
+      <button type="button" onclick="setTodayDates()">Set today's date</button>
+      <button type="button" class="primary" id="downloadPdfBtn">Download Signed PDF</button>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <article class="document">
+      <!-- Page 1 -->
+      <section class="doc-page">
+        <header class="doc-header">
+          <div class="brand-block">
+            <div class="brand-mark">BF</div>
+            <div class="brand-text">
+              <h1>Brandon Fonville</h1>
+              <p>Creative Studio</p>
+            </div>
+          </div>
+          <div class="doc-meta">
+            <strong>Design License Agreement</strong>
+            <div class="meta-row"><span>Agreement #</span><span><input class="inline-field" type="text" value="BF-2026-001" style="min-width: 110px;" /></span></div>
+            <div class="meta-row"><span>Effective date</span><span><input class="inline-field" id="effectiveDate" type="date" value="2026-07-09" /></span></div>
+            <div class="meta-row"><span>Project</span><span><input class="inline-field" id="projectName" type="text" value="Blue Collar Millionaire Logo" style="min-width: 140px;" /></span></div>
+          </div>
+        </header>
+
+        <h2 class="doc-title">Creative work license agreement</h2>
+        <p class="doc-subtitle">
+          This agreement defines ownership, usage rights, and delivery of the approved logo design upon receipt of
+          payment in full. Assignment of rights and any retained portfolio rights are set out in Section 3.
+        </p>
+
+
+        <div class="parties">
+          <div class="party-card">
+            <h2>Licensor (Designer)</h2>
+            <span class="field-label">Legal name</span>
+            <input class="field" type="text" value="Brandon Fonville" />
+            <span class="field-label">Business name</span>
+            <input class="field" type="text" value="Brandon Fonville Creative Studio" />
+            <span class="field-label">Address</span>
+            <input class="field" type="text" value="Raleigh, North Carolina, United States" />
+            <span class="field-label">Email</span>
+            <input class="field" type="email" value="hello@brandonfonville.com" />
+            <span class="field-label">Website</span>
+            <input class="field" type="text" value="https://brandonfonville.com" />
+          </div>
+          <div class="party-card">
+            <h2>Licensee (Client)</h2>
+            <span class="field-label">Legal name / business</span>
+            <input class="field" type="text" value="Blue Collar Millionaire" />
+            <span class="field-label">Address</span>
+            <input class="field" type="text" placeholder="Street, city, state, ZIP" />
+            <span class="field-label">Email</span>
+            <input class="field" type="text" placeholder="billing@client.com" />
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <label for="packageName">Service package</label>
+            <input id="packageName" type="text" value="Starter Design Package" />
+          </div>
+          <div class="summary-item">
+            <label for="projectFee">Project fee (USD)</label>
+            <input id="projectFee" type="text" value="$150.00" />
+          </div>
+          <div class="summary-item">
+            <label for="deliveryDate">Target delivery</label>
+            <input id="deliveryDate" type="date" />
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>1. Licensed work</h3>
+          <p>
+            The following deliverables are covered by this agreement (the "Licensed Work"):
+          </p>
+          <table class="clause-table">
+            <tbody>
+              <tr>
+                <th>Deliverables</th>
+                <td>
+                  <ul class="checkbox-list">
+                    <li><label><input type="checkbox" checked /> Logo / wordmark</label></li>
+                    <li><label><input type="checkbox" /> Brand identity kit</label></li>
+                    <li><label><input type="checkbox" /> Social media graphics</label></li>
+                    <li><label><input type="checkbox" /> Print materials</label></li>
+                    <li><label><input type="checkbox" /> Product / merch design</label></li>
+                    <li><label><input type="checkbox" /> Website design assets</label></li>
+                    <li><label><input type="checkbox" /> Packaging / labels</label></li>
+                    <li><label><input type="checkbox" /> Other: <input class="inline-field" type="text" placeholder="describe" /></label></li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th>File formats delivered</th>
+                <td>
+                  <input class="field" type="text" value="PNG, JPEG, and PDF exports included. Adobe source files available as add-on ($25–$100)." />
+                </td>
+              </tr>
+              <tr>
+                <th>Project description</th>
+                <td>
+                  <input class="field" type="text" value="Blue Collar Millionaire logo design — primary crest with BC monogram and secondary monogram badge (Est. 2016). Licensed for apparel, merchandise, and brand use." />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <h3>2. Scope of use</h3>
+          <p>
+            Upon receipt of payment in full, the rights granted and assigned under Section 3 apply to the approved
+            logo design. Permitted use includes the following:
+          </p>
+          <ol>
+            <li>
+              <strong>Permitted use:</strong>
+              <input class="inline-field" type="text" value="marketing, merchandise, website, social media, and print" style="min-width: 260px;" />
+            </li>
+            <li>
+              <strong>Territory:</strong>
+              <input class="inline-field" type="text" value="Worldwide" />
+            </li>
+            <li>
+              <strong>Term:</strong>
+              <select class="inline-field">
+                <option>Perpetual, unless terminated</option>
+                <option>Fixed term (specify below)</option>
+              </select>
+              <input class="inline-field" type="text" placeholder="End date or renewal terms" style="min-width: 180px;" />
+            </li>
+            <li>
+              <strong>Attribution:</strong>
+              <select class="inline-field">
+                <option>Not required</option>
+                <option>Credit required where practical</option>
+              </select>
+            </li>
+          </ol>
+        </div>
+
+        <footer class="page-footer">
+          <span><strong>Brandon Fonville Creative Studio</strong> · brandonfonville.com</span>
+          <span>Page 1 of 2</span>
+        </footer>
+      </section>
+
+      <!-- Page 2 -->
+      <section class="doc-page">
+        <div class="section">
+          <h3>3. Ownership, assignment &amp; portfolio rights</h3>
+          <ol>
+            <li>
+              <strong>Transfer of rights upon payment.</strong>
+              Upon receipt of payment in full, the Licensor grants the Licensee the rights described in this
+              Agreement for the approved logo design. The scope of ownership, usage rights, and any retained
+              rights are governed by the terms outlined herein.
+            </li>
+            <li>
+              <strong>Assignment of logo rights.</strong>
+              Upon full payment of the logo design fee, the Licensor assigns to the Licensee all right, title,
+              and interest in and to the final approved logo design, including associated intellectual property
+              rights, except for any pre-existing materials, concepts, tools, or assets not specifically created
+              for the Licensee.
+            </li>
+            <li>
+              <strong>Portfolio rights.</strong>
+              Notwithstanding the transfer of ownership, the Licensor retains the right to display the final logo
+              and identify the Licensee in the Licensor's portfolio, website, social media, and other promotional
+              materials, unless otherwise agreed in writing.
+            </li>
+            <li>
+              <strong>Source files:</strong>
+              <select class="inline-field">
+                <option>Not included unless purchased separately</option>
+                <option>Included with this agreement</option>
+              </select>
+            </li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>4. Payment &amp; delivery</h3>
+          <p>
+            <strong>Payment confirmation.</strong>
+            The Licensee has paid the logo design fee in full under Stripe Invoice
+            <strong>#KSUSPO8P-0002</strong>, which has been marked Paid. This payment covers the creation and
+            delivery of the logo design. The paid invoice is provided as
+            <a href="https://invoice.stripe.com/i/acct_1TLlLO0j1bcyDF5y/live_YWNjdF8xVExsTE8wajFiY3lERjV5LF9VS1JJVTlSdmRKblYzUFI3OWpsQ2h2QTJKYVRzZ1h5LDE3NDE3OTg4Ng0200ahM76gRv?s=db" target="_blank" rel="noopener">Exhibit A</a>
+            and incorporated into this Agreement by reference.
+          </p>
+          <ol>
+            <li>
+              Total fee:
+              <input class="inline-field" type="text" value="$150.00" />
+              · Deposit (if any):
+              <input class="inline-field" type="text" value="N/A" />
+              · Balance due:
+              <input class="inline-field" type="text" value="Paid in full — Stripe Invoice #KSUSPO8P-0002" />
+            </li>
+            <li>Rights under this Agreement take effect upon receipt of payment in full, as confirmed above.</li>
+            <li>Revisions are limited to the number included in the selected package unless additional revision fees are agreed in writing.</li>
+            <li>Rush delivery ($50–$150), extra revisions ($15–$40 each), mockups ($20–$75), print-ready formatting ($30–$75), and source files ($25–$100) may be billed as add-ons per the Brandon Fonville Creative Studio rate sheet.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>5. Client ownership &amp; retained designer rights</h3>
+          <ol>
+            <li>
+              Upon full payment, the Licensee owns the final approved logo design as described in Section 3.
+              All assignment rights transfer to the Licensee upon payment, except for the rights expressly
+              reserved by the Licensor in this Agreement.
+            </li>
+            <li>
+              The Licensor does not claim any ownership interest in materials supplied by the Licensee for
+              reference or context (including logos, photos, fonts, trademarks, or other brand assets
+              provided by the Licensee).
+            </li>
+            <li>
+              The Licensor retains portfolio rights as described in Section 3 and retains working/editable
+              source files unless the Licensee purchases source file delivery as a paid add-on.
+            </li>
+            <li>
+              The project fee for this logo has been paid in full. No further client action is required for
+              rights transfer or delivery of the approved logo exports described in Section 1.
+            </li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>6. Warranty &amp; liability</h3>
+          <ol>
+            <li>Licensor warrants that the Licensed Work is original to the extent described in the project scope and does not knowingly infringe third-party rights.</li>
+            <li>Licensed Work is provided for the stated business use. Licensor is not responsible for trademark clearance, legal compliance, or printing/production outcomes unless separately contracted.</li>
+            <li>
+              Licensor's total liability is limited to the fees paid for the project giving rise to the claim, except where prohibited by law.
+            </li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>7. Termination</h3>
+          <ol>
+            <li>Either party may terminate for material breach if the breach is not cured within
+              <input class="inline-field" type="text" value="10" style="min-width: 40px;" />
+              business days of written notice.
+            </li>
+            <li>If terminated before completion, Licensee pays for work performed to date. No rights are assigned for unfinished deliverables.</li>
+            <li>Upon termination, Licensee must stop using any deliverables for which payment has not been received in full.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>8. General</h3>
+          <ol>
+            <li>
+              <strong>Governing law:</strong>
+              <input class="inline-field" type="text" value="State of North Carolina, United States" />
+            </li>
+            <li>This agreement is the full understanding for the Licensed Work described herein and replaces prior verbal understandings on that subject.</li>
+            <li>Changes must be in writing and signed by both parties.</li>
+            <li>Electronic signatures and PDF copies are acceptable unless otherwise required by law.</li>
+          </ol>
+        </div>
+
+        <div class="section exhibit-block">
+          <h3>Exhibit A — Paid invoice</h3>
+          <p>
+            <strong>Stripe Invoice #KSUSPO8P-0002</strong><br />
+            Status: Paid · Project fee: $150.00 · Blue Collar Millionaire Logo
+          </p>
+          <p class="exhibit-note">
+            Paid invoice (incorporated by reference):
+            <a href="https://invoice.stripe.com/i/acct_1TLlLO0j1bcyDF5y/live_YWNjdF8xVExsTE8wajFiY3lERjV5LF9VS1JJVTlSdmRKblYzUFI3OWpsQ2h2QTJKYVRzZ1h5LDE3NDE3OTg4Ng0200ahM76gRv?s=db" target="_blank" rel="noopener">https://invoice.stripe.com/i/acct_1TLlLO0j1bcyDF5y/live_YWNjdF8xVExsTE8wajFiY3lERjV5LF9VS1JJVTlSdmRKblYzUFI3OWpsQ2h2QTJKYVRzZ1h5LDE3NDE3OTg4Ng0200ahM76gRv?s=db</a>
+          </p>
+        </div>
+
+        <div class="signature-grid">
+          <div class="signature-block">
+            <h4>Licensor</h4>
+            <div class="sig-line export-sig">
+              <span class="sig-cursive licensor-sig">BFonville</span>
+            </div>
+            <div class="sig-line screen-only">
+              <span class="sig-cursive licensor-sig">BFonville</span>
+            </div>
+            <div class="sig-meta">
+              <span>Brandon Fonville · Brandon Fonville Creative Studio</span>
+              <span>Date: <input class="inline-field" id="licensorSignDate" type="date" value="2026-07-09" /></span>
+            </div>
+          </div>
+          <div class="signature-block client-sign-block">
+            <h4>Licensee</h4>
+            <div class="sign-panel screen-only">
+              <div class="sign-tabs" role="tablist" aria-label="Signature method">
+                <button type="button" class="sign-tab active" data-mode="draw" role="tab" aria-selected="true">Draw signature</button>
+                <button type="button" class="sign-tab" data-mode="type" role="tab" aria-selected="false">Type signature</button>
+              </div>
+              <div class="sign-mode active" id="drawMode">
+                <canvas id="clientSigPad" aria-label="Draw your signature"></canvas>
+              </div>
+              <div class="sign-mode" id="typeMode">
+                <input class="typed-sign-field" id="clientTypedSig" type="text" placeholder="Type your full name" />
+                <div class="typed-sign-preview">Preview: <span class="sig-cursive" id="typedSigPreview"></span></div>
+              </div>
+              <div class="sign-actions">
+                <label class="esign-consent">
+                  <input type="checkbox" id="esignConsent" />
+                  I agree to sign this agreement electronically.
+                </label>
+                <button type="button" id="clearSig">Clear signature</button>
+              </div>
+            </div>
+            <div class="sig-line export-sig" id="clientExportSig">
+              <img class="client-sig-image" id="clientSigImage" alt="Client signature" hidden />
+              <span class="sig-cursive" id="clientSigTyped" hidden></span>
+            </div>
+            <div class="sig-line screen-only" id="clientLiveSig">
+              <span class="sig-cursive" id="clientLiveTyped" hidden></span>
+              <img class="client-sig-image" id="clientLiveImage" alt="" hidden />
+            </div>
+            <div class="sig-meta">
+              <span><input class="inline-field" id="clientPrintedName" type="text" placeholder="Printed name / title" style="min-width: 180px;" /></span>
+              <span>Date: <input class="inline-field" id="clientSignDate" type="date" /></span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="page-footer">
+          <span><strong>Brandon Fonville Creative Studio</strong> · Product Design · Graphic Design · Brand Visuals</span>
+          <span>Page 2 of 2</span>
+        </footer>
+      </section>
+    </article>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const canvas = document.getElementById("clientSigPad");
+    const signaturePad = new SignaturePad(canvas, {
+      minWidth: 0.8,
+      maxWidth: 2.2,
+      penColor: "#1c1a17",
+    });
+
+    let activeSignMode = "draw";
+
+    function resizeCanvas() {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const data = signaturePad.toData();
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      canvas.getContext("2d").scale(ratio, ratio);
+      signaturePad.clear();
+      if (data.length) signaturePad.fromData(data);
+      updateLiveClientSignature();
+    }
+
+    function setTodayDates() {
+      const today = new Date();
+      document.getElementById("effectiveDate").valueAsDate = today;
+      document.getElementById("licensorSignDate").valueAsDate = today;
+      document.getElementById("clientSignDate").valueAsDate = today;
+    }
+
+    function setSignMode(mode) {
+      activeSignMode = mode;
+      document.querySelectorAll(".sign-tab").forEach((tab) => {
+        const isActive = tab.dataset.mode === mode;
+        tab.classList.toggle("active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
+      });
+      document.getElementById("drawMode").classList.toggle("active", mode === "draw");
+      document.getElementById("typeMode").classList.toggle("active", mode === "type");
+      updateLiveClientSignature();
+    }
+
+    function updateLiveClientSignature() {
+      const liveTyped = document.getElementById("clientLiveTyped");
+      const liveImage = document.getElementById("clientLiveImage");
+      const typedPreview = document.getElementById("typedSigPreview");
+      const typedValue = document.getElementById("clientTypedSig").value.trim();
+
+      typedPreview.textContent = typedValue;
+
+      if (activeSignMode === "type" && typedValue) {
+        liveTyped.textContent = typedValue;
+        liveTyped.hidden = false;
+        liveImage.hidden = true;
+        return;
+      }
+
+      if (activeSignMode === "draw" && !signaturePad.isEmpty()) {
+        liveImage.src = signaturePad.toDataURL("image/png");
+        liveImage.hidden = false;
+        liveTyped.hidden = true;
+        return;
+      }
+
+      liveTyped.hidden = true;
+      liveImage.hidden = true;
+    }
+
+    function hasClientSignature() {
+      if (activeSignMode === "type") {
+        return document.getElementById("clientTypedSig").value.trim().length > 0;
+      }
+      return !signaturePad.isEmpty();
+    }
+
+    function applyClientSignatureForExport() {
+      const exportImage = document.getElementById("clientSigImage");
+      const exportTyped = document.getElementById("clientSigTyped");
+
+      if (activeSignMode === "type") {
+        const typedValue = document.getElementById("clientTypedSig").value.trim();
+        exportTyped.textContent = typedValue;
+        exportTyped.hidden = !typedValue;
+        exportImage.hidden = true;
+        return;
+      }
+
+      if (!signaturePad.isEmpty()) {
+        exportImage.src = signaturePad.toDataURL("image/png");
+        exportImage.hidden = false;
+        exportTyped.hidden = true;
+      }
+    }
+
+    function setStatus(message, isError) {
+      const status = document.getElementById("toolbarStatus");
+      status.textContent = message;
+      status.style.color = isError ? "#ff9b8f" : "#d2cec7";
+    }
+
+    async function downloadSignedPdf() {
+      if (!document.getElementById("esignConsent").checked) {
+        setStatus("Please agree to sign electronically.", true);
+        return;
+      }
+
+      if (!hasClientSignature()) {
+        setStatus("Please add a client signature first.", true);
+        return;
+      }
+
+      const clientDate = document.getElementById("clientSignDate");
+      if (!clientDate.value) clientDate.valueAsDate = new Date();
+
+      applyClientSignatureForExport();
+      document.body.classList.add("is-exporting");
+
+      const projectName = document.getElementById("projectName")?.value || "Design-License-Agreement";
+      const filename = projectName.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") + "-Signed.pdf";
+
+      setStatus("Generating PDF…");
+
+      try {
+        await html2pdf()
+          .set({
+            margin: 0,
+            filename,
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            pagebreak: { mode: ["css", "legacy"] },
+          })
+          .from(document.querySelector(".document"))
+          .save();
+
+        setStatus("Signed PDF downloaded.");
+      } catch (error) {
+        console.error(error);
+        setStatus("PDF export failed. Try Print instead.", true);
+      } finally {
+        document.body.classList.remove("is-exporting");
+      }
+    }
+
+    document.querySelectorAll(".sign-tab").forEach((tab) => {
+      tab.addEventListener("click", () => setSignMode(tab.dataset.mode));
+    });
+
+    document.getElementById("clearSig").addEventListener("click", () => {
+      signaturePad.clear();
+      document.getElementById("clientTypedSig").value = "";
+      document.getElementById("typedSigPreview").textContent = "";
+      updateLiveClientSignature();
+    });
+
+    document.getElementById("clientTypedSig").addEventListener("input", updateLiveClientSignature);
+    signaturePad.addEventListener("endStroke", updateLiveClientSignature);
+    document.getElementById("downloadPdfBtn").addEventListener("click", downloadSignedPdf);
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+  </script>
+</body>
+</html>
