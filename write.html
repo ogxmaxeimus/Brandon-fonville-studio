@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Start a project with Brandon Fonville Creative Studio." />
+  <title>Write | Brandon Fonville Creative Studio</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=jam-full-1" />
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body class="page-inner" data-page="write">
+
+  <header class="site-nav" id="top">
+    <a href="index.html" class="nav-logo" aria-label="Brandon Fonville Creative Studio home">BF</a>
+    <button type="button" class="nav-menu-btn" id="menuToggle" aria-expanded="false" aria-controls="siteMenu">
+      <span class="nav-menu-label">Menu</span>
+    </button>
+    <a href="write.html" class="nav-write">Write</a>
+  </header>
+
+  <div class="site-menu" id="siteMenu" aria-hidden="true">
+    <div class="menu-layer" data-menu-close></div>
+    <div class="menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+      <div class="menu-inner">
+        <div class="menu-top"><a href="index.html" class="menu-toplink">Home</a><span class="menu-comma">,</span><a href="about.html" class="menu-toplink">About</a><span class="menu-comma">,</span><a href="services.html" class="menu-toplink">Services</a><span class="menu-comma">,</span><a href="works.html" class="menu-toplink">Works</a></div>
+        <div class="menu-center">
+          <div class="menu-brand-left" aria-hidden="true">Brandon</div>
+          <div class="menu-media">
+            <div class="menu-col">
+              <p class="menu-loc">Brandon Fonville<br />Creative Studio</p>
+              <p class="menu-contact"><a href="mailto:hello@brandonfonville.studio">hello@brandonfonville.studio</a></p>
+            </div>
+            <div class="menu-rail" aria-hidden="true">
+              <div class="menu-rail-track">
+                <img src="assets/work/work-identity.png" alt="" />
+                <img src="assets/work/ss-demo.png" alt="" />
+                <img src="assets/work/av-home.png" alt="" />
+                <img src="assets/work/hg-home.png" alt="" />
+                <img src="assets/work/kp-wayfinding.png" alt="" />
+                <img src="assets/work/tv-landing.png" alt="" />
+                <img src="assets/work/work-identity.png" alt="" />
+              </div>
+            </div>
+            <div class="menu-col menu-col-right">
+              <p><a href="discovery.html">Discovery</a></p>
+              <p><a href="ownership.html">Login</a></p>
+              <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch color theme">
+                <span class="theme-icon theme-icon-moon">☾</span>
+                <span class="theme-icon theme-icon-sun">☀</span>
+              </button>
+            </div>
+          </div>
+          <div class="menu-brand-right" aria-hidden="true">Fonville</div>
+        </div>
+        <div class="menu-bottom"><a href="index.html" class="menu-page" data-menu-page="home">
+          <span class="menu-page-inner"><span>Home</span><span class="menu-underline" aria-hidden="true"></span></span>
+        </a><span class="menu-comma">,</span><a href="about.html" class="menu-page" data-menu-page="about">
+          <span class="menu-page-inner"><span>About</span><span class="menu-underline" aria-hidden="true"></span></span>
+        </a><span class="menu-comma">,</span><a href="services.html" class="menu-page" data-menu-page="services">
+          <span class="menu-page-inner"><span>Services</span><span class="menu-underline" aria-hidden="true"></span></span>
+        </a><span class="menu-comma">,</span><a href="works.html" class="menu-page" data-menu-page="works">
+          <span class="menu-page-inner"><span>Works</span><span class="menu-underline" aria-hidden="true"></span></span>
+        </a><span class="menu-comma">,</span><a href="write.html" class="menu-page is-current" data-menu-page="write">
+          <span class="menu-page-inner"><span>Write</span><span class="menu-underline" aria-hidden="true"></span></span>
+        </a></div>
+      </div>
+      <button type="button" class="menu-close" data-menu-close aria-label="Close menu">Close</button>
+    </div>
+  </div>
+
+
+  <main class="inner-page">
+    <section class="contact" id="contact">
+      <div class="contact-inner reveal">
+        <p class="eyebrow">Write</p>
+        <h1>Ready to work<br />with the studio?</h1>
+        <p class="contact-sub">New projects start with the <a href="discovery.html">discovery questionnaire</a>. Or send a brief here — I'll follow up with a proposal and the right package for your scope.</p>
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xwvjkpva" method="POST">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@email.com" required /></div>
+          <div class="field">
+            <label for="package">Interested in</label>
+            <select id="package" name="package">
+              <option>Brand Launch Package ($2,500 to $5,000)</option>
+              <option>Product Launch Package ($3,500 to $8,000)</option>
+              <option>Digital Product Package ($5,000 to $15,000+)</option>
+              <option>Creative Partner Retainer</option>
+              <option>Starter Design Package</option>
+              <option>Brand Builder Package</option>
+              <option>Social Media Content Package</option>
+              <option>Premium Creative Direction</option>
+              <option>Landing Page Website</option>
+              <option>Business Website</option>
+              <option>Online Store / Ecommerce</option>
+              <option>Website Care Plan</option>
+              <option>Not sure yet. Help me choose</option>
+            </select>
+          </div>
+          <div class="field field-full"><label for="brief">Project brief</label><textarea id="brief" name="message" rows="4" placeholder="Tell me about your project, timeline, and goals…" required></textarea></div>
+          <input type="hidden" name="_subject" value="New project request: Brandon Fonville Creative Studio" />
+          <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Send project request</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+        <p class="write-alt"><a href="discovery.html">Prefer the full discovery form →</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-wordmark" aria-hidden="true">Brandon Fonville</p>
+    <div class="footer-row">
+      <div class="footer-brand"><span>Brandon Fonville Creative Studio</span></div>
+      <nav class="footer-links" aria-label="Studio links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="works.html">Works</a>
+        <a href="write.html">Write</a>
+        <a href="discovery.html">Discovery</a>
+        <a href="ownership.html" class="footer-login">Login</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-meta">Brand · Product · Digital · Physical · © <span data-year></span></p>
+      <a href="#top" class="to-top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js?v=jam-full-1"></script>
+</body>
+</html>

@@ -1,19 +1,20 @@
-// ---------- Theme toggle (shared with main site) ----------
+// ---------- Theme toggle (light default; dark via data-theme) ----------
 const root = document.documentElement;
 const themeBtn = document.getElementById("themeToggle");
 const stored = localStorage.getItem("bfc-theme");
-const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-const initialTheme = stored || (prefersLight ? "light" : "dark");
-if (initialTheme === "light") root.setAttribute("data-theme", "light");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const initialTheme = stored || (prefersDark ? "dark" : "light");
+if (initialTheme === "dark") root.setAttribute("data-theme", "dark");
+else root.removeAttribute("data-theme");
 
 themeBtn?.addEventListener("click", () => {
-  const isLight = root.getAttribute("data-theme") === "light";
-  if (isLight) {
+  const isDark = root.getAttribute("data-theme") === "dark";
+  if (isDark) {
     root.removeAttribute("data-theme");
-    localStorage.setItem("bfc-theme", "dark");
-  } else {
-    root.setAttribute("data-theme", "light");
     localStorage.setItem("bfc-theme", "light");
+  } else {
+    root.setAttribute("data-theme", "dark");
+    localStorage.setItem("bfc-theme", "dark");
   }
 });
 
@@ -375,9 +376,12 @@ function renderMissingProjects() {
 
   const labels = {
     tradeverified: "TradeVerified",
+    scopesignal: "ScopeSignal",
     maxeimus: "Maxeimus of Raleigh",
     bcm: "Blue Collar Millionaire",
-    knightsplay: "Knights Play Golf Center",
+    knightsplay: "Knights Play Golf Center — concept",
+    ashfordvale: "Ashford Vale LLP — concept",
+    harborglobal: "Harbor Global LLP — concept",
   };
 
   container.hidden = false;
@@ -396,9 +400,12 @@ function renderMissingProjects() {
 function restoreProjectById(id) {
   const labels = {
     tradeverified: "TradeVerified",
+    scopesignal: "ScopeSignal",
     maxeimus: "Maxeimus of Raleigh",
     bcm: "Blue Collar Millionaire",
-    knightsplay: "Knights Play Golf Center",
+    knightsplay: "Knights Play Golf Center — concept",
+    ashfordvale: "Ashford Vale LLP — concept",
+    harborglobal: "Harbor Global LLP — concept",
   };
   const label = labels[id] || id;
   if (!confirm(`Restore "${label}" to its original default content?`)) return;

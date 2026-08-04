@@ -1,5 +1,5 @@
 /**
- * Featured work carousel ù slides driven by WorkStore.
+ * Featured work carousel ? slides driven by WorkStore.
  * Scoped scroll, a11y controls, case-study open, cleanup via destroy().
  */
 (function () {
@@ -28,6 +28,18 @@
 
   /** Hero image + brand color per project (prefer lifestyle/merch / strong crops). */
   const HERO = {
+    tradeverified: {
+      color: "#0B3A66",
+      src: "assets/work/hero-tradeverified.png",
+      webp: "",
+      alt: "TradeVerified marketing landing page",
+    },
+    scopesignal: {
+      color: "#0A1628",
+      src: "assets/work/ss-demo.png",
+      webp: "",
+      alt: "ScopeSignal AI risk analysis product demo",
+    },
     maxeimus: {
       color: "#4A3420",
       src: "assets/work/work-apparel.png",
@@ -45,6 +57,18 @@
       src: "assets/work/kp-staff-apparel.png",
       webp: "assets/work/kp-staff-apparel.webp",
       alt: "Knights Play branded apparel and merch",
+    },
+    ashfordvale: {
+      color: "#1A2433",
+      src: "assets/work/av-home.png",
+      webp: "",
+      alt: "Ashford Vale LLP prestige law firm website concept",
+    },
+    harborglobal: {
+      color: "#083A68",
+      src: "assets/work/hg-home.png",
+      webp: "",
+      alt: "Harbor Global LLP international law firm website concept",
     },
   };
 
@@ -205,7 +229,7 @@
     }
 
     fillLine(line, text) {
-      // Per-letter only for short names ù long titles animate as one block
+      // Per-letter only for short names ÔøΩ long titles animate as one block
       if (text.length <= 14) {
         [...text].forEach((ch) => {
           const span = document.createElement("span");

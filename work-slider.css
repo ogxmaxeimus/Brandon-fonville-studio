@@ -1,7 +1,7 @@
-/* Featured work slider ù used on the studio Work section */
+/* Featured work slider ‚Äî editorial stage */
 
 .work-slider {
-  margin: 8px 0 56px;
+  margin: 8px 0 36px;
   outline: none;
 }
 
@@ -19,29 +19,29 @@
   align-items: center;
   gap: 12px;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-family: var(--font-display);
+  font-weight: 700;
 }
 
 .work-slider__brand .brand-mark {
-  width: 32px;
-  height: 32px;
-  font-size: 0.75rem;
-  border-radius: 9px;
+  width: 30px;
+  height: 30px;
+  font-size: 0.72rem;
+  border-radius: var(--radius);
 }
 
 .work-slider__hint {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
 .work-slider__stage {
   position: relative;
   height: min(78vh, 720px);
   min-height: 480px;
-  border-radius: calc(var(--radius) + 4px);
   overflow: hidden;
   border: 1px solid var(--line);
   isolation: isolate;
@@ -57,13 +57,13 @@
   z-index: 10;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 7vw, 5.4rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
   line-height: 0.95;
   overflow: hidden;
   pointer-events: none;
-  color: #f4f2ee;
+  color: #f4f7f5;
   text-wrap: balance;
 }
 
@@ -91,18 +91,19 @@
 
 .work-slider__meta {
   margin: 0;
-  color: rgba(244, 242, 238, 0.78);
+  color: rgba(244, 247, 245, 0.78);
   font-size: 0.95rem;
 }
 
 .work-slider__tag {
-  color: var(--accent-2);
+  color: #a8d4c2;
   font-family: var(--font-display);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius);
   padding: 4px 10px;
 }
 
@@ -131,8 +132,8 @@
   height: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  border-radius: 2px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
 }
 
 .work-slider__controls {
@@ -156,13 +157,14 @@
 
 .work-slider__btn {
   appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(8, 8, 10, 0.35);
-  color: #f4f2ee;
-  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(10, 14, 12, 0.4);
+  color: #f4f7f5;
+  border-radius: var(--radius);
   padding: 10px 16px;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
   backdrop-filter: blur(8px);
   transition: border-color 0.2s, background 0.2s, color 0.2s;
@@ -170,22 +172,22 @@
 
 .work-slider__btn:hover,
 .work-slider__btn:focus-visible {
-  border-color: rgba(var(--accent-rgb), 0.75);
+  border-color: rgba(168, 212, 194, 0.85);
   color: #fff;
   outline: none;
 }
 
 .work-slider__btn--open {
-  background: var(--accent);
+  background: #f4f7f5;
   border-color: transparent;
-  color: var(--accent-ink);
-  font-weight: 600;
+  color: #121814;
+  font-weight: 700;
 }
 
 .work-slider__btn--open:hover,
 .work-slider__btn--open:focus-visible {
-  background: var(--accent-2);
-  color: var(--accent-ink);
+  background: #fff;
+  color: #121814;
 }
 
 .work-slider__dots {
@@ -197,7 +199,7 @@
 .work-slider__dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 1px;
   border: 0;
   padding: 0;
   background: rgba(255, 255, 255, 0.28);
@@ -207,8 +209,8 @@
 
 .work-slider__dot.is-active,
 .work-slider__dot[aria-current="true"] {
-  background: var(--accent);
-  transform: scale(1.25);
+  background: #a8d4c2;
+  transform: scale(1.2);
 }
 
 .work-slider__status {
