@@ -63,7 +63,10 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
 
 body {
   background: var(--bg);
@@ -283,9 +286,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 section {
   position: relative;
   z-index: 1;
-  padding: clamp(72px, 10vw, 120px) var(--offset);
+  padding: clamp(88px, 10vw, 120px) var(--offset);
   max-width: var(--maxw);
   margin: 0 auto;
+  scroll-margin-top: 88px;
 }
 
 .sheet-label {
@@ -686,20 +690,21 @@ section {
   max-width: none;
   background: var(--hero-bg);
   color: var(--paper);
-  padding-top: clamp(72px, 10vw, 110px);
+  padding-top: clamp(88px, 10vw, 120px);
   padding-bottom: clamp(72px, 10vw, 110px);
 }
 .assembly-stage {
   max-width: var(--maxw);
-  margin: 24px auto 0;
+  margin: 28px auto 0;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(32px, 6vw, 72px);
-  align-items: end;
-  min-height: 520px;
+  align-items: center;
+  min-height: 0;
 }
 .assembly-visual {
-  min-height: 420px;
+  min-height: min(420px, 52vh);
+  aspect-ratio: 4 / 3;
   display: grid;
   place-items: center;
   background:

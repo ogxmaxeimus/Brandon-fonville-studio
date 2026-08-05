@@ -119,7 +119,8 @@ const io = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  // Low threshold so tall blocks (work board, packages) reveal as soon as they enter
+  { threshold: 0.02, rootMargin: "0px 0px -24px 0px" }
 );
 document.querySelectorAll(".reveal").forEach((el, i) => {
   el.style.transitionDelay = `${(i % 4) * 70}ms`;
@@ -138,6 +139,19 @@ function revealInView() {
 revealInView();
 window.addEventListener("load", revealInView);
 window.addEventListener("resize", revealInView);
+// Safety net: IO alone can miss tall sections / late layout; keep scroll coherent
+let revealScrollTick = 0;
+window.addEventListener(
+  "scroll",
+  () => {
+    if (revealScrollTick) return;
+    revealScrollTick = requestAnimationFrame(() => {
+      revealScrollTick = 0;
+      revealInView();
+    });
+  },
+  { passive: true }
+);
 
 // ---------- Assembly layers ----------
 const ASSEMBLY = [
@@ -273,7 +287,7 @@ function initWorkBoard(projects) {
       const code = `A-${String(101 + i).padStart(3, "0")}`;
       const meta = (p.meta || p.tag || "").toUpperCase();
       return `
-      <button type="button" class="work-card" data-project="${p.id}" aria-label="Open case study: ${p.title}">
+      <button type="button" class="work-card reveal" data-project="${p.id}" aria-label="Open case study: ${p.title}">
         <div class="work-card__frame">
           <div class="work-card__blueprint" aria-hidden="true" style="background-image:url('${preview.src}')"></div>
           <div class="work-card__photo" style="background-image:url('${preview.src}')"></div>
@@ -287,6 +301,8 @@ function initWorkBoard(projects) {
       </button>`;
     })
     .join("");
+
+  observeReveals(workBoard);
 
   workBoard.querySelectorAll(".work-card").forEach((card) => {
     const frame = card.querySelector(".work-card__frame");
