@@ -171,7 +171,7 @@
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+  background: linear-gradient(135deg, #1e5a9c, #5b9fd4);
   color: #110a06;
   font-family: var(--font-display);
   font-size: 0.72rem;

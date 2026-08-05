@@ -1,7 +1,3 @@
-# Studio site root — never nest client/concept folders as publish.
-[build]
-  publish = "."
-
 [[headers]]
   for = "/*.html"
   [headers.values]
@@ -10,4 +6,4 @@
 [[headers]]
   for = "/*.{css,js,ico,png,jpg,webp,svg}"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "public, max-age=604800"

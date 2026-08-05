@@ -45,15 +45,15 @@
       id: "tradeverified",
       title: "TradeVerified",
       titleSub: "",
-      meta: "SaaS platform · product & brand design",
+      meta: "SaaS platform, product and brand design",
       tag: "Product / UX",
       caseStudy: {
-        eyebrow: "Case study · Product & UX",
+        eyebrow: "Case study: Product & UX",
         sub: "A LinkedIn style, trust first SaaS platform for skilled trades workers and the companies that hire them.",
         facts: [
           { label: "Role", value: "Founder & Lead Product Designer" },
           { label: "Team", value: "Solo designer founder directing development" },
-          { label: "Tools", value: "Figma · Next.js · TypeScript · Tailwind · Supabase · Stripe" },
+          { label: "Tools", value: "Figma, Next.js, TypeScript, Tailwind, Supabase, Stripe" },
           { label: "Type", value: "Web app + marketing site" },
         ],
         overview:
@@ -108,15 +108,15 @@
       id: "scopesignal",
       title: "ScopeSignal",
       titleSub: "",
-      meta: "SaaS product · brand & go-to-market",
+      meta: "SaaS product, brand and go-to-market",
       tag: "Product / Brand",
       caseStudy: {
-        eyebrow: "Case study · Product & brand",
+        eyebrow: "Case study: Product & brand",
         sub: "A SaaS tool that spots scope creep in client messages and helps freelancers protect unpaid work.",
         facts: [
           { label: "Role", value: "Founder & Product Designer" },
           { label: "Team", value: "Solo designer founder" },
-          { label: "Tools", value: "Figma · Next.js · TypeScript · Tailwind" },
+          { label: "Tools", value: "Figma, Next.js, TypeScript, Tailwind" },
           { label: "Type", value: "Product UI + brand system" },
         ],
         overview:
@@ -174,12 +174,12 @@
       meta: "Heritage athleisure & lifestyle",
       tag: "Full brand system",
       caseStudy: {
-        eyebrow: "Case study · Brand system",
+        eyebrow: "Case study: Brand system",
         sub: "A full heritage athleisure and lifestyle brand system spanning identity, apparel, packaging, print, and web.",
         facts: [
           { label: "Role", value: "Lead Brand & Product Designer" },
           { label: "Team", value: "Independent, with the brand owner" },
-          { label: "Tools", value: "Adobe Illustrator · Photoshop · Mockups" },
+          { label: "Tools", value: "Adobe Illustrator, Photoshop, Mockups" },
           { label: "Scope", value: "Identity → packaging → social → web" },
         ],
         overview:
@@ -254,16 +254,16 @@
       id: "bcm",
       title: "Blue Collar Millionaire",
       titleSub: "",
-      meta: "Apparel & lifestyle brand · Est. 2016",
+      meta: "Apparel and lifestyle brand, Est. 2016",
       tag: "Apparel & merchandise",
       caseStudy: {
-        eyebrow: "Case study · Apparel & merchandise",
+        eyebrow: "Case study: Apparel and merchandise",
         sub: "Apparel graphics, merchandise, and campaign imagery for a lifestyle brand established in 2016.",
         facts: [
           { label: "Role", value: "Brand & Product Designer" },
           { label: "Team", value: "Solo, with the founder" },
-          { label: "Tools", value: "Adobe Illustrator · Photoshop · Mockups" },
-          { label: "Scope", value: "Apparel · merch · campaign" },
+          { label: "Tools", value: "Adobe Illustrator, Photoshop, Mockups" },
+          { label: "Scope", value: "Apparel, merch, campaign" },
         ],
         overview:
           "For Blue Collar Millionaire, an apparel and lifestyle brand established in 2016, I designed and mocked up the merchandise line and campaign imagery. The work spanned a lifestyle campaign shot, a charcoal hoodie with the circular monogram badge, a full merch flat lay (cap, apparel stack, tote, and mug), and an embroidered beanie. As the solo designer working directly with the founder, I used Adobe Illustrator for the vector logo suite and Photoshop with product mockups to bring the collection to life.",
@@ -317,16 +317,16 @@
       id: "knightsplay",
       title: "Knights Play",
       titleSub: "Golf Center",
-      meta: "Concept · Public golf facility · Apex, NC",
+      meta: "Concept: public golf facility, Apex, NC",
       tag: "Rebrand concept",
       caseStudy: {
-        eyebrow: "Case study · Concept",
+        eyebrow: "Case study: Concept",
         sub: "A concept rebrand spanning digital and environmental design for a public golf facility in Apex, NC.",
         facts: [
           { label: "Role", value: "Lead Designer" },
           { label: "Team", value: "Independent concept" },
-          { label: "Tools", value: "Figma · Illustrator · Photoshop" },
-          { label: "Type", value: "Concept · App · signage · print · apparel" },
+          { label: "Tools", value: "Figma, Illustrator, Photoshop" },
+          { label: "Type", value: "Concept: app, signage, print, apparel" },
         ],
         overview:
           "Knights Play Golf Center is a studio concept rebrand for a public golf facility in Apex, NC. The work spans both digital and environmental design: a mobile app concept (tee time booking, on course GPS, and order to bay), wayfinding signage, business cards and stationery, and branded staff apparel and merch. As the lead designer, I used Figma for the app UI and Illustrator and Photoshop for signage, print, and apparel mockups.",
@@ -380,16 +380,16 @@
       id: "ashfordvale",
       title: "Ashford Vale",
       titleSub: "LLP",
-      meta: "Concept · Prestige law firm website",
+      meta: "Concept: prestige law firm website",
       tag: "Web concept",
       caseStudy: {
-        eyebrow: "Case study · Concept",
+        eyebrow: "Case study: Concept",
         sub: "A prestige corporate and litigation firm website concept designed to attract law-firm clients to the studio.",
         facts: [
           { label: "Role", value: "Lead Designer" },
           { label: "Team", value: "Independent concept" },
-          { label: "Tools", value: "HTML · CSS · JS" },
-          { label: "Type", value: "Concept · Website · Homepage · About · Contact" },
+          { label: "Tools", value: "HTML, CSS, JS" },
+          { label: "Type", value: "Concept: website, homepage, about, contact" },
         ],
         overview:
           "Ashford Vale LLP is a fictional prestige firm concept built for Brandon Fonville Creative Studio marketing. The brief was to improve on the dense, news-led pattern common to elite firm sites: put the firm name at hero level, keep one composition in the first viewport, and make hierarchy calmer and more usable on mobile. The system uses cream, charcoal, and deep navy with Cormorant Garamond and Sora.",
@@ -433,16 +433,16 @@
       id: "harborglobal",
       title: "Harbor Global",
       titleSub: "LLP",
-      meta: "Concept · International law firm website",
+      meta: "Concept: international law firm website",
       tag: "Web concept",
       caseStudy: {
-        eyebrow: "Case study · Concept",
+        eyebrow: "Case study: Concept",
         sub: "A modern international firm website concept with productized practice navigation and clearer CTAs.",
         facts: [
           { label: "Role", value: "Lead Designer" },
           { label: "Team", value: "Independent concept" },
-          { label: "Tools", value: "HTML · CSS · JS" },
-          { label: "Type", value: "Concept · Website · Homepage · About · Contact" },
+          { label: "Tools", value: "HTML, CSS, JS" },
+          { label: "Type", value: "Concept: website, homepage, about, contact" },
         ],
         overview:
           "Harbor Global LLP is a fictional international firm concept for studio marketing aimed at law firms. It improves on dense global-firm patterns with a blue and neutral system, Outfit and Source Serif 4, and a six-lane service grid that clients can scan in one screen instead of hunting through mega-menus.",
@@ -482,20 +482,21 @@
         },
       ],
     },
+
     {
       id: "saltmarsh",
       title: "Saltmarsh",
       titleSub: "Co.",
-      meta: "Concept · CPG product launch",
+      meta: "Concept: CPG product launch",
       tag: "Product Launch",
       caseStudy: {
-        eyebrow: "Case study · Concept",
+        eyebrow: "Case study: Concept",
         sub: "A coastal Carolina hot sauce product launch spanning packaging, labels, landing, and launch creative.",
         facts: [
           { label: "Role", value: "Lead Designer" },
           { label: "Team", value: "Independent concept" },
-          { label: "Tools", value: "HTML · CSS · JS" },
-          { label: "Type", value: "Concept · Packaging · Landing · Launch" },
+          { label: "Tools", value: "HTML, CSS, JS" },
+          { label: "Type", value: "Concept: Packaging, Landing, Launch" },
         ],
         overview:
           "Saltmarsh Co. is a fictional CPG brand built for Brandon Fonville Creative Studio marketing. The brief was to prove the studio's Product Launch package end to end: bottle and carton packaging, a three-SKU label system, a brand-forward product landing page, and a four-frame social launch sequence. The system uses deep ink, sea-glass teal, warm sand, and chalk with Fraunces and Manrope.",
@@ -638,7 +639,7 @@
         facts: project.caseStudy.facts,
         images: project.items.map((item) => ({
           src: item.src,
-          caption: `${item.title} · ${item.span.replace(/ • /g, " · ")}`,
+          caption: `${item.title}, ${item.span.replace(/ • /g, ", ")}`,
         })),
         overview: project.caseStudy.overview,
         outcome: project.caseStudy.outcome,
@@ -714,7 +715,7 @@
       id,
       title: "New Project",
       titleSub: "",
-      meta: "Client · project type",
+      meta: "Client, project type",
       tag: "Category",
       caseStudy: {
         eyebrow: "Case study",
@@ -722,7 +723,7 @@
         facts: [
           { label: "Role", value: "Designer" },
           { label: "Team", value: "Solo" },
-          { label: "Tools", value: "Figma · Illustrator" },
+          { label: "Tools", value: "Figma, Illustrator" },
           { label: "Scope", value: "Brand design" },
         ],
         overview: "Project overview goes here.",

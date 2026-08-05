@@ -1,8 +1,37 @@
-// Footer year
-const yearEl = document.getElementById("year");
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+// Brandon Fonville Creative Studio — new-studio
+document.querySelectorAll("[data-year]").forEach((el) => {
+  el.textContent = new Date().getFullYear();
+});
 
-// ---------- Theme toggle ----------
+// Ambient mouse light: updates --mx / --my for body::before spotlight
+(function initAmbientLight() {
+  const rootEl = document.documentElement;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  rootEl.style.setProperty("--mx", "50%");
+  rootEl.style.setProperty("--my", "32%");
+
+  let raf = 0;
+  let nextX = 50;
+  let nextY = 32;
+
+  const onMove = (e) => {
+    if (reduceMotion.matches) return;
+    const w = window.innerWidth || 1;
+    const h = window.innerHeight || 1;
+    nextX = (e.clientX / w) * 100;
+    nextY = (e.clientY / h) * 100;
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      rootEl.style.setProperty("--mx", `${nextX.toFixed(2)}%`);
+      rootEl.style.setProperty("--my", `${nextY.toFixed(2)}%`);
+      raf = 0;
+    });
+  };
+
+  window.addEventListener("pointermove", onMove, { passive: true });
+})();
+
+// Theme
 const root = document.documentElement;
 const themeBtn = document.getElementById("themeToggle");
 const storedTheme = localStorage.getItem("bfc-theme");
@@ -22,54 +51,414 @@ themeBtn?.addEventListener("click", () => {
   }
 });
 
-// ---------- Intro title sheet ----------
-const intro = document.getElementById("intro");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-function finishIntro() {
-  intro?.classList.add("is-done");
-  intro?.setAttribute("aria-hidden", "true");
+// Fullscreen menu
+const menu = document.getElementById("siteMenu");
+const menuToggle = document.getElementById("menuToggle");
+const menuPanel = menu?.querySelector(".menu-panel");
+const menuInner = menu?.querySelector(".menu-inner");
+const menuBottom = menu?.querySelector(".menu-bottom");
+const menuBottomTrack = menu?.querySelector(".menu-bottom-track");
+
+/**
+ * Uniformly scale the content-sized menu composition to fit the viewport.
+ * Absolute centering (left/top 50% + translate -50%) keeps the unit on-page.
+ * Horizontal motion stays inside `.menu-bottom` only — never widens the page.
+ */
+function menuIsMobileLayout() {
+  return window.matchMedia("(max-width: 720px)").matches;
+}
+
+function fitMenuToViewport() {
+  if (!menu || !menuPanel || !menuInner) return;
+
+  // Mobile uses a normal document flow stack — clear desktop fit inline styles.
+  if (menuIsMobileLayout()) {
+    menuInner.style.setProperty("--menu-scale", "1");
+    menuInner.style.top = "";
+    menuInner.style.transform = "";
+    if (menuBottom) {
+      menuBottom.style.width = "";
+      menuBottom.style.minWidth = "";
+    }
+    resetMenuBottomScroll(true);
+    return;
+  }
+
+  menuInner.style.setProperty("--menu-scale", "1");
+  menuInner.style.top = "46%";
+  if (menuBottom) {
+    menuBottom.style.width = "";
+    menuBottom.style.minWidth = "";
+  }
+
+  const availW = menuPanel.clientWidth;
+  const panelH = menuPanel.clientHeight;
+  if (availW < 80 || panelH < 80) return;
+
+  const chromeH = menu.querySelector(".menu-chrome")?.offsetHeight || 56;
+  const bottomH = menuBottom?.offsetHeight || 0;
+  const availH = Math.max(panelH - chromeH - bottomH - 24, 120);
+
+  const center = menuInner.querySelector(".menu-center");
+  const stageW = Math.max(center?.scrollWidth || 0, menuInner.scrollWidth || 0, 1);
+  const stageH = Math.max(menuInner.scrollHeight, menuInner.offsetHeight, 1);
+
+  let scale = Math.min(availW / stageW, availH / stageH, 1);
+  if (!Number.isFinite(scale) || scale <= 0) scale = 1;
+  if (scale < 1) scale *= 0.92;
+  else scale = Math.min(scale, 0.98);
+  scale = Math.floor(scale * 1000) / 1000;
+  menuInner.style.setProperty("--menu-scale", String(scale));
+
+  // Fit only — do not auto-scroll to `.is-current` (that stuck the strip on reopen).
+  // Open / mouseleave own the left-edge reset.
+}
+
+function scheduleMenuFit() {
   requestAnimationFrame(() => {
-    document.querySelector(".hero")?.classList.add("is-ready");
-    document.documentElement.classList.add("hero-ready");
+    fitMenuToViewport();
+    requestAnimationFrame(fitMenuToViewport);
   });
 }
-if (!intro || reduceMotion || sessionStorage.getItem("bfc-intro") === "1") {
-  intro?.classList.add("is-done");
-  finishIntro();
-} else {
-  setTimeout(() => {
-    sessionStorage.setItem("bfc-intro", "1");
-    finishIntro();
-  }, 1650);
+
+function menuBottomCanScroll() {
+  return Boolean(
+    menuBottom &&
+      menuBottomTrack &&
+      window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 721px)").matches
+  );
 }
 
-// ---------- Header over hero ----------
-const header = document.querySelector(".site-header");
-const hero = document.querySelector(".hero");
-function syncHeaderOverHero() {
-  if (!header || !hero) return;
-  const heroBottom = hero.getBoundingClientRect().bottom;
-  header.classList.toggle("is-over-hero", heroBottom > 72);
+function menuBottomClampX(x) {
+  if (!menuBottom || !menuBottomTrack) return 0;
+  const bw = menuBottom.clientWidth;
+  const tw = menuBottomTrack.scrollWidth;
+  if (bw < 8 || tw < 8) return 0;
+  // maxX = 0 (full left); minX = bw - tw (full right / last item flush).
+  const minX = Math.min(0, bw - tw);
+  const maxX = 0;
+  return Math.min(maxX, Math.max(minX, x));
 }
-syncHeaderOverHero();
-window.addEventListener("scroll", syncHeaderOverHero, { passive: true });
-window.addEventListener("resize", syncHeaderOverHero);
 
-// Mobile nav toggle
-const toggle = document.querySelector(".nav-toggle");
-const nav = document.querySelector(".nav");
-toggle?.addEventListener("click", () => {
-  const open = nav.classList.toggle("open");
-  toggle.setAttribute("aria-expanded", open ? "true" : "false");
+function setMenuBottomX(x, instant) {
+  if (!menuBottomTrack) return;
+  const clamped = menuBottomClampX(x);
+  if (instant) {
+    const prev = menuBottomTrack.style.transition;
+    menuBottomTrack.style.transition = "none";
+    menuBottomTrack.style.setProperty("--menu-bottom-x", `${clamped}px`);
+    // Force reflow so the next transition animates from this value.
+    void menuBottomTrack.offsetWidth;
+    menuBottomTrack.style.transition = prev || "";
+  } else {
+    menuBottomTrack.style.setProperty("--menu-bottom-x", `${clamped}px`);
+  }
+}
+
+function resetMenuBottomScroll(instant) {
+  setMenuBottomX(0, instant);
+}
+
+function focusMenuBottomPage(page, instant) {
+  if (!menuBottomCanScroll() || !page) return;
+  const bw = menuBottom.clientWidth;
+  const tw = menuBottomTrack.scrollWidth;
+  if (bw < 8 || tw < 8) return;
+
+  const pad = 16;
+  const pageLeft = page.offsetLeft;
+  const pageWidth = page.offsetWidth;
+  const pageRight = pageLeft + pageWidth;
+  const pageCenter = pageLeft + pageWidth / 2;
+
+  const pages = [...menuBottomTrack.querySelectorAll(".menu-page")];
+  const isLast = pages[pages.length - 1] === page;
+
+  // Last title (“Start a Project”): flush the track end so the full phrase shows.
+  if (isLast && tw > bw) {
+    setMenuBottomX(bw - tw, instant);
+    return;
+  }
+
+  // Prefer centering the hovered title in the strip.
+  let x = bw / 2 - pageCenter;
+
+  // Keep the full label in view when it fits.
+  if (pageWidth <= bw - pad * 2) {
+    const minXForPage = bw - pad - pageRight;
+    const maxXForPage = pad - pageLeft;
+    x = Math.min(maxXForPage, Math.max(minXForPage, x));
+  } else {
+    // Label wider than strip: pin its start into view.
+    x = pad - pageLeft;
+  }
+
+  // Clamp via setMenuBottomX (allows x=0 full left and full right for last item).
+  setMenuBottomX(x, instant);
+}
+
+function initMenuBottomScroll() {
+  if (!menuBottom || !menuBottomTrack) return;
+
+  menuBottomTrack.querySelectorAll(".menu-page").forEach((page) => {
+    page.addEventListener("mouseenter", () => focusMenuBottomPage(page, false));
+    page.addEventListener("focus", () => focusMenuBottomPage(page, false));
+  });
+
+  // Leave the strip → return to the left edge (Home), not the current page.
+  menuBottom.addEventListener("mouseleave", () => resetMenuBottomScroll(false));
+}
+
+function openMenu() {
+  if (!menu || !menuToggle) return;
+  menu.classList.add("is-open");
+  menu.setAttribute("aria-hidden", "false");
+  menuToggle.setAttribute("aria-expanded", "true");
+  document.documentElement.classList.add("menu-open");
+  document.body.classList.add("menu-open");
+  resetMenuBottomScroll(true);
+  scheduleMenuFit();
+}
+function closeMenu() {
+  if (!menu || !menuToggle) return;
+  menu.classList.remove("is-open");
+  menu.setAttribute("aria-hidden", "true");
+  menuToggle.setAttribute("aria-expanded", "false");
+  document.documentElement.classList.remove("menu-open");
+  document.body.classList.remove("menu-open");
+  menuInner?.style.setProperty("--menu-scale", "1");
+  if (menuInner) {
+    menuInner.style.top = "";
+    menuInner.style.transform = "";
+  }
+  if (menuBottom) {
+    menuBottom.style.width = "";
+    menuBottom.style.minWidth = "";
+  }
+  resetMenuBottomScroll(true);
+}
+menuToggle?.addEventListener("click", () => {
+  if (menu?.classList.contains("is-open")) closeMenu();
+  else openMenu();
 });
-nav?.querySelectorAll("a").forEach((a) =>
-  a.addEventListener("click", () => {
-    nav.classList.remove("open");
-    toggle?.setAttribute("aria-expanded", "false");
-  })
-);
+menu?.querySelectorAll("[data-menu-close]").forEach((el) => el.addEventListener("click", closeMenu));
+menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && menu?.classList.contains("is-open")) closeMenu();
+});
+window.addEventListener("resize", () => {
+  if (menu?.classList.contains("is-open")) scheduleMenuFit();
+});
+if (document.fonts?.ready) {
+  document.fonts.ready.then(() => {
+    if (menu?.classList.contains("is-open")) scheduleMenuFit();
+  });
+}
+initMenuBottomScroll();
 
-// ---------- Contact form (Formspree) ----------
+// Home entrance + project flipper
+const home = document.querySelector(".home");
+if (home) {
+  requestAnimationFrame(() => {
+    home.classList.add("is-ready");
+    document.documentElement.classList.add("home-ready");
+  });
+}
+
+/**
+ * Nudge the CSS-sized wordmark to the brand measure via scale.
+ * CSS already sizes from 100cqw / 6.05 (Bebas metrics); this only
+ * corrects subpixel / font-swap drift and never overshoots width.
+ */
+function fitHomeBrandName() {
+  const wrap = document.querySelector(".home-brand-name");
+  const text = document.querySelector(".home-brand-name-text");
+  const brand = document.querySelector(".home-brand");
+  if (!wrap || !text || !brand) return;
+
+  const available = wrap.clientWidth || brand.clientWidth;
+  if (available < 40) return;
+
+  // Reset scale to measure natural CSS size.
+  brand.style.setProperty("--brand-scale", "1");
+  text.style.fontSize = "";
+
+  const widthOf = () => {
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const rects = range.getClientRects();
+    let w = 0;
+    for (let i = 0; i < rects.length; i++) w = Math.max(w, rects[i].width);
+    return w || text.scrollWidth || text.getBoundingClientRect().width;
+  };
+
+  const natural = widthOf();
+  if (!natural) return;
+
+  // Fill the measure; never exceed available (prevents Chrome clip).
+  let scale = available / natural;
+  if (!Number.isFinite(scale) || scale <= 0) scale = 1;
+  // Allow tiny upscale from the conservative 6.05em CSS; clamp hard.
+  scale = Math.min(Math.max(scale, 0.85), 1.02);
+  if (natural * scale > available) scale = available / natural;
+
+  brand.style.setProperty("--brand-scale", String(Math.floor(scale * 1000) / 1000));
+}
+
+function initHomeBrandFit() {
+  if (!document.querySelector(".home-brand-name-text")) return;
+  let scheduled = false;
+  const run = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      fitHomeBrandName();
+    });
+  };
+  const afterFonts = async () => {
+    try {
+      if (document.fonts?.load) {
+        await document.fonts.load('1em "Bebas Neue"');
+        await document.fonts.load('700 1em "Bebas Neue"');
+      }
+      if (document.fonts?.ready) await document.fonts.ready;
+    } catch (_) { /* fall through */ }
+    run();
+    // Late swap / cached font paint
+    requestAnimationFrame(run);
+    setTimeout(run, 120);
+    setTimeout(run, 400);
+  };
+  afterFonts();
+  if (document.fonts?.addEventListener) {
+    document.fonts.addEventListener("loadingdone", run);
+  }
+  window.addEventListener("resize", run, { passive: true });
+  window.addEventListener("orientationchange", run, { passive: true });
+  if (typeof ResizeObserver !== "undefined") {
+    const brand = document.querySelector(".home-brand");
+    if (brand) new ResizeObserver(run).observe(brand);
+  }
+}
+initHomeBrandFit();
+window.fitHomeBrandName = fitHomeBrandName;
+
+const FLIPPER_PROJECTS = [
+  { id: "maxeimus", title: "Maxeimus", tag: "Identity" },
+  { id: "scopesignal", title: "ScopeSignal", tag: "Product" },
+  { id: "tradeverified", title: "TradeVerified", tag: "Product" },
+  { id: "knightsplay", title: "Knights Play", tag: "Wayfinding" },
+  { id: "ashfordvale", title: "Ashford Vale", tag: "Web" },
+  { id: "harborglobal", title: "Harbor Global", tag: "Web" },
+];
+
+function initHomeFlipper() {
+  const titleEl = document.getElementById("flipperTitle");
+  const tagEl = document.getElementById("flipperTag");
+  const indexEl = document.getElementById("flipperIndex");
+  const works = document.querySelector(".home-works");
+  if (!titleEl || !works) return;
+
+  const railIsScrollable = () => window.matchMedia("(max-width: 1100px)").matches;
+  const items = [...works.querySelectorAll(".home-work")];
+  let i = 0;
+  let pauseUntil = 0;
+  let scrollSyncing = false;
+
+  const scrollActiveIntoView = (idx, behavior = "smooth") => {
+    if (!railIsScrollable()) return;
+    const p = FLIPPER_PROJECTS[idx];
+    const el = items.find((node) => node.getAttribute("data-project") === p.id);
+    if (!el) return;
+    scrollSyncing = true;
+    const target =
+      el.offsetLeft - (works.clientWidth - el.offsetWidth) / 2;
+    works.scrollTo({ left: Math.max(0, target), behavior });
+    window.setTimeout(() => {
+      scrollSyncing = false;
+    }, behavior === "smooth" ? 420 : 80);
+  };
+
+  const setActive = (idx, { fromScroll = false, scrollIntoView = true } = {}) => {
+    i = ((idx % FLIPPER_PROJECTS.length) + FLIPPER_PROJECTS.length) % FLIPPER_PROJECTS.length;
+    const p = FLIPPER_PROJECTS[i];
+    const num = String(i + 1).padStart(3, "0");
+    titleEl.textContent = p.title;
+    if (tagEl) tagEl.textContent = p.tag;
+    if (indexEl) indexEl.textContent = `0 ( ${num} ) 0`;
+    works.classList.add("is-dimming");
+    items.forEach((el) => {
+      el.classList.toggle("is-active", el.getAttribute("data-project") === p.id);
+    });
+    if (!fromScroll && scrollIntoView) scrollActiveIntoView(i);
+  };
+
+  const nearestIndex = () => {
+    const center = works.scrollLeft + works.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    items.forEach((el) => {
+      const mid = el.offsetLeft + el.offsetWidth / 2;
+      const dist = Math.abs(mid - center);
+      if (dist < bestDist) {
+        bestDist = dist;
+        const id = el.getAttribute("data-project");
+        const idx = FLIPPER_PROJECTS.findIndex((p) => p.id === id);
+        if (idx >= 0) best = idx;
+      }
+    });
+    return best;
+  };
+
+  setActive(0, { scrollIntoView: false });
+  requestAnimationFrame(() => scrollActiveIntoView(0, "auto"));
+
+  setInterval(() => {
+    if (Date.now() < pauseUntil) return;
+    setActive(i + 1);
+  }, 2800);
+
+  items.forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      if (railIsScrollable() && window.matchMedia("(hover: none)").matches) return;
+      const id = el.getAttribute("data-project");
+      const idx = FLIPPER_PROJECTS.findIndex((p) => p.id === id);
+      if (idx >= 0) {
+        pauseUntil = Date.now() + 4000;
+        setActive(idx, { scrollIntoView: false });
+      }
+    });
+  });
+
+  let scrollTick = false;
+  works.addEventListener(
+    "scroll",
+    () => {
+      if (!railIsScrollable() || scrollSyncing) return;
+      pauseUntil = Date.now() + 4500;
+      if (scrollTick) return;
+      scrollTick = true;
+      requestAnimationFrame(() => {
+        scrollTick = false;
+        const idx = nearestIndex();
+        if (idx !== i) setActive(idx, { fromScroll: true });
+      });
+    },
+    { passive: true }
+  );
+
+  works.addEventListener(
+    "pointerdown",
+    () => {
+      if (railIsScrollable()) pauseUntil = Date.now() + 4500;
+    },
+    { passive: true }
+  );
+}
+initHomeFlipper();
+
+// Contact form
 const form = document.getElementById("contactForm");
 const statusEl = document.getElementById("formStatus");
 const submitBtn = document.getElementById("submitBtn");
@@ -83,17 +472,14 @@ function setStatus(message, kind) {
 form?.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (form.querySelector('[name="_gotcha"]')?.value) return;
-
   setStatus("Sending…", "pending");
   if (submitBtn) submitBtn.disabled = true;
-
   try {
     const res = await fetch(form.action, {
       method: "POST",
       body: new FormData(form),
       headers: { Accept: "application/json" },
     });
-
     if (res.ok) {
       form.reset();
       setStatus("Thanks! Your project request has been sent. I'll be in touch shortly.", "success");
@@ -119,14 +505,12 @@ const io = new IntersectionObserver(
       }
     });
   },
-  // Low threshold so tall blocks (work board, packages) reveal as soon as they enter
-  { threshold: 0.02, rootMargin: "0px 0px -24px 0px" }
+  { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
 );
 document.querySelectorAll(".reveal").forEach((el, i) => {
   el.style.transitionDelay = `${(i % 4) * 70}ms`;
   io.observe(el);
 });
-
 function revealInView() {
   document.querySelectorAll(".reveal:not(.in)").forEach((el) => {
     const rect = el.getBoundingClientRect();
@@ -138,121 +522,19 @@ function revealInView() {
 }
 revealInView();
 window.addEventListener("load", revealInView);
-window.addEventListener("resize", revealInView);
-// Safety net: IO alone can miss tall sections / late layout; keep scroll coherent
-let revealScrollTick = 0;
-window.addEventListener(
-  "scroll",
-  () => {
-    if (revealScrollTick) return;
-    revealScrollTick = requestAnimationFrame(() => {
-      revealScrollTick = 0;
-      revealInView();
-    });
-  },
-  { passive: true }
-);
 
-// ---------- Assembly layers ----------
-const ASSEMBLY = [
-  {
-    meta: "Brand · System",
-    title: "The Identity",
-    body: "Logo suite, strategy, colors, typography, guidelines, and launch-ready files for print and digital.",
-  },
-  {
-    meta: "Product · Digital",
-    title: "The Product",
-    body: "UI/UX, SaaS product design, websites, apps, user flows, prototypes, and developer handoff.",
-  },
-  {
-    meta: "Physical · Production",
-    title: "The Physical",
-    body: "Apparel, packaging, merch, phone cases, labels, product mockups, and print-ready production files.",
-  },
-  {
-    meta: "Ops · Handoff",
-    title: "The Finish",
-    body: "Contracts, structured revisions, production prep, and files delivered as if someone will build from them tomorrow.",
-  },
-];
-
-const assemblyNav = document.getElementById("assemblyNav");
-const assemblyMeta = document.getElementById("assemblyMeta");
-const assemblyTitle = document.getElementById("assemblyTitle");
-const assemblyBody = document.getElementById("assemblyBody");
-
-function setAssembly(index) {
-  const layer = ASSEMBLY[index];
-  if (!layer) return;
-  assemblyMeta.textContent = layer.meta;
-  assemblyTitle.textContent = layer.title;
-  assemblyBody.textContent = layer.body;
-  assemblyNav?.querySelectorAll("button").forEach((btn, i) => {
-    btn.classList.toggle("is-active", i === index);
-  });
-}
-
-assemblyNav?.addEventListener("click", (e) => {
-  const btn = e.target.closest("button[data-layer]");
-  if (!btn) return;
-  setAssembly(Number(btn.getAttribute("data-layer")));
-});
-
-// Auto-advance assembly while in view
-let assemblyIndex = 0;
-let assemblyTimer = null;
-const assemblySection = document.getElementById("services");
-const assemblyWatcher = new IntersectionObserver(
-  ([entry]) => {
-    if (entry.isIntersecting) {
-      if (assemblyTimer) return;
-      assemblyTimer = setInterval(() => {
-        assemblyIndex = (assemblyIndex + 1) % ASSEMBLY.length;
-        setAssembly(assemblyIndex);
-      }, 4200);
-    } else if (assemblyTimer) {
-      clearInterval(assemblyTimer);
-      assemblyTimer = null;
-    }
-  },
-  { threshold: 0.35 }
-);
-if (assemblySection) assemblyWatcher.observe(assemblySection);
-
-// ---------- Process gauge ----------
-const processSteps = document.querySelectorAll(".process-steps > li");
-const processWeek = document.getElementById("processWeek");
-const processTicks = document.querySelectorAll(".process-ticks li");
-
-const processObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const li = entry.target;
-      const stage = Number(li.getAttribute("data-stage") || 0);
-      processSteps.forEach((el) => el.classList.toggle("is-active", el === li));
-      if (processWeek) processWeek.textContent = `Stage ${String(stage + 1).padStart(2, "0")} / 06`;
-      processTicks.forEach((tick, i) => tick.classList.toggle("is-done", i <= stage));
-    });
-  },
-  { rootMargin: "-40% 0px -45% 0px", threshold: 0 }
-);
-processSteps.forEach((li) => processObserver.observe(li));
-
-// ---------- Portfolio work ----------
+// Portfolio (works page)
 let caseStudies = {};
 const workProjectsEl = document.getElementById("workProjects");
-const workBoard = document.getElementById("workBoard");
 
 const WORK_PREVIEWS = {
-  tradeverified: { src: "assets/work/tv-landing.png", caption: "TradeVerified · Product" },
-  scopesignal: { src: "assets/work/ss-demo.png", caption: "ScopeSignal · Product" },
-  maxeimus: { src: "assets/work/work-identity.png", caption: "Maxeimus · Identity" },
-  bcm: { src: "assets/work/bcm-crest.png", caption: "Blue Collar Millionaire · Mark" },
-  knightsplay: { src: "assets/work/kp-wayfinding.png", caption: "Knights Play · Wayfinding" },
-  ashfordvale: { src: "assets/work/av-home.png", caption: "Ashford Vale · Web" },
-  harborglobal: { src: "assets/work/hg-home.png", caption: "Harbor Global · Web" },
+  tradeverified: { src: "assets/work/tv-landing.png", caption: "TradeVerified, Product" },
+  scopesignal: { src: "assets/work/ss-demo.png", caption: "ScopeSignal, Product" },
+  maxeimus: { src: "assets/work/work-identity.png", caption: "Maxeimus, Identity" },
+  bcm: { src: "assets/work/bcm-crest.png", caption: "Blue Collar Millionaire, Mark" },
+  knightsplay: { src: "assets/work/kp-wayfinding.png", caption: "Knights Play, Wayfinding" },
+  ashfordvale: { src: "assets/work/av-home.png", caption: "Ashford Vale, Web" },
+  harborglobal: { src: "assets/work/hg-home.png", caption: "Harbor Global, Web" },
   saltmarsh: { src: "assets/work/sm-home.png", caption: "Saltmarsh · Product Launch" },
 };
 
@@ -272,63 +554,72 @@ function initPortfolio() {
     bindCaseStudyTriggers();
     observeReveals(workProjectsEl);
   }
-  initWorkBoard(data.projects);
+  initWorkIndex(data.projects);
 }
 
-function initWorkBoard(projects) {
-  if (!workBoard) return;
+function initWorkIndex(projects) {
+  const listEl = document.getElementById("workIndexList");
+  const previewEl = document.getElementById("workIndexPreview");
+  const imgEl = document.getElementById("workIndexImg");
+  const captionEl = document.getElementById("workIndexCaption");
+  if (!listEl || !previewEl || !imgEl) return;
 
-  workBoard.innerHTML = projects
-    .map((p, i) => {
-      const preview = WORK_PREVIEWS[p.id] || {
-        src: (p.items && p.items[0] && p.items[0].src) || "",
-        caption: `${p.title} · ${p.tag || ""}`.trim(),
-      };
-      const code = `A-${String(101 + i).padStart(3, "0")}`;
-      const meta = (p.meta || p.tag || "").toUpperCase();
-      return `
-      <button type="button" class="work-card reveal" data-project="${p.id}" aria-label="Open case study: ${p.title}">
-        <div class="work-card__frame">
-          <div class="work-card__blueprint" aria-hidden="true" style="background-image:url('${preview.src}')"></div>
-          <div class="work-card__photo" style="background-image:url('${preview.src}')"></div>
-          <span class="work-card__ring" aria-hidden="true"></span>
-          <span class="work-card__code">${code}</span>
-        </div>
-        <div class="work-card__meta">
-          <h3>${p.title}</h3>
-          <p>${meta}</p>
-        </div>
-      </button>`;
-    })
+  const items = projects.map((p, i) => {
+    const preview = WORK_PREVIEWS[p.id] || {
+      src: (p.items && p.items[0] && p.items[0].src) || "",
+      caption: [p.title, p.tag].filter(Boolean).join(", "),
+    };
+    const num = String(i + 1).padStart(2, "0");
+    return { id: p.id, title: p.title, tag: p.tag || "", preview, num };
+  });
+
+  listEl.innerHTML = items
+    .map(
+      (item) => `
+      <button type="button" class="work-index__item" role="listitem" data-project="${item.id}" data-src="${item.preview.src}" data-caption="${item.preview.caption}">
+        <span class="work-index__num">${item.num}</span>
+        <span class="work-index__title">${item.title}</span>
+        <span class="work-index__meta">${item.tag}</span>
+      </button>`
+    )
     .join("");
 
-  observeReveals(workBoard);
+  const indexRoot = document.getElementById("workIndex");
+  let activeBtn = null;
 
-  workBoard.querySelectorAll(".work-card").forEach((card) => {
-    const frame = card.querySelector(".work-card__frame");
-    const photo = card.querySelector(".work-card__photo");
+  const showPreview = (btn) => {
+    if (!btn) return;
+    const src = btn.getAttribute("data-src");
+    const caption = btn.getAttribute("data-caption") || "";
+    if (!src) return;
+    if (imgEl.getAttribute("src") !== src) {
+      imgEl.style.opacity = "0";
+      imgEl.onload = () => { imgEl.style.opacity = ""; };
+      imgEl.src = src;
+    }
+    if (captionEl) captionEl.textContent = caption;
+    previewEl.classList.add("is-live");
+    indexRoot?.classList.add("is-hovering");
+    listEl.querySelectorAll(".work-index__item").forEach((el) => el.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    activeBtn = btn;
+  };
 
-    const move = (e) => {
-      const rect = frame.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      photo.style.setProperty("--mx", `${x}%`);
-      photo.style.setProperty("--my", `${y}%`);
-      photo.style.setProperty("--reveal", "150px");
-      card.classList.add("is-revealing");
-    };
-    const leave = () => {
-      photo.style.setProperty("--reveal", "0px");
-      card.classList.remove("is-revealing");
-    };
-
-    frame.addEventListener("pointermove", move);
-    frame.addEventListener("pointerleave", leave);
-    card.addEventListener("click", () => {
-      const id = card.getAttribute("data-project");
+  listEl.querySelectorAll(".work-index__item").forEach((btn) => {
+    btn.addEventListener("mouseenter", () => showPreview(btn));
+    btn.addEventListener("focus", () => showPreview(btn));
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-project");
       if (id) openCaseStudy(id);
     });
   });
+
+  indexRoot?.addEventListener("mouseleave", () => {
+    indexRoot.classList.remove("is-hovering");
+    if (activeBtn) activeBtn.classList.add("is-active");
+  });
+
+  if (items[0]) showPreview(listEl.querySelector(".work-index__item"));
 }
 
 function observeReveals(container) {
@@ -352,10 +643,36 @@ const caseEls = {
 };
 let lastFocused = null;
 
+function getProjectDeepLinkId() {
+  try {
+    const fromQuery = new URLSearchParams(window.location.search).get("project");
+    if (fromQuery && caseStudies[fromQuery]) return fromQuery;
+  } catch (_) { /* ignore */ }
+  const hash = (window.location.hash || "").replace(/^#/, "").trim();
+  if (hash && caseStudies[hash]) return hash;
+  return null;
+}
+
+function syncCaseStudyDeepLink(id) {
+  if (!caseModal) return;
+  const path = window.location.pathname;
+  let search = window.location.search;
+  try {
+    const params = new URLSearchParams(search);
+    if (params.has("project")) {
+      params.delete("project");
+      const next = params.toString();
+      search = next ? `?${next}` : "";
+    }
+  } catch (_) { /* ignore */ }
+  const next = id ? `${path}${search}#${id}` : `${path}${search}`;
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (current !== next) history.replaceState(null, "", next);
+}
+
 function openCaseStudy(id) {
   const data = caseStudies[id];
   if (!data || !caseModal) return;
-
   caseEls.eyebrow.textContent = data.eyebrow;
   caseEls.title.textContent = data.title;
   caseEls.sub.textContent = data.sub;
@@ -370,13 +687,13 @@ function openCaseStudy(id) {
     .join("");
   caseEls.overview.textContent = data.overview;
   caseEls.outcome.textContent = data.outcome;
-
   lastFocused = document.activeElement;
   caseModal.classList.add("open");
   caseModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
   caseModal.querySelector(".case-modal-close")?.focus();
   caseModal.querySelector(".case-modal-scroll").scrollTop = 0;
+  syncCaseStudyDeepLink(id);
 }
 
 function closeCaseStudy() {
@@ -384,6 +701,7 @@ function closeCaseStudy() {
   caseModal.classList.remove("open");
   caseModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
+  if (getProjectDeepLinkId()) syncCaseStudyDeepLink(null);
   if (lastFocused) lastFocused.focus();
 }
 
@@ -399,7 +717,20 @@ function bindCaseStudyTriggers() {
   });
 }
 
+function openCaseStudyFromLocation() {
+  const id = getProjectDeepLinkId();
+  if (id) openCaseStudy(id);
+}
+
 initPortfolio();
+openCaseStudyFromLocation();
+
+window.addEventListener("hashchange", () => {
+  if (!caseModal) return;
+  const id = getProjectDeepLinkId();
+  if (id) openCaseStudy(id);
+  else if (caseModal.classList.contains("open")) closeCaseStudy();
+});
 
 caseModal?.querySelectorAll("[data-close]").forEach((el) =>
   el.addEventListener("click", closeCaseStudy)
