@@ -1,0 +1,41 @@
+/**
+ * Studio signature font — Andre Belarosa (Andrea Belarosa)
+ * Place licensed files here as:
+ *   AndreaBelarosa.otf
+ *   AndreaBelarosa.ttf
+ *
+ * Desktop / Standard license: local HTML → Print to PDF
+ * Webfont license: required if these files are served on a public website
+ */
+@font-face {
+  font-family: "Andrea Belarosa";
+  src:
+    url("AndreaBelarosa.otf") format("opentype"),
+    url("AndreaBelarosa.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-signature: "Andrea Belarosa", "Andre Belarosa", cursive;
+}
+
+.sig-cursive,
+.studio-signature {
+  font-family: var(--font-signature);
+  font-weight: normal;
+  font-style: normal;
+  color: #1c1a17;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.sig-cursive {
+  font-size: 2.35rem;
+}
+
+.sig-cursive.licensor-sig,
+.studio-signature {
+  font-size: 2.55rem;
+}

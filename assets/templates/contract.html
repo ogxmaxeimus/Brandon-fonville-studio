@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contract Template — Brandon Fonville Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../fonts/signature-font.css" />
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --ink-soft: #3d3a35;
+      --muted: #6c665d;
+      --line: rgba(20, 16, 12, 0.14);
+      --paper: #ffffff;
+      --paper-tint: #f7f5f1;
+      --accent: #e6481e;
+      --accent-soft: #fff1eb;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #e8e4dd;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 10.5pt;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .toolbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 14px 24px;
+      background: var(--ink); color: #f4f2ee; font-size: 0.88rem;
+    }
+    .toolbar-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; }
+    .toolbar-mark {
+      width: 30px; height: 30px; display: grid; place-items: center;
+      border-radius: 8px; background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06; font-size: 0.72rem; font-weight: 700;
+    }
+    .toolbar-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .toolbar button {
+      border: 1px solid rgba(255,255,255,0.18); background: transparent; color: inherit;
+      padding: 8px 16px; border-radius: 999px; font-family: var(--font-body);
+      font-size: 0.82rem; font-weight: 500; cursor: pointer;
+    }
+    .toolbar button:hover, .toolbar button.primary {
+      border-color: #ff5d2e; background: rgba(255,93,46,0.14);
+    }
+    .toolbar button.primary {
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #150a05; border-color: transparent;
+    }
+    .toolbar-status { font-size: 0.8rem; color: #d2cec7; }
+    .page-wrap { max-width: 8.5in; margin: 32px auto 48px; padding: 0 20px; }
+    .document {
+      background: var(--paper); border: 1px solid var(--line);
+      box-shadow: 0 24px 80px -32px rgba(20,16,12,0.28);
+    }
+    .doc-page {
+      min-height: 11in; padding: 0.72in 0.78in 0.82in;
+      position: relative; page-break-after: always;
+    }
+    .doc-page:last-child { page-break-after: auto; }
+    .doc-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 24px; padding-bottom: 22px; margin-bottom: 26px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .brand-block { display: flex; align-items: center; gap: 14px; }
+    .brand-mark {
+      width: 46px; height: 46px; display: grid; place-items: center;
+      border-radius: 12px; background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06; font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+    }
+    .brand-text h1 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; line-height: 1.1; }
+    .brand-text p { margin-top: 3px; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+    .doc-meta { text-align: right; font-size: 0.82rem; color: var(--ink-soft); min-width: 2.2in; }
+    .doc-meta strong { display: block; font-family: var(--font-display); font-size: 1.2rem; color: var(--ink); margin-bottom: 10px; }
+    .meta-row { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 4px; }
+    .meta-row span:first-child { color: var(--muted); }
+    .doc-title { font-family: var(--font-display); font-size: 1.55rem; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 8px; }
+    .doc-subtitle { color: var(--muted); font-size: 0.92rem; max-width: 52ch; margin-bottom: 22px; }
+    .notice {
+      background: var(--accent-soft); border: 1px solid rgba(230,72,30,0.18);
+      border-left: 4px solid var(--accent); border-radius: 10px;
+      padding: 12px 14px; font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 24px;
+    }
+    .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 26px; }
+    .party-card { background: var(--paper-tint); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+    .party-card h2 { font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .field-label { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 2px; }
+    .field {
+      display: block; width: 100%; border: none;
+      border-bottom: 1px dashed rgba(20,16,12,0.28); background: transparent;
+      font-family: var(--font-body); font-size: 0.95rem; color: var(--ink);
+      padding: 6px 0; margin-bottom: 10px; outline: none;
+    }
+    .field:focus { border-bottom-color: var(--accent); background: rgba(255,241,235,0.35); }
+    .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+    .summary-item { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--paper); }
+    .summary-item label { display: block; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .summary-item input { width: 100%; border: none; background: transparent; font-family: var(--font-display); font-size: 0.95rem; color: var(--ink); outline: none; }
+    .section { margin-bottom: 22px; }
+    .section h3 {
+      font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section h3::before { content: ""; width: 18px; height: 3px; border-radius: 3px; background: linear-gradient(135deg, #ff5d2e, #ffd166); flex-shrink: 0; }
+    .section p, .section li { color: var(--ink-soft); font-size: 0.92rem; margin-bottom: 8px; }
+    .section ol, .section ul { margin: 0 0 8px 1.1rem; padding: 0; }
+    .section li { margin-bottom: 6px; }
+    .form-section { margin-bottom: 24px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-tint); }
+    .form-section h3 { font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 14px; color: var(--ink); }
+    .form-section h3::before { display: none; }
+    .inline-field {
+      display: inline-block; min-width: 120px; border: none;
+      border-bottom: 1px dashed rgba(20,16,12,0.28); background: transparent;
+      font-family: var(--font-body); font-size: inherit; color: var(--ink); padding: 0 4px 2px; outline: none;
+    }
+    .signature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .signature-block h4 { font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+    .sig-line { border-bottom: 1px solid var(--ink); min-height: 48px; margin-bottom: 8px; display: flex; align-items: flex-end; }
+    .sig-cursive { font-family: var(--font-signature); font-size: 2.35rem; color: var(--ink); line-height: 1; padding-bottom: 2px; }
+    .sig-cursive.licensor-sig { font-size: 2.55rem; }
+    .client-sig-image { max-height: 46px; max-width: 100%; display: block; }
+    .sign-panel { border: 1px solid var(--line); border-radius: 12px; background: var(--paper-tint); padding: 12px; margin-bottom: 10px; }
+    .sign-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+    .sign-tab { border: 1px solid var(--line); background: var(--paper); color: var(--ink-soft); padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; cursor: pointer; }
+    .sign-tab.active { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+    #clientSigPad { width: 100%; height: 110px; border: 1px dashed rgba(20,16,12,0.22); border-radius: 10px; background: #fff; touch-action: none; cursor: crosshair; }
+    .typed-sign-field { width: 100%; border: 1px dashed rgba(20,16,12,0.22); border-radius: 10px; background: #fff; padding: 14px; font-size: 0.95rem; outline: none; }
+    .sign-mode { display: none; }
+    .sign-mode.active { display: block; }
+    .sign-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+    .sign-actions button { border: 1px solid var(--line); background: var(--paper); padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; cursor: pointer; }
+    .esign-consent { display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; color: var(--ink-soft); }
+    .esign-consent input { margin-top: 3px; accent-color: var(--accent); }
+    .export-sig { display: none; }
+    .is-exporting .screen-only { display: none !important; }
+    .is-exporting .export-sig { display: flex !important; }
+    .sig-meta { display: grid; grid-template-columns: 1fr 0.55fr; gap: 14px; font-size: 0.82rem; color: var(--muted); }
+    .page-footer {
+      position: absolute; left: 0.78in; right: 0.78in; bottom: 0.42in;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px;
+    }
+    .not-found { text-align: center; padding: 80px 20px; }
+    .not-found h1 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 12px; }
+    .not-found a { color: var(--accent); }
+    @media print {
+      body { background: white; }
+      .toolbar { display: none; }
+      .page-wrap { margin: 0; padding: 0; max-width: none; }
+      .document { border: none; box-shadow: none; }
+      .screen-only { display: none !important; }
+      .export-sig { display: flex !important; }
+    }
+    @page { size: letter; margin: 0; }
+    @media (max-width: 720px) {
+      .parties, .summary-grid, .signature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-brand">
+      <span class="toolbar-mark">BF</span>
+      <span id="toolbarTitle">Contract Template</span>
+    </div>
+    <div class="toolbar-actions">
+      <span class="toolbar-status" id="toolbarStatus" role="status"></span>
+      <button type="button" onclick="window.print()">Print</button>
+      <button type="button" id="setDateBtn">Set today's date</button>
+      <button type="button" class="primary" id="downloadPdfBtn">Download Signed PDF</button>
+    </div>
+  </div>
+
+  <div class="page-wrap" id="pageWrap">
+    <div class="not-found" id="notFound" hidden>
+      <h1>Contract not found</h1>
+      <p>Check the link from the <a href="../../ownership.html">contract library</a>.</p>
+    </div>
+    <article class="document" id="document" hidden></article>
+  </div>
+
+  <script src="contracts-data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const contractId = params.get("id");
+    const content = ContractsData.getContractContent(contractId);
+    const designer = ContractsData.DESIGNER;
+
+    let signaturePad = null;
+    let activeSignMode = "draw";
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderSummaryFields(fields) {
+      if (!fields || !fields.length) return "";
+      return `<div class="summary-grid">${fields
+        .map(
+          (f) => `
+        <div class="summary-item">
+          <label for="${escapeHtml(f.id)}">${escapeHtml(f.label)}</label>
+          <input id="${escapeHtml(f.id)}" type="${f.type || "text"}" value="${escapeHtml(f.value || "")}" placeholder="${escapeHtml(f.placeholder || "")}" />
+        </div>`
+        )
+        .join("")}</div>`;
+    }
+
+    function renderSections(sections) {
+      return sections
+        .map(
+          (s) => `
+        <div class="section">
+          <h3>${escapeHtml(s.title)}</h3>
+          ${s.items.length === 1 ? `<p>${escapeHtml(s.items[0])}</p>` : `<ol>${s.items.map((i) => `<li>${escapeHtml(i)}</li>`).join("")}</ol>`}
+        </div>`
+        )
+        .join("");
+    }
+
+    function renderFormSections(formSections) {
+      return formSections
+        .map(
+          (fs) => `
+        <div class="form-section">
+          <h3>${escapeHtml(fs.title)}</h3>
+          ${fs.fields
+            .map(
+              (f) => `
+            <span class="field-label">${escapeHtml(f.label)}</span>
+            ${
+              f.multiline
+                ? `<textarea class="field" rows="3" placeholder="${escapeHtml(f.placeholder || "")}"></textarea>`
+                : `<input class="field" type="text" placeholder="${escapeHtml(f.placeholder || "")}" />`
+            }`
+            )
+            .join("")}
+        </div>`
+        )
+        .join("");
+    }
+
+    function renderDocument(data) {
+      const clientRole = data.clientRole || "Client";
+      const designerRole = data.designerRole || "Designer";
+      const isForm = data.isForm;
+
+      document.title = `${data.docTitle} — Brandon Fonville Creative Studio`;
+      document.getElementById("toolbarTitle").textContent = data.docTitle;
+
+      const notice = data.notice
+        ? `<div class="notice">${escapeHtml(data.notice)}</div>`
+        : "";
+
+      const bodyContent = isForm
+        ? renderFormSections(data.formSections || [])
+        : renderSummaryFields(data.summaryFields) + renderSections(data.sections || []);
+
+      const signatures = isForm
+        ? ""
+        : `
+        <div class="signature-grid">
+          <div class="signature-block">
+            <h4>${escapeHtml(designerRole)}</h4>
+            <div class="sig-line export-sig"><span class="sig-cursive licensor-sig">BFonville</span></div>
+            <div class="sig-line screen-only"><span class="sig-cursive licensor-sig">BFonville</span></div>
+            <div class="sig-meta">
+              <span>${escapeHtml(designer.name)} · ${escapeHtml(designer.business)}</span>
+              <span>Date: <input class="inline-field" id="designerSignDate" type="date" /></span>
+            </div>
+          </div>
+          <div class="signature-block client-sign-block">
+            <h4>${escapeHtml(clientRole)}</h4>
+            <div class="sign-panel screen-only">
+              <div class="sign-tabs" role="tablist">
+                <button type="button" class="sign-tab active" data-mode="draw">Draw signature</button>
+                <button type="button" class="sign-tab" data-mode="type">Type signature</button>
+              </div>
+              <div class="sign-mode active" id="drawMode">
+                <canvas id="clientSigPad" aria-label="Draw your signature"></canvas>
+              </div>
+              <div class="sign-mode" id="typeMode">
+                <input class="typed-sign-field" id="clientTypedSig" type="text" placeholder="Type your full name" />
+                <div style="margin-top:8px;font-size:0.78rem;color:var(--muted)">Preview: <span class="sig-cursive" id="typedSigPreview"></span></div>
+              </div>
+              <div class="sign-actions">
+                <label class="esign-consent">
+                  <input type="checkbox" id="esignConsent" />
+                  I agree to sign electronically.
+                </label>
+                <button type="button" id="clearSig">Clear</button>
+              </div>
+            </div>
+            <div class="sig-line export-sig" id="clientExportSig">
+              <img class="client-sig-image" id="clientSigImage" alt="Signature" hidden />
+              <span class="sig-cursive" id="clientSigTyped" hidden></span>
+            </div>
+            <div class="sig-line screen-only" id="clientLiveSig">
+              <span class="sig-cursive" id="clientLiveTyped" hidden></span>
+              <img class="client-sig-image" id="clientLiveImage" alt="" hidden />
+            </div>
+            <div class="sig-meta">
+              <span><input class="inline-field" id="clientPrintedName" type="text" placeholder="Printed name / title" style="min-width:180px" /></span>
+              <span>Date: <input class="inline-field" id="clientSignDate" type="date" /></span>
+            </div>
+          </div>
+        </div>`;
+
+      document.getElementById("document").innerHTML = `
+        <section class="doc-page">
+          <header class="doc-header">
+            <div class="brand-block">
+              <div class="brand-mark">BF</div>
+              <div class="brand-text">
+                <h1>${escapeHtml(designer.name)}</h1>
+                <p>Creative Studio</p>
+              </div>
+            </div>
+            <div class="doc-meta">
+              <strong>${escapeHtml(data.docTitle)}</strong>
+              <div class="meta-row"><span>Agreement #</span><span><input class="inline-field" id="agreementNum" type="text" value="BF-${new Date().getFullYear()}-001" style="min-width:110px" /></span></div>
+              <div class="meta-row"><span>Effective date</span><span><input class="inline-field" id="effectiveDate" type="date" /></span></div>
+              <div class="meta-row"><span>Project</span><span><input class="inline-field" id="projectName" type="text" placeholder="Project name" style="min-width:140px" /></span></div>
+            </div>
+          </header>
+          <h2 class="doc-title">${escapeHtml(data.title)}</h2>
+          <p class="doc-subtitle">${escapeHtml(data.subtitle)}</p>
+          ${notice}
+          <div class="parties">
+            <div class="party-card">
+              <h2>${escapeHtml(designerRole)}</h2>
+              <span class="field-label">Legal name</span>
+              <input class="field" type="text" value="${escapeHtml(designer.name)}" />
+              <span class="field-label">Business name</span>
+              <input class="field" type="text" value="${escapeHtml(designer.business)}" />
+              <span class="field-label">Address</span>
+              <input class="field" type="text" value="${escapeHtml(designer.address)}" />
+              <span class="field-label">Email</span>
+              <input class="field" type="email" value="${escapeHtml(designer.email)}" />
+            </div>
+            <div class="party-card">
+              <h2>${escapeHtml(clientRole)}</h2>
+              <span class="field-label">Legal name / business</span>
+              <input class="field" type="text" placeholder="Client name" />
+              <span class="field-label">Address</span>
+              <input class="field" type="text" placeholder="Street, city, state, ZIP" />
+              <span class="field-label">Email</span>
+              <input class="field" type="email" placeholder="billing@client.com" />
+            </div>
+          </div>
+          ${bodyContent}
+          ${signatures}
+          <footer class="page-footer">
+            <span><strong>${escapeHtml(designer.business)}</strong> · brandonfonville.com</span>
+            <span>${escapeHtml(data.docTitle)}</span>
+          </footer>
+        </section>`;
+
+      document.getElementById("document").hidden = false;
+      if (!isForm) initSignatures();
+      setTodayDates();
+    }
+
+    function setTodayDates() {
+      const today = new Date();
+      ["effectiveDate", "designerSignDate", "clientSignDate"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && !el.value) el.valueAsDate = today;
+      });
+    }
+
+    function initSignatures() {
+      const canvas = document.getElementById("clientSigPad");
+      if (!canvas || !window.SignaturePad) return;
+
+      signaturePad = new SignaturePad(canvas, { minWidth: 0.8, maxWidth: 2.2, penColor: "#1c1a17" });
+
+      function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        const data = signaturePad.toData();
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        signaturePad.clear();
+        if (data.length) signaturePad.fromData(data);
+        updateLiveSig();
+      }
+
+      function setSignMode(mode) {
+        activeSignMode = mode;
+        document.querySelectorAll(".sign-tab").forEach((t) => {
+          t.classList.toggle("active", t.dataset.mode === mode);
+        });
+        document.getElementById("drawMode").classList.toggle("active", mode === "draw");
+        document.getElementById("typeMode").classList.toggle("active", mode === "type");
+        updateLiveSig();
+      }
+
+      function updateLiveSig() {
+        const liveTyped = document.getElementById("clientLiveTyped");
+        const liveImage = document.getElementById("clientLiveImage");
+        const typedVal = document.getElementById("clientTypedSig")?.value.trim() || "";
+        const preview = document.getElementById("typedSigPreview");
+        if (preview) preview.textContent = typedVal;
+
+        if (activeSignMode === "type" && typedVal) {
+          liveTyped.textContent = typedVal;
+          liveTyped.hidden = false;
+          liveImage.hidden = true;
+          return;
+        }
+        if (activeSignMode === "draw" && signaturePad && !signaturePad.isEmpty()) {
+          liveImage.src = signaturePad.toDataURL("image/png");
+          liveImage.hidden = false;
+          liveTyped.hidden = true;
+          return;
+        }
+        liveTyped.hidden = true;
+        liveImage.hidden = true;
+      }
+
+      document.querySelectorAll(".sign-tab").forEach((t) => {
+        t.addEventListener("click", () => setSignMode(t.dataset.mode));
+      });
+      document.getElementById("clearSig")?.addEventListener("click", () => {
+        signaturePad.clear();
+        const typed = document.getElementById("clientTypedSig");
+        if (typed) typed.value = "";
+        updateLiveSig();
+      });
+      document.getElementById("clientTypedSig")?.addEventListener("input", updateLiveSig);
+      signaturePad.addEventListener("endStroke", updateLiveSig);
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      document.getElementById("downloadPdfBtn")?.addEventListener("click", downloadPdf);
+      document.getElementById("setDateBtn")?.addEventListener("click", setTodayDates);
+    }
+
+    function hasClientSig() {
+      if (activeSignMode === "type") {
+        return (document.getElementById("clientTypedSig")?.value.trim() || "").length > 0;
+      }
+      return signaturePad && !signaturePad.isEmpty();
+    }
+
+    function applyExportSig() {
+      const exportImage = document.getElementById("clientSigImage");
+      const exportTyped = document.getElementById("clientSigTyped");
+      if (activeSignMode === "type") {
+        const v = document.getElementById("clientTypedSig").value.trim();
+        exportTyped.textContent = v;
+        exportTyped.hidden = !v;
+        exportImage.hidden = true;
+        return;
+      }
+      if (signaturePad && !signaturePad.isEmpty()) {
+        exportImage.src = signaturePad.toDataURL("image/png");
+        exportImage.hidden = false;
+        exportTyped.hidden = true;
+      }
+    }
+
+    function setStatus(msg, err) {
+      const el = document.getElementById("toolbarStatus");
+      if (el) {
+        el.textContent = msg;
+        el.style.color = err ? "#ff9b8f" : "#d2cec7";
+      }
+    }
+
+    async function downloadPdf() {
+      if (!document.getElementById("esignConsent")?.checked) {
+        setStatus("Please agree to sign electronically.", true);
+        return;
+      }
+      if (!hasClientSig()) {
+        setStatus("Please add a client signature first.", true);
+        return;
+      }
+      const clientDate = document.getElementById("clientSignDate");
+      if (clientDate && !clientDate.value) clientDate.valueAsDate = new Date();
+
+      applyExportSig();
+      document.body.classList.add("is-exporting");
+
+      const projectName = document.getElementById("projectName")?.value || content?.docTitle || "Contract";
+      const filename = projectName.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") + "-Signed.pdf";
+
+      setStatus("Generating PDF…");
+      try {
+        await html2pdf()
+          .set({
+            margin: 0,
+            filename,
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            pagebreak: { mode: ["css", "legacy"] },
+          })
+          .from(document.getElementById("document"))
+          .save();
+        setStatus("Signed PDF downloaded.");
+      } catch (e) {
+        setStatus("PDF export failed. Try Print instead.", true);
+      } finally {
+        document.body.classList.remove("is-exporting");
+      }
+    }
+
+    if (!content) {
+      document.getElementById("notFound").hidden = false;
+      document.getElementById("downloadPdfBtn").hidden = true;
+    } else {
+      renderDocument(content);
+    }
+  </script>
+</body>
+</html>

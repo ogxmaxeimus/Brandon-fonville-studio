@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice Terms & Late Fee Policy — Blue Collar Millionaire — Brandon Fonville Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/fonts/signature-font.css" />
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --ink-soft: #3d3a35;
+      --muted: #6c665d;
+      --line: rgba(20, 16, 12, 0.14);
+      --paper: #ffffff;
+      --paper-tint: #f7f5f1;
+      --accent: #e6481e;
+      --accent-soft: #fff1eb;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4dd;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 10.5pt;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      background: var(--ink);
+      color: #f4f2ee;
+      font-size: 0.88rem;
+    }
+
+    .toolbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+
+    .toolbar-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .toolbar-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .toolbar button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: transparent;
+      color: inherit;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .toolbar button.primary {
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #150a05;
+      border-color: transparent;
+    }
+
+    .page-wrap {
+      max-width: 8.5in;
+      margin: 32px auto 48px;
+      padding: 0 20px;
+    }
+
+    .document {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 80px -32px rgba(20, 16, 12, 0.28);
+    }
+
+    .doc-page {
+      min-height: 11in;
+      padding: 0.72in 0.78in 0.9in;
+      position: relative;
+    }
+
+    .doc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .brand-block { display: flex; align-items: center; gap: 14px; }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .brand-text p {
+      margin-top: 3px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      min-width: 2.4in;
+    }
+
+    .doc-meta strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .meta-row span:first-child { color: var(--muted); }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .doc-subtitle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 52ch;
+      margin-bottom: 20px;
+    }
+
+    .notice {
+      background: var(--accent-soft);
+      border: 1px solid rgba(230, 72, 30, 0.22);
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      border-radius: 2px 8px 8px 2px;
+    }
+
+    .notice strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .notice p { color: var(--ink-soft); font-size: 0.9rem; }
+
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .party-card {
+      background: var(--paper-tint);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .party-card h2 {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .party-card p {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      margin-bottom: 2px;
+    }
+
+    .party-card .name {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .section { margin-bottom: 18px; }
+
+    .section h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section p,
+    .section li {
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    .section ol { padding-left: 18px; }
+
+    .fee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0 6px;
+    }
+
+    .fee-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: var(--paper-tint);
+    }
+
+    .fee-card .k {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .fee-card .v {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .signature-block {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .signature-block h4 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      margin-bottom: 28px;
+    }
+
+    .sig-line {
+      border-bottom: 1px solid var(--ink);
+      min-height: 36px;
+      margin-bottom: 8px;
+    }
+
+    .sig-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .page-footer {
+      position: absolute;
+      left: 0.78in;
+      right: 0.78in;
+      bottom: 0.42in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .page-footer strong { color: var(--ink-soft); font-weight: 500; }
+
+    @media print {
+      body { background: white; }
+      .toolbar { display: none; }
+      .page-wrap { margin: 0; padding: 0; max-width: none; }
+      .document { border: none; box-shadow: none; }
+      .doc-page { min-height: auto; padding: 0.65in 0.72in 0.75in; }
+    }
+
+    @page { size: letter; margin: 0; }
+
+    @media (max-width: 700px) {
+      .parties,
+      .signature-grid,
+      .fee-grid { grid-template-columns: 1fr; }
+      .doc-header { flex-direction: column; }
+      .doc-meta { text-align: left; }
+      .meta-row { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-brand">
+      <span class="toolbar-mark">BF</span>
+      <span>Invoice Terms &amp; Late Fee Policy — BCM</span>
+    </div>
+    <div class="toolbar-actions">
+      <button type="button" onclick="window.print()">Print / Save PDF</button>
+      <button type="button" class="primary" onclick="window.print()">Download PDF</button>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <article class="document">
+      <section class="doc-page">
+        <header class="doc-header">
+          <div class="brand-block">
+            <div class="brand-mark">BF</div>
+            <div class="brand-text">
+              <h1>Brandon Fonville</h1>
+              <p>Creative Studio</p>
+            </div>
+          </div>
+          <div class="doc-meta">
+            <strong>Invoice Terms &amp; Late Fees</strong>
+            <div class="meta-row"><span>Policy #</span><span>BF-IT-2026-001</span></div>
+            <div class="meta-row"><span>Effective</span><span>July 14, 2026</span></div>
+            <div class="meta-row"><span>Client</span><span>Blue Collar Millionaire</span></div>
+          </div>
+        </header>
+
+        <h2 class="doc-title">Payment terms going forward</h2>
+        <p class="doc-subtitle">
+          These terms govern all current and future invoices issued by Brandon Fonville Creative Studio to
+          Blue Collar Millionaire, including Invoice #KSUSPO8P-0012 and any invoices issued after this date.
+        </p>
+
+        <div class="notice">
+          <strong>Invoices and license agreements are separate</strong>
+          <p>
+            Design License / Transfer License Agreements (including Agreement #BF-2026-001 and paid Invoice
+            #KSUSPO8P-0002) only address ownership and usage rights for the licensed work named in those documents.
+            They do not modify due dates, remaining balances, or late fees on any other invoice. An unpaid invoice
+            balance remains due regardless of any license or transfer document.
+          </p>
+        </div>
+
+        <div class="parties">
+          <div class="party-card">
+            <h2>Studio</h2>
+            <p class="name">Brandon Fonville Creative Studio</p>
+            <p>Brandon Fonville</p>
+            <p>Raleigh, North Carolina, United States</p>
+            <p>hello@brandonfonville.com</p>
+          </div>
+          <div class="party-card">
+            <h2>Client</h2>
+            <p class="name">Blue Collar Millionaire</p>
+            <p>Applies to all design / brand / project invoices</p>
+            <p>Effective July 14, 2026 forward</p>
+          </div>
+        </div>
+
+        <div class="fee-grid">
+          <div class="fee-card">
+            <div class="k">Payment due</div>
+            <div class="v">On due date</div>
+          </div>
+          <div class="fee-card">
+            <div class="k">Past-due fee</div>
+            <div class="v">$25 flat</div>
+          </div>
+          <div class="fee-card">
+            <div class="k">Ongoing</div>
+            <div class="v">+1.5% / mo</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>1. Due dates</h3>
+          <ol>
+            <li>Each invoice states an arranged due date. Payment is due in full on that date unless a written payment plan is signed by both parties, or unless the Client makes an earlier express payment commitment (for example, promising to pay the same day revised materials are sent).</li>
+            <li>An express verbal payment commitment by the Client is binding for timing purposes and may control over a later or incorrect date that appears on a Stripe invoice due to administrative error.</li>
+            <li>Partial payments reduce principal only. They do not extend the due date for the remaining balance.</li>
+            <li>“Remaining balance,” deposits, and milestone payments are invoice payment terms — not license transfer terms. Reviewing or signing a Design License / Transfer License Agreement does not satisfy an unpaid invoice.</li>
+            <li>
+              <strong>Invoice #KSUSPO8P-0012:</strong> The Stripe field showing due date August 8, 2026 was a Studio clerical error.
+              The Client committed on a phone call (spouse present) to pay the remaining balance the same day the revised
+              agreement and invoice were sent. That commitment controls. As of July 14, 2026 the balance remains unpaid
+              after that commitment and after a July 12, 2026 in-person acknowledgment that the revised agreement had not yet been reviewed.
+            </li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>2. Late fees (active now and going forward)</h3>
+          <ol>
+            <li>Any balance unpaid after the due date is overdue.</li>
+            <li>When an invoice becomes past due, a flat late fee of <strong>$25.00</strong> is assessed on that invoice.</li>
+            <li>If any principal remains unpaid into a subsequent month after the flat fee is assessed, the unpaid principal also accrues <strong>1.5% per month (18% annually)</strong>, or the maximum permitted by North Carolina law, whichever is less, until paid in full.</li>
+            <li>Late fees are in addition to the principal amount owed.</li>
+            <li>
+              Current application (Invoice #KSUSPO8P-0012): principal $110.00 + $25.00 flat late fee =
+              <strong>$135.00 due now</strong> (see Statement BF-PD-2026-001). The $25.00 fee is based on the missed
+              same-day payment commitment after delivery of the revised agreement and invoice — not on the incorrect
+              August 8, 2026 Stripe due date. If still unpaid into the next month, add $110.00 × 1.5% =
+              <strong>$1.65</strong> more per month on the unpaid principal.
+            </li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>3. Work suspension &amp; ownership retention</h3>
+          <ol>
+            <li>The Studio may suspend active or pending work if an invoice remains unpaid more than 7 days past due.</li>
+            <li>All deliverables, files, and work product remain Studio property until the related invoice is paid in full.</li>
+            <li>Client may not use, publish, reproduce, or distribute work product tied to an unpaid invoice.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>4. Independence of documents</h3>
+          <ol>
+            <li>Invoice #KSUSPO8P-0012 is independent of Agreement #BF-2026-001 and Invoice #KSUSPO8P-0002.</li>
+            <li>Client delay in reviewing a revised license agreement does not pause, waive, or reschedule payment of a separate invoice.</li>
+            <li>Future Statements of Work, proposals, and invoices are likewise independent of any Design License or Transfer License Agreement unless a document expressly says otherwise in writing.</li>
+            <li>Client acknowledgment of a license agreement does not constitute payment, waiver, or satisfaction of any invoice.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>5. Collections</h3>
+          <ol>
+            <li>If an overdue balance remains unpaid 30 days after a past-due statement, Client agrees to pay reasonable collection costs as allowed by law.</li>
+            <li>Governing law: State of North Carolina, United States.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>6. Acknowledgment</h3>
+          <p>
+            By continuing the engagement or remitting payment under any Studio invoice on or after the effective date,
+            Client acknowledges these payment and late-fee terms. Optional signature below confirms receipt.
+          </p>
+        </div>
+
+        <div class="signature-grid">
+          <div class="signature-block">
+            <h4>Studio</h4>
+            <div class="sig-line" style="border-bottom: none; min-height: auto;">
+              <span class="studio-signature">BFonville</span>
+            </div>
+            <div class="sig-meta">
+              <span>Brandon Fonville · Brandon Fonville Creative Studio</span>
+              <span>Date: July 14, 2026</span>
+            </div>
+          </div>
+          <div class="signature-block">
+            <h4>Client — Blue Collar Millionaire</h4>
+            <div class="sig-line"></div>
+            <div class="sig-meta">
+              <span>Name / title: _______________________________</span>
+              <span>Date: ____________________________________</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="page-footer">
+          <span><strong>Brandon Fonville Creative Studio</strong> · brandonfonville.com</span>
+          <span>Policy BF-IT-2026-001</span>
+        </footer>
+      </section>
+    </article>
+  </div>
+</body>
+</html>

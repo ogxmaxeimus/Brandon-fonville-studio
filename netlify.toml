@@ -1,0 +1,42 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
+
+[[redirects]]
+  from = "/works"
+  to = "/works.html"
+  status = 200
+
+[[redirects]]
+  from = "/write"
+  to = "/write.html"
+  status = 200
+
+[[redirects]]
+  from = "/discovery"
+  to = "/discovery.html"
+  status = 200
+
+[[redirects]]
+  from = "/ownership"
+  to = "/ownership.html"
+  status = 200
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.{css,js,ico,png,jpg,webp,svg}"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
