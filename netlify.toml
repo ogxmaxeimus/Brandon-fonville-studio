@@ -1,8 +1,3 @@
-# afterlight-stewardship.netlify.app publishes Afterlight at the site root.
-# The studio site should use a separate Netlify site with publish = "."
-[build]
-  publish = "afterlight"
-
 [[headers]]
   for = "/*.html"
   [headers.values]

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wheel spin demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=spin-demo" />
+  <style>
+    body { min-height: 100vh; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 40px clamp(20px, 5vw, 56px); }
+    /* Keep reveal content visible without fighting wheel transforms */
+    .reveal { opacity: 1 !important; }
+    .demo-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="demo-note">Auto-spin demo � watch the wheel. Or click Spin if it pauses.</p>
+    <div class="packages-subhead" style="margin:0;padding:0;border:0">
+      <h3>Chance to win</h3>
+      <p class="section-note">Enter once, spin once. A small studio giveaway for people exploring packages.</p>
+    </div>
+    <div class="raffle" id="raffle">
+      <div class="raffle-stage">
+        <div class="raffle-wheel-col">
+          <div class="raffle-pointer" aria-hidden="true"></div>
+          <div class="raffle-wheel" id="raffleWheel">
+            <canvas id="raffleCanvas" width="360" height="360"></canvas>
+          </div>
+        </div>
+        <div class="raffle-panel">
+          <p class="eyebrow">Studio giveaway</p>
+          <h4 class="raffle-panel-title">Spin for a studio perk</h4>
+          <p class="raffle-panel-copy">Demo mode unlocks automatically so you can watch the spin.</p>
+          <form class="raffle-form" id="raffleForm">
+            <div class="field"><label for="raffleName">Name</label><input id="raffleName" name="name" value="Demo Viewer" /></div>
+            <div class="field"><label for="raffleEmail">Email</label><input id="raffleEmail" name="email" type="email" value="demo-spin@example.com" /></div>
+            <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button type="submit" class="btn btn-primary btn-block">Enter &amp; unlock spin</button>
+          </form>
+          <button type="button" class="btn btn-primary btn-block raffle-spin-btn" id="raffleSpinBtn" hidden disabled>Spin the wheel</button>
+          <p class="form-status raffle-status" id="raffleStatus" role="status" aria-live="polite"></p>
+          <div class="raffle-result" id="raffleResult" hidden></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="raffle-wheel.js"></script>
+  <script>
+    // Clear prior demo spins so we can re-run, then auto-enter + spin
+    (function () {
+      try {
+        localStorage.removeItem("bfc-raffle-entries");
+      } catch (e) {}
+      const form = document.getElementById("raffleForm");
+      const spin = document.getElementById("raffleSpinBtn");
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          form?.requestSubmit();
+          setTimeout(() => {
+            if (spin && !spin.hidden) spin.click();
+          }, 700);
+        }, 400);
+      });
+    })();
+  </script>
+</body>
+</html>
