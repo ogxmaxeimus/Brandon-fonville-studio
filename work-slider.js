@@ -70,6 +70,12 @@
       webp: "",
       alt: "Harbor Global LLP international law firm website concept",
     },
+    saltmarsh: {
+      color: "#1A4F4E",
+      src: "assets/work/sm-home.png",
+      webp: "",
+      alt: "Saltmarsh Co. CPG product launch concept",
+    },
   };
 
   const AUTOPLAY_DELAY = 5000;

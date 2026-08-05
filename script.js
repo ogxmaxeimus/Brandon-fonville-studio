@@ -1,7 +1,35 @@
-// Brandon Fonville Creative Studio — jamarea-variant
+// Brandon Fonville Creative Studio — new-studio
 document.querySelectorAll("[data-year]").forEach((el) => {
   el.textContent = new Date().getFullYear();
 });
+
+// Ambient mouse light: updates --mx / --my for body::before spotlight
+(function initAmbientLight() {
+  const rootEl = document.documentElement;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  rootEl.style.setProperty("--mx", "50%");
+  rootEl.style.setProperty("--my", "32%");
+
+  let raf = 0;
+  let nextX = 50;
+  let nextY = 32;
+
+  const onMove = (e) => {
+    if (reduceMotion.matches) return;
+    const w = window.innerWidth || 1;
+    const h = window.innerHeight || 1;
+    nextX = (e.clientX / w) * 100;
+    nextY = (e.clientY / h) * 100;
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      rootEl.style.setProperty("--mx", `${nextX.toFixed(2)}%`);
+      rootEl.style.setProperty("--my", `${nextY.toFixed(2)}%`);
+      raf = 0;
+    });
+  };
+
+  window.addEventListener("pointermove", onMove, { passive: true });
+})();
 
 // Theme
 const root = document.documentElement;
@@ -26,19 +54,188 @@ themeBtn?.addEventListener("click", () => {
 // Fullscreen menu
 const menu = document.getElementById("siteMenu");
 const menuToggle = document.getElementById("menuToggle");
+const menuPanel = menu?.querySelector(".menu-panel");
+const menuInner = menu?.querySelector(".menu-inner");
+const menuBottom = menu?.querySelector(".menu-bottom");
+const menuBottomTrack = menu?.querySelector(".menu-bottom-track");
+
+/**
+ * Uniformly scale the content-sized menu composition to fit the viewport.
+ * Absolute centering (left/top 50% + translate -50%) keeps the unit on-page.
+ * Horizontal motion stays inside `.menu-bottom` only — never widens the page.
+ */
+function menuIsMobileLayout() {
+  return window.matchMedia("(max-width: 720px)").matches;
+}
+
+function fitMenuToViewport() {
+  if (!menu || !menuPanel || !menuInner) return;
+
+  // Mobile uses a normal document flow stack — clear desktop fit inline styles.
+  if (menuIsMobileLayout()) {
+    menuInner.style.setProperty("--menu-scale", "1");
+    menuInner.style.top = "";
+    menuInner.style.transform = "";
+    if (menuBottom) {
+      menuBottom.style.width = "";
+      menuBottom.style.minWidth = "";
+    }
+    resetMenuBottomScroll(true);
+    return;
+  }
+
+  menuInner.style.setProperty("--menu-scale", "1");
+  menuInner.style.top = "46%";
+  if (menuBottom) {
+    menuBottom.style.width = "";
+    menuBottom.style.minWidth = "";
+  }
+
+  const availW = menuPanel.clientWidth;
+  const panelH = menuPanel.clientHeight;
+  if (availW < 80 || panelH < 80) return;
+
+  const chromeH = menu.querySelector(".menu-chrome")?.offsetHeight || 56;
+  const bottomH = menuBottom?.offsetHeight || 0;
+  const availH = Math.max(panelH - chromeH - bottomH - 24, 120);
+
+  const center = menuInner.querySelector(".menu-center");
+  const stageW = Math.max(center?.scrollWidth || 0, menuInner.scrollWidth || 0, 1);
+  const stageH = Math.max(menuInner.scrollHeight, menuInner.offsetHeight, 1);
+
+  let scale = Math.min(availW / stageW, availH / stageH, 1);
+  if (!Number.isFinite(scale) || scale <= 0) scale = 1;
+  if (scale < 1) scale *= 0.92;
+  else scale = Math.min(scale, 0.98);
+  scale = Math.floor(scale * 1000) / 1000;
+  menuInner.style.setProperty("--menu-scale", String(scale));
+
+  // Fit only — do not auto-scroll to `.is-current` (that stuck the strip on reopen).
+  // Open / mouseleave own the left-edge reset.
+}
+
+function scheduleMenuFit() {
+  requestAnimationFrame(() => {
+    fitMenuToViewport();
+    requestAnimationFrame(fitMenuToViewport);
+  });
+}
+
+function menuBottomCanScroll() {
+  return Boolean(
+    menuBottom &&
+      menuBottomTrack &&
+      window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 721px)").matches
+  );
+}
+
+function menuBottomClampX(x) {
+  if (!menuBottom || !menuBottomTrack) return 0;
+  const bw = menuBottom.clientWidth;
+  const tw = menuBottomTrack.scrollWidth;
+  if (bw < 8 || tw < 8) return 0;
+  // maxX = 0 (full left); minX = bw - tw (full right / last item flush).
+  const minX = Math.min(0, bw - tw);
+  const maxX = 0;
+  return Math.min(maxX, Math.max(minX, x));
+}
+
+function setMenuBottomX(x, instant) {
+  if (!menuBottomTrack) return;
+  const clamped = menuBottomClampX(x);
+  if (instant) {
+    const prev = menuBottomTrack.style.transition;
+    menuBottomTrack.style.transition = "none";
+    menuBottomTrack.style.setProperty("--menu-bottom-x", `${clamped}px`);
+    // Force reflow so the next transition animates from this value.
+    void menuBottomTrack.offsetWidth;
+    menuBottomTrack.style.transition = prev || "";
+  } else {
+    menuBottomTrack.style.setProperty("--menu-bottom-x", `${clamped}px`);
+  }
+}
+
+function resetMenuBottomScroll(instant) {
+  setMenuBottomX(0, instant);
+}
+
+function focusMenuBottomPage(page, instant) {
+  if (!menuBottomCanScroll() || !page) return;
+  const bw = menuBottom.clientWidth;
+  const tw = menuBottomTrack.scrollWidth;
+  if (bw < 8 || tw < 8) return;
+
+  const pad = 16;
+  const pageLeft = page.offsetLeft;
+  const pageWidth = page.offsetWidth;
+  const pageRight = pageLeft + pageWidth;
+  const pageCenter = pageLeft + pageWidth / 2;
+
+  const pages = [...menuBottomTrack.querySelectorAll(".menu-page")];
+  const isLast = pages[pages.length - 1] === page;
+
+  // Last title (“Start a Project”): flush the track end so the full phrase shows.
+  if (isLast && tw > bw) {
+    setMenuBottomX(bw - tw, instant);
+    return;
+  }
+
+  // Prefer centering the hovered title in the strip.
+  let x = bw / 2 - pageCenter;
+
+  // Keep the full label in view when it fits.
+  if (pageWidth <= bw - pad * 2) {
+    const minXForPage = bw - pad - pageRight;
+    const maxXForPage = pad - pageLeft;
+    x = Math.min(maxXForPage, Math.max(minXForPage, x));
+  } else {
+    // Label wider than strip: pin its start into view.
+    x = pad - pageLeft;
+  }
+
+  // Clamp via setMenuBottomX (allows x=0 full left and full right for last item).
+  setMenuBottomX(x, instant);
+}
+
+function initMenuBottomScroll() {
+  if (!menuBottom || !menuBottomTrack) return;
+
+  menuBottomTrack.querySelectorAll(".menu-page").forEach((page) => {
+    page.addEventListener("mouseenter", () => focusMenuBottomPage(page, false));
+    page.addEventListener("focus", () => focusMenuBottomPage(page, false));
+  });
+
+  // Leave the strip → return to the left edge (Home), not the current page.
+  menuBottom.addEventListener("mouseleave", () => resetMenuBottomScroll(false));
+}
+
 function openMenu() {
   if (!menu || !menuToggle) return;
   menu.classList.add("is-open");
   menu.setAttribute("aria-hidden", "false");
   menuToggle.setAttribute("aria-expanded", "true");
+  document.documentElement.classList.add("menu-open");
   document.body.classList.add("menu-open");
+  resetMenuBottomScroll(true);
+  scheduleMenuFit();
 }
 function closeMenu() {
   if (!menu || !menuToggle) return;
   menu.classList.remove("is-open");
   menu.setAttribute("aria-hidden", "true");
   menuToggle.setAttribute("aria-expanded", "false");
+  document.documentElement.classList.remove("menu-open");
   document.body.classList.remove("menu-open");
+  menuInner?.style.setProperty("--menu-scale", "1");
+  if (menuInner) {
+    menuInner.style.top = "";
+    menuInner.style.transform = "";
+  }
+  if (menuBottom) {
+    menuBottom.style.width = "";
+    menuBottom.style.minWidth = "";
+  }
+  resetMenuBottomScroll(true);
 }
 menuToggle?.addEventListener("click", () => {
   if (menu?.classList.contains("is-open")) closeMenu();
@@ -49,6 +246,15 @@ menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && menu?.classList.contains("is-open")) closeMenu();
 });
+window.addEventListener("resize", () => {
+  if (menu?.classList.contains("is-open")) scheduleMenuFit();
+});
+if (document.fonts?.ready) {
+  document.fonts.ready.then(() => {
+    if (menu?.classList.contains("is-open")) scheduleMenuFit();
+  });
+}
+initMenuBottomScroll();
 
 // Home entrance + project flipper
 const home = document.querySelector(".home");
@@ -59,6 +265,85 @@ if (home) {
   });
 }
 
+/**
+ * Nudge the CSS-sized wordmark to the brand measure via scale.
+ * CSS already sizes from 100cqw / 6.05 (Bebas metrics); this only
+ * corrects subpixel / font-swap drift and never overshoots width.
+ */
+function fitHomeBrandName() {
+  const wrap = document.querySelector(".home-brand-name");
+  const text = document.querySelector(".home-brand-name-text");
+  const brand = document.querySelector(".home-brand");
+  if (!wrap || !text || !brand) return;
+
+  const available = wrap.clientWidth || brand.clientWidth;
+  if (available < 40) return;
+
+  // Reset scale to measure natural CSS size.
+  brand.style.setProperty("--brand-scale", "1");
+  text.style.fontSize = "";
+
+  const widthOf = () => {
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const rects = range.getClientRects();
+    let w = 0;
+    for (let i = 0; i < rects.length; i++) w = Math.max(w, rects[i].width);
+    return w || text.scrollWidth || text.getBoundingClientRect().width;
+  };
+
+  const natural = widthOf();
+  if (!natural) return;
+
+  // Fill the measure; never exceed available (prevents Chrome clip).
+  let scale = available / natural;
+  if (!Number.isFinite(scale) || scale <= 0) scale = 1;
+  // Allow tiny upscale from the conservative 6.05em CSS; clamp hard.
+  scale = Math.min(Math.max(scale, 0.85), 1.02);
+  if (natural * scale > available) scale = available / natural;
+
+  brand.style.setProperty("--brand-scale", String(Math.floor(scale * 1000) / 1000));
+}
+
+function initHomeBrandFit() {
+  if (!document.querySelector(".home-brand-name-text")) return;
+  let scheduled = false;
+  const run = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      fitHomeBrandName();
+    });
+  };
+  const afterFonts = async () => {
+    try {
+      if (document.fonts?.load) {
+        await document.fonts.load('1em "Bebas Neue"');
+        await document.fonts.load('700 1em "Bebas Neue"');
+      }
+      if (document.fonts?.ready) await document.fonts.ready;
+    } catch (_) { /* fall through */ }
+    run();
+    // Late swap / cached font paint
+    requestAnimationFrame(run);
+    setTimeout(run, 120);
+    setTimeout(run, 400);
+  };
+  afterFonts();
+  if (document.fonts?.addEventListener) {
+    document.fonts.addEventListener("loadingdone", run);
+  }
+  window.addEventListener("resize", run, { passive: true });
+  window.addEventListener("orientationchange", run, { passive: true });
+  if (typeof ResizeObserver !== "undefined") {
+    const brand = document.querySelector(".home-brand");
+    if (brand) new ResizeObserver(run).observe(brand);
+  }
+}
+initHomeBrandFit();
+window.fitHomeBrandName = fitHomeBrandName;
+
 const FLIPPER_PROJECTS = [
   { id: "maxeimus", title: "Maxeimus", tag: "Identity" },
   { id: "scopesignal", title: "ScopeSignal", tag: "Product" },
@@ -66,6 +351,7 @@ const FLIPPER_PROJECTS = [
   { id: "knightsplay", title: "Knights Play", tag: "Wayfinding" },
   { id: "ashfordvale", title: "Ashford Vale", tag: "Web" },
   { id: "harborglobal", title: "Harbor Global", tag: "Web" },
+  { id: "saltmarsh", title: "Saltmarsh Co.", tag: "Launch" },
 ];
 
 function initHomeFlipper() {
@@ -75,30 +361,101 @@ function initHomeFlipper() {
   const works = document.querySelector(".home-works");
   if (!titleEl || !works) return;
 
+  const railIsScrollable = () => window.matchMedia("(max-width: 1100px)").matches;
+  const items = [...works.querySelectorAll(".home-work")];
   let i = 0;
-  const setActive = (idx) => {
-    i = idx;
+  let pauseUntil = 0;
+  let scrollSyncing = false;
+
+  const scrollActiveIntoView = (idx, behavior = "smooth") => {
+    if (!railIsScrollable()) return;
+    const p = FLIPPER_PROJECTS[idx];
+    const el = items.find((node) => node.getAttribute("data-project") === p.id);
+    if (!el) return;
+    scrollSyncing = true;
+    const target =
+      el.offsetLeft - (works.clientWidth - el.offsetWidth) / 2;
+    works.scrollTo({ left: Math.max(0, target), behavior });
+    window.setTimeout(() => {
+      scrollSyncing = false;
+    }, behavior === "smooth" ? 420 : 80);
+  };
+
+  const setActive = (idx, { fromScroll = false, scrollIntoView = true } = {}) => {
+    i = ((idx % FLIPPER_PROJECTS.length) + FLIPPER_PROJECTS.length) % FLIPPER_PROJECTS.length;
     const p = FLIPPER_PROJECTS[i];
     const num = String(i + 1).padStart(3, "0");
     titleEl.textContent = p.title;
     if (tagEl) tagEl.textContent = p.tag;
     if (indexEl) indexEl.textContent = `0 ( ${num} ) 0`;
     works.classList.add("is-dimming");
-    works.querySelectorAll(".home-work").forEach((el) => {
+    items.forEach((el) => {
       el.classList.toggle("is-active", el.getAttribute("data-project") === p.id);
     });
+    if (!fromScroll && scrollIntoView) scrollActiveIntoView(i);
   };
 
-  setActive(0);
-  setInterval(() => setActive((i + 1) % FLIPPER_PROJECTS.length), 2800);
+  const nearestIndex = () => {
+    const center = works.scrollLeft + works.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    items.forEach((el) => {
+      const mid = el.offsetLeft + el.offsetWidth / 2;
+      const dist = Math.abs(mid - center);
+      if (dist < bestDist) {
+        bestDist = dist;
+        const id = el.getAttribute("data-project");
+        const idx = FLIPPER_PROJECTS.findIndex((p) => p.id === id);
+        if (idx >= 0) best = idx;
+      }
+    });
+    return best;
+  };
 
-  works.querySelectorAll(".home-work").forEach((el) => {
+  setActive(0, { scrollIntoView: false });
+  requestAnimationFrame(() => scrollActiveIntoView(0, "auto"));
+
+  setInterval(() => {
+    if (Date.now() < pauseUntil) return;
+    setActive(i + 1);
+  }, 2800);
+
+  items.forEach((el) => {
     el.addEventListener("mouseenter", () => {
+      if (railIsScrollable() && window.matchMedia("(hover: none)").matches) return;
       const id = el.getAttribute("data-project");
       const idx = FLIPPER_PROJECTS.findIndex((p) => p.id === id);
-      if (idx >= 0) setActive(idx);
+      if (idx >= 0) {
+        pauseUntil = Date.now() + 4000;
+        setActive(idx, { scrollIntoView: false });
+      }
     });
   });
+
+  let scrollTick = false;
+  works.addEventListener(
+    "scroll",
+    () => {
+      if (!railIsScrollable() || scrollSyncing) return;
+      pauseUntil = Date.now() + 4500;
+      if (scrollTick) return;
+      scrollTick = true;
+      requestAnimationFrame(() => {
+        scrollTick = false;
+        const idx = nearestIndex();
+        if (idx !== i) setActive(idx, { fromScroll: true });
+      });
+    },
+    { passive: true }
+  );
+
+  works.addEventListener(
+    "pointerdown",
+    () => {
+      if (railIsScrollable()) pauseUntil = Date.now() + 4500;
+    },
+    { passive: true }
+  );
 }
 initHomeFlipper();
 
@@ -172,13 +529,14 @@ let caseStudies = {};
 const workProjectsEl = document.getElementById("workProjects");
 
 const WORK_PREVIEWS = {
-  tradeverified: { src: "assets/work/tv-landing.png", caption: "TradeVerified · Product" },
-  scopesignal: { src: "assets/work/ss-demo.png", caption: "ScopeSignal · Product" },
-  maxeimus: { src: "assets/work/work-identity.png", caption: "Maxeimus · Identity" },
-  bcm: { src: "assets/work/bcm-crest.png", caption: "Blue Collar Millionaire · Mark" },
-  knightsplay: { src: "assets/work/kp-wayfinding.png", caption: "Knights Play · Wayfinding" },
-  ashfordvale: { src: "assets/work/av-home.png", caption: "Ashford Vale · Web" },
-  harborglobal: { src: "assets/work/hg-home.png", caption: "Harbor Global · Web" },
+  tradeverified: { src: "assets/work/tv-landing.png", caption: "TradeVerified, Product" },
+  scopesignal: { src: "assets/work/ss-demo.png", caption: "ScopeSignal, Product" },
+  maxeimus: { src: "assets/work/work-identity.png", caption: "Maxeimus, Identity" },
+  bcm: { src: "assets/work/bcm-crest.png", caption: "Blue Collar Millionaire, Mark" },
+  knightsplay: { src: "assets/work/kp-wayfinding.png", caption: "Knights Play, Wayfinding" },
+  ashfordvale: { src: "assets/work/av-home.png", caption: "Ashford Vale, Web" },
+  harborglobal: { src: "assets/work/hg-home.png", caption: "Harbor Global, Web" },
+  saltmarsh: { src: "assets/work/sm-home.png", caption: "Saltmarsh, Product Launch" },
 };
 
 function initPortfolio() {
@@ -210,7 +568,7 @@ function initWorkIndex(projects) {
   const items = projects.map((p, i) => {
     const preview = WORK_PREVIEWS[p.id] || {
       src: (p.items && p.items[0] && p.items[0].src) || "",
-      caption: `${p.title} · ${p.tag || ""}`.trim(),
+      caption: [p.title, p.tag].filter(Boolean).join(", "),
     };
     const num = String(i + 1).padStart(2, "0");
     return { id: p.id, title: p.title, tag: p.tag || "", preview, num };
@@ -286,6 +644,33 @@ const caseEls = {
 };
 let lastFocused = null;
 
+function getProjectDeepLinkId() {
+  try {
+    const fromQuery = new URLSearchParams(window.location.search).get("project");
+    if (fromQuery && caseStudies[fromQuery]) return fromQuery;
+  } catch (_) { /* ignore */ }
+  const hash = (window.location.hash || "").replace(/^#/, "").trim();
+  if (hash && caseStudies[hash]) return hash;
+  return null;
+}
+
+function syncCaseStudyDeepLink(id) {
+  if (!caseModal) return;
+  const path = window.location.pathname;
+  let search = window.location.search;
+  try {
+    const params = new URLSearchParams(search);
+    if (params.has("project")) {
+      params.delete("project");
+      const next = params.toString();
+      search = next ? `?${next}` : "";
+    }
+  } catch (_) { /* ignore */ }
+  const next = id ? `${path}${search}#${id}` : `${path}${search}`;
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (current !== next) history.replaceState(null, "", next);
+}
+
 function openCaseStudy(id) {
   const data = caseStudies[id];
   if (!data || !caseModal) return;
@@ -309,6 +694,7 @@ function openCaseStudy(id) {
   document.body.classList.add("modal-open");
   caseModal.querySelector(".case-modal-close")?.focus();
   caseModal.querySelector(".case-modal-scroll").scrollTop = 0;
+  syncCaseStudyDeepLink(id);
 }
 
 function closeCaseStudy() {
@@ -316,6 +702,7 @@ function closeCaseStudy() {
   caseModal.classList.remove("open");
   caseModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
+  if (getProjectDeepLinkId()) syncCaseStudyDeepLink(null);
   if (lastFocused) lastFocused.focus();
 }
 
@@ -331,7 +718,20 @@ function bindCaseStudyTriggers() {
   });
 }
 
+function openCaseStudyFromLocation() {
+  const id = getProjectDeepLinkId();
+  if (id) openCaseStudy(id);
+}
+
 initPortfolio();
+openCaseStudyFromLocation();
+
+window.addEventListener("hashchange", () => {
+  if (!caseModal) return;
+  const id = getProjectDeepLinkId();
+  if (id) openCaseStudy(id);
+  else if (caseModal.classList.contains("open")) closeCaseStudy();
+});
 
 caseModal?.querySelectorAll("[data-close]").forEach((el) =>
   el.addEventListener("click", closeCaseStudy)

@@ -382,6 +382,7 @@ function renderMissingProjects() {
     knightsplay: "Knights Play Golf Center — concept",
     ashfordvale: "Ashford Vale LLP — concept",
     harborglobal: "Harbor Global LLP — concept",
+    saltmarsh: "Saltmarsh Co. — concept",
   };
 
   container.hidden = false;
@@ -406,6 +407,7 @@ function restoreProjectById(id) {
     knightsplay: "Knights Play Golf Center — concept",
     ashfordvale: "Ashford Vale LLP — concept",
     harborglobal: "Harbor Global LLP — concept",
+    saltmarsh: "Saltmarsh Co. — concept",
   };
   const label = labels[id] || id;
   if (!confirm(`Restore "${label}" to its original default content?`)) return;
