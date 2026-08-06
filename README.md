@@ -1,25 +1,25 @@
 # Brandon Fonville Creative Studio
 
-Personal studio site for Brandon Fonville Creative Studio — brand systems, digital products, and production-ready delivery.
+Portfolio and client site for Brandon Fonville Creative Studio.
 
 ## Overview
 
-[brandonfonville.com](https://brandonfonville.com) is the live portfolio and intake site for Brandon Fonville Creative Studio. It presents selected work (identity, product/UX, packaging, merch), clear service packages, a discovery questionnaire, and a project inquiry flow. The BFCS repo is the static HTML/CSS/JS source deployed to Netlify.
+[brandonfonville.com](https://brandonfonville.com) is the live studio site. It covers selected work (identity, product, packaging, merch), service packages, a discovery questionnaire, and project intake. This BFCS repo is the static HTML, CSS, and JavaScript source, deployed on Netlify.
 
 ## Problem
 
-Independent designers need a site that reads as a real studio — not a generic template — while making it easy for clients to understand packages, review case studies, and start a project without friction.
+A freelance designer’s site has to feel like a real studio and still make it simple for clients to see the work, understand packages, and start a project.
 
 ## Solution
 
-A brand-first static site with expressive typography and motion, a curated works slider with case-study detail, package-led services, a structured discovery questionnaire, and a password-protected ownership/admin area for portfolio and contract management. Pretty URLs and Netlify redirects keep navigation clean in production.
+Built a static site with a clear homepage, a works section with case studies, package based services, a discovery form, and a protected ownership area for portfolio and contracts. Netlify handles hosting and pretty URLs.
 
 ## My Role
 
-- Product Designer
-- UX/UI Designer
-- Frontend Developer
-- Project Manager
+Product Designer  
+UX/UI Designer  
+Frontend Developer  
+Project Manager
 
 ## Process
 
@@ -33,24 +33,24 @@ A brand-first static site with expressive typography and motion, a curated works
 
 ## Tech Stack
 
-- HTML
-- CSS
-- JavaScript (vanilla)
-- Netlify (hosting, pretty URL redirects, cache headers)
-- Google Fonts (Bebas Neue, DM Sans)
+HTML  
+CSS  
+JavaScript  
+Netlify  
+Google Fonts (Bebas Neue, DM Sans)
 
 ## Features
 
-- Brand-first homepage with work flipper and CTA to start a project
-- Works portfolio with case studies (TradeVerified, ScopeSignal, Maxeimus, Blue Collar Millionaire, Knights Play, Ashford Vale, Harbor Global, Saltmarsh, and more)
-- Saltmarsh Co. product-launch concept (packaging, labels, landing, social sequence)
-- Services and packages (brand launch, product launch, digital product, retainers, web)
-- Discovery questionnaire for pre-proposal intake
-- Start a Project / write inquiry flow
-- About page for studio positioning
-- Ownership login for portfolio data and contract library management
-- Light/dark theme toggle and full-site menu with work rail
-- Open Graph / social preview assets
+Homepage with work flipper and Start a Project CTA.  
+Works portfolio with case studies including TradeVerified, ScopeSignal, Maxeimus, Blue Collar Millionaire, Knights Play, Ashford Vale, Harbor Global, and Saltmarsh.  
+Saltmarsh Co. product launch concept: packaging, labels, landing page, and social sequence.  
+Services packages for brand, product, digital, retainers, and web.  
+Discovery questionnaire before proposals.  
+Project inquiry on Write.  
+About page.  
+Ownership login for portfolio data and contracts.  
+Theme toggle and site menu with work rail.  
+Open Graph preview images.
 
 ## Screenshots
 
@@ -60,8 +60,9 @@ A brand-first static site with expressive typography and motion, a curated works
 
 ## Live Demo
 
-- Production: [https://brandonfonville.com](https://brandonfonville.com)
-- Source / Netlify deploy: this repo (`ogxmaxeimus/BFCS`) — publish directory is site root (`.`)
+Production: [https://brandonfonville.com](https://brandonfonville.com)  
+
+Repo and Netlify source: `ogxmaxeimus/BFCS` (publish directory is `.`)
 
 ### Local preview
 
@@ -70,13 +71,12 @@ cd /Users/brandonfonville/Projects/BFCS
 python3 -m http.server 5200
 ```
 
-Open [http://127.0.0.1:5200/](http://127.0.0.1:5200/)  
-(Do not open via `file://` — nav uses `/works`, `/about`, etc.)
+Open [http://127.0.0.1:5200/](http://127.0.0.1:5200/). Use a local server, not `file://`, so routes like `/works` and `/about` resolve.
 
 ## Case Study
 
-Portfolio and case studies: [https://brandonfonville.com/works](https://brandonfonville.com/works)
+[https://brandonfonville.com/works](https://brandonfonville.com/works)
 
 ## Status
 
-Production — live studio site at [brandonfonville.com](https://brandonfonville.com)
+Production. Live at [brandonfonville.com](https://brandonfonville.com).
