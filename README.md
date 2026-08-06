@@ -80,7 +80,3 @@ Open [http://127.0.0.1:5200/](http://127.0.0.1:5200/). Use a local server, not `
 ## Status
 
 Production. Live at [brandonfonville.com](https://brandonfonville.com).
-
-<!-- achievement practice -->
-
-<!-- achievement practice 2 -->
