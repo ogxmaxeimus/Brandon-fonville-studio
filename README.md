@@ -1,6 +1,6 @@
 # BFCS — Brandon Fonville Creative Studio
 
-Clean deployable copy of the studio site (inspired Brandon Fonville Studio site + portfolio including Saltmarsh).
+Clean deployable studio site.
 
 ## Local preview
 
