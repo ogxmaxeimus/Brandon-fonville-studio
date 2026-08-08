@@ -97,14 +97,14 @@
         <p class="eyebrow">Studio ownership</p>
         <h1>Sign in to manage your portfolio</h1>
         <p class="ownership-lead">Update the Work section, preview changes on the live site, and access your full contract library :  no Netlify deploy needed.</p>
-        <form id="loginForm" class="ownership-form" method="post" action="#" autocomplete="on">
+        <div id="loginForm" class="ownership-form" role="form" aria-label="Studio ownership sign in">
           <div class="field">
             <label for="password">Password</label>
-            <input id="password" type="password" autocomplete="current-password" required />
+            <input id="password" type="password" autocomplete="current-password" />
           </div>
           <button type="button" id="loginBtn" class="btn btn-primary btn-block">Sign in</button>
           <p class="form-status" id="loginStatus" role="status" aria-live="polite"></p>
-        </form>
+        </div>
       </div>
     </section>
 
@@ -187,6 +187,6 @@
   <script src="work-store.js?v=pw-20260808"></script>
   <script src="contract-library.js"></script>
   <script src="script.js?v=home-rail-services-1"></script>
-  <script src="ownership.js?v=login-fix-20260808"></script>
+  <script src="ownership.js?v=login-no-post-20260808"></script>
 </body>
 </html>
