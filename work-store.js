@@ -5,7 +5,7 @@
 (function () {
   const STORAGE_KEY = "bfc-work-data";
   const AUTH_KEY = "bfc-ownership-auth";
-  const PASSWORD = "Fonville919";
+  const PASSWORD = "Bask3tba!!";
 
   const LICENSES = [
     {
