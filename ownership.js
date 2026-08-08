@@ -612,6 +612,7 @@ function bindAdminEvents() {
 
 function attemptLogin(e) {
   e?.preventDefault?.();
+  e?.stopPropagation?.();
   const passwordInput = document.getElementById("password");
   const password = (passwordInput?.value || "").trim();
   if (!password) {
@@ -619,6 +620,7 @@ function attemptLogin(e) {
       loginStatus.textContent = "Enter your password.";
       loginStatus.className = "form-status error";
     }
+    passwordInput?.focus();
     return;
   }
   try {
@@ -638,13 +640,19 @@ function attemptLogin(e) {
   }
 }
 
-loginForm?.addEventListener("submit", attemptLogin);
 document.getElementById("loginBtn")?.addEventListener("click", attemptLogin);
+document.getElementById("password")?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    attemptLogin(e);
+  }
+});
 
 logoutBtn?.addEventListener("click", () => {
   WorkStore.logout();
   showLogin();
-  loginForm?.reset();
+  const passwordInput = document.getElementById("password");
+  if (passwordInput) passwordInput.value = "";
 });
 
 bindAdminEvents();
