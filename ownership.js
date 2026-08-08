@@ -612,7 +612,7 @@ function bindAdminEvents() {
 
 loginForm?.addEventListener("submit", (e) => {
   e.preventDefault();
-  const password = document.getElementById("password").value;
+  const password = document.getElementById("password").value.trim();
   if (WorkStore.login(password)) {
     loginStatus.textContent = "";
     showAdmin();
