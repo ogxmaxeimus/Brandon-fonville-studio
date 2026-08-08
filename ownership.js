@@ -1,22 +1,6 @@
-// ---------- Theme toggle (light default; dark via data-theme) ----------
-const root = document.documentElement;
-const themeBtn = document.getElementById("themeToggle");
-const stored = localStorage.getItem("bfc-theme");
-const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const initialTheme = stored || (prefersDark ? "dark" : "light");
-if (initialTheme === "dark") root.setAttribute("data-theme", "dark");
-else root.removeAttribute("data-theme");
-
-themeBtn?.addEventListener("click", () => {
-  const isDark = root.getAttribute("data-theme") === "dark";
-  if (isDark) {
-    root.removeAttribute("data-theme");
-    localStorage.setItem("bfc-theme", "light");
-  } else {
-    root.setAttribute("data-theme", "dark");
-    localStorage.setItem("bfc-theme", "dark");
-  }
-});
+// Theme toggle lives in script.js (loaded before this file). Do not redeclare
+// root/themeBtn/etc. here — top-level const collisions abort this whole script
+// and leave Sign in / Enter dead.
 
 const loginPanel = document.getElementById("loginPanel");
 const adminPanel = document.getElementById("adminPanel");
@@ -36,11 +20,10 @@ const exportBtn = document.getElementById("exportBtn");
 const importInput = document.getElementById("importInput");
 const resetBtn = document.getElementById("resetBtn");
 
-let portfolioData = WorkStore.load();
+let portfolioData = typeof WorkStore !== "undefined" ? WorkStore.load() : { projects: [], licenses: [] };
 let saveTimer = null;
 let activeContractStage = "all";
 let contractSearchQuery = "";
-
 function setSaveStatus(message, kind) {
   if (!saveStatus) return;
   saveStatus.textContent = message;
@@ -610,49 +593,72 @@ function bindAdminEvents() {
   });
 }
 
+function setLoginStatus(message, kind) {
+  if (!loginStatus) return;
+  loginStatus.textContent = message || "";
+  loginStatus.className = "form-status" + (kind ? " " + kind : "");
+}
+
 function attemptLogin(e) {
   e?.preventDefault?.();
   e?.stopPropagation?.();
   const passwordInput = document.getElementById("password");
   const password = (passwordInput?.value || "").trim();
   if (!password) {
-    if (loginStatus) {
-      loginStatus.textContent = "Enter your password.";
-      loginStatus.className = "form-status error";
-    }
+    setLoginStatus("Enter your password.", "error");
     passwordInput?.focus();
-    return;
+    return false;
+  }
+  if (typeof WorkStore === "undefined" || typeof WorkStore.login !== "function") {
+    setLoginStatus("Sign-in is unavailable. Hard-refresh the page (Cmd+Shift+R).", "error");
+    return false;
   }
   try {
     if (WorkStore.login(password)) {
-      if (loginStatus) loginStatus.textContent = "";
+      setLoginStatus("");
       showAdmin();
-    } else if (loginStatus) {
-      loginStatus.textContent = "Incorrect password.";
-      loginStatus.className = "form-status error";
+      return true;
     }
+    setLoginStatus("Incorrect password.", "error");
+    return false;
   } catch (err) {
     console.error("Ownership login failed:", err);
-    if (loginStatus) {
-      loginStatus.textContent = "Sign-in hit an error. Refresh and try again.";
-      loginStatus.className = "form-status error";
-    }
+    setLoginStatus("Sign-in hit an error. Refresh and try again.", "error");
+    return false;
   }
 }
 
-document.getElementById("loginBtn")?.addEventListener("click", attemptLogin);
-document.getElementById("password")?.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    attemptLogin(e);
-  }
-});
+function wireLoginControls() {
+  const loginBtn = document.getElementById("loginBtn");
+  const passwordInput = document.getElementById("password");
+  loginBtn?.addEventListener("click", attemptLogin);
+  passwordInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      attemptLogin(e);
+    }
+  });
+  // Capture-phase fallback if something else stops the bubble later
+  loginForm?.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key === "Enter" && e.target === passwordInput) {
+        e.preventDefault();
+        attemptLogin(e);
+      }
+    },
+    true
+  );
+}
+
+wireLoginControls();
 
 logoutBtn?.addEventListener("click", () => {
   WorkStore.logout();
   showLogin();
   const passwordInput = document.getElementById("password");
   if (passwordInput) passwordInput.value = "";
+  setLoginStatus("");
 });
 
 bindAdminEvents();
