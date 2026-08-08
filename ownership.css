@@ -60,6 +60,14 @@
   margin-bottom: 32px;
 }
 
+.ownership-intro-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .ownership-intro h1,
 .ownership-login h1 {
   font-family: var(--font-display);

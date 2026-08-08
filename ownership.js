@@ -57,16 +57,16 @@ function persist(message) {
 }
 
 function showAdmin() {
-  loginPanel.hidden = true;
-  adminPanel.hidden = false;
-  logoutBtn.hidden = false;
+  if (loginPanel) loginPanel.hidden = true;
+  if (adminPanel) adminPanel.hidden = false;
+  if (logoutBtn) logoutBtn.hidden = false;
   renderAll();
 }
 
 function showLogin() {
-  loginPanel.hidden = false;
-  adminPanel.hidden = true;
-  logoutBtn.hidden = true;
+  if (loginPanel) loginPanel.hidden = false;
+  if (adminPanel) adminPanel.hidden = true;
+  if (logoutBtn) logoutBtn.hidden = true;
 }
 
 function frequencyClass(frequency) {
@@ -610,28 +610,52 @@ function bindAdminEvents() {
   });
 }
 
-loginForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const password = document.getElementById("password").value.trim();
-  if (WorkStore.login(password)) {
-    loginStatus.textContent = "";
-    showAdmin();
-  } else {
-    loginStatus.textContent = "Incorrect password.";
-    loginStatus.className = "form-status error";
+function attemptLogin(e) {
+  e?.preventDefault?.();
+  const passwordInput = document.getElementById("password");
+  const password = (passwordInput?.value || "").trim();
+  if (!password) {
+    if (loginStatus) {
+      loginStatus.textContent = "Enter your password.";
+      loginStatus.className = "form-status error";
+    }
+    return;
   }
-});
+  try {
+    if (WorkStore.login(password)) {
+      if (loginStatus) loginStatus.textContent = "";
+      showAdmin();
+    } else if (loginStatus) {
+      loginStatus.textContent = "Incorrect password.";
+      loginStatus.className = "form-status error";
+    }
+  } catch (err) {
+    console.error("Ownership login failed:", err);
+    if (loginStatus) {
+      loginStatus.textContent = "Sign-in hit an error. Refresh and try again.";
+      loginStatus.className = "form-status error";
+    }
+  }
+}
+
+loginForm?.addEventListener("submit", attemptLogin);
+document.getElementById("loginBtn")?.addEventListener("click", attemptLogin);
 
 logoutBtn?.addEventListener("click", () => {
   WorkStore.logout();
   showLogin();
-  loginForm.reset();
+  loginForm?.reset();
 });
 
 bindAdminEvents();
 
-if (WorkStore.isAuthenticated()) {
-  showAdmin();
-} else {
+try {
+  if (WorkStore.isAuthenticated()) {
+    showAdmin();
+  } else {
+    showLogin();
+  }
+} catch (err) {
+  console.error("Ownership init failed:", err);
   showLogin();
 }
