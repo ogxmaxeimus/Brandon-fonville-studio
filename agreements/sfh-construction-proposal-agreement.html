@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposal &amp; Agreement | SFH Construction | Brandon Fonville Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/fonts/signature-font.css" />
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --ink-soft: #3d3a35;
+      --muted: #6c665d;
+      --line: rgba(20, 16, 12, 0.14);
+      --paper: #ffffff;
+      --paper-tint: #f7f5f1;
+      --accent: #e6481e;
+      --accent-soft: #fff1eb;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4dd;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 10.5pt;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      background: var(--ink);
+      color: #f4f2ee;
+      font-size: 0.88rem;
+    }
+
+    .toolbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+
+    .toolbar-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .toolbar-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .toolbar button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: transparent;
+      color: inherit;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .toolbar button.primary {
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #150a05;
+      border-color: transparent;
+    }
+
+    .page-wrap {
+      max-width: 8.5in;
+      margin: 32px auto 48px;
+      padding: 0 20px;
+    }
+
+    .document {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 80px -32px rgba(20, 16, 12, 0.28);
+    }
+
+    .doc-page {
+      min-height: 11in;
+      padding: 0.68in 0.75in 0.85in;
+      position: relative;
+      page-break-after: always;
+    }
+
+    .doc-page:last-child { page-break-after: auto; }
+
+    .doc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .brand-block { display: flex; align-items: center; gap: 14px; }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff5d2e, #ff8a3d);
+      color: #110a06;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .brand-text p {
+      margin-top: 3px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      min-width: 2.4in;
+    }
+
+    .doc-meta strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 3px;
+    }
+
+    .meta-row span:first-child { color: var(--muted); }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .doc-subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 58ch;
+      margin-bottom: 18px;
+    }
+
+    .notice {
+      background: var(--accent-soft);
+      border: 1px solid rgba(230, 72, 30, 0.22);
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      border-radius: 2px 8px 8px 2px;
+    }
+
+    .notice strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .notice p { color: var(--ink-soft); font-size: 0.88rem; }
+
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .party-card {
+      background: var(--paper-tint);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .party-card h2 {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .party-card .name {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+
+    .party-card p {
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      margin-bottom: 2px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .summary-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: var(--paper-tint);
+    }
+
+    .summary-item .k {
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .summary-item .v {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .section { margin-bottom: 16px; }
+
+    .section h3 {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 7px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section p,
+    .section li {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .section ol,
+    .section ul {
+      margin: 0 0 4px 1.15rem;
+      padding: 0;
+    }
+
+    .section li { margin-bottom: 4px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: var(--paper-tint);
+    }
+
+    .box h4 {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .box ul {
+      margin: 0 0 0 1rem;
+      padding: 0;
+    }
+
+    .box li {
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      margin-bottom: 4px;
+    }
+
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .signature-block {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .signature-block h4 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      margin-bottom: 22px;
+    }
+
+    .sig-line {
+      border-bottom: 1px solid var(--ink);
+      min-height: 36px;
+      margin-bottom: 8px;
+    }
+
+    .sig-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .studio-signature {
+      font-family: "SignatureFont", cursive;
+      font-size: 1.8rem;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .page-footer {
+      position: absolute;
+      left: 0.75in;
+      right: 0.75in;
+      bottom: 0.4in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .page-footer strong { color: var(--ink-soft); font-weight: 500; }
+
+    @media print {
+      body { background: white; }
+      .toolbar { display: none; }
+      .page-wrap { margin: 0; padding: 0; max-width: none; }
+      .document { border: none; box-shadow: none; }
+      .doc-page { min-height: auto; padding: 0.6in 0.68in 0.72in; }
+    }
+
+    @page { size: letter; margin: 0; }
+
+    @media (max-width: 700px) {
+      .parties,
+      .signature-grid,
+      .summary-grid,
+      .two-col { grid-template-columns: 1fr; }
+      .doc-header { flex-direction: column; }
+      .doc-meta { text-align: left; }
+      .meta-row { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-brand">
+      <span class="toolbar-mark">BF</span>
+      <span>Proposal &amp; Agreement | SFH Construction</span>
+    </div>
+    <div class="toolbar-actions">
+      <button type="button" onclick="window.print()">Print / Save PDF</button>
+      <button type="button" class="primary" onclick="window.print()">Download PDF</button>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <article class="document">
+
+      <!-- PAGE 1: PROPOSAL -->
+      <section class="doc-page">
+        <header class="doc-header">
+          <div class="brand-block">
+            <div class="brand-mark">BF</div>
+            <div class="brand-text">
+              <h1>Brandon Fonville</h1>
+              <p>Creative Studio</p>
+            </div>
+          </div>
+          <div class="doc-meta">
+            <strong>Proposal &amp; Agreement</strong>
+            <div class="meta-row"><span>Doc #</span><span>BF.PA.2026.SFH.001</span></div>
+            <div class="meta-row"><span>Date</span><span>August 8, 2026</span></div>
+            <div class="meta-row"><span>Valid</span><span>14 days</span></div>
+          </div>
+        </header>
+
+        <h2 class="doc-title">Custom website for SFH Construction</h2>
+        <p class="doc-subtitle">
+          Design proposal and project agreement. Signature constitutes acceptance, authorizes work to begin
+          upon deposit, and incorporates the Statement of Work and terms on the following page.
+        </p>
+
+        <div class="notice">
+          <strong>Recommended path: custom site, not Wix</strong>
+          <p>
+            The current Wix site can stay up as a temporary placeholder. The custom build on
+            <strong>sfhconstruction.com</strong> is what homeowners and Google should see.
+          </p>
+        </div>
+
+        <div class="parties">
+          <div class="party-card">
+            <h2>Designer</h2>
+            <p class="name">Brandon Fonville Creative Studio</p>
+            <p>Brandon Fonville</p>
+            <p>Raleigh, North Carolina, United States</p>
+            <p>hello@brandonfonville.com</p>
+            <p>brandonfonville.com</p>
+          </div>
+          <div class="party-card">
+            <h2>Client</h2>
+            <p class="name">SFH Construction</p>
+            <p>Jeremy Smith</p>
+            <p>Triangle Area, North Carolina</p>
+            <p>info@sfh-construction.com</p>
+            <p>Tel: 919.402.3389</p>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <div class="k">Total investment</div>
+            <div class="v">$2,200</div>
+          </div>
+          <div class="summary-item">
+            <div class="k">Estimated timeline</div>
+            <div class="v">2 to 3 weeks</div>
+          </div>
+          <div class="summary-item">
+            <div class="k">Domain</div>
+            <div class="v">sfhconstruction.com</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>1. The challenge</h3>
+          <p>
+            SFH Construction needs a professional online presence that wins trust with Triangle area homeowners
+            and commercial clients. The current free Wix site understates the business, lacks a custom domain,
+            and is not positioned to convert local leads.
+          </p>
+        </div>
+
+        <div class="section">
+          <h3>2. Proposed solution</h3>
+          <p>
+            Designer will design and develop a custom marketing website for SFH Construction, launched on
+            <strong>sfhconstruction.com</strong>, replacing reliance on the Wix placeholder. The site will
+            present services, build trust, and make it easy to request a quote or call.
+          </p>
+        </div>
+
+        <div class="section">
+          <h3>3. Process</h3>
+          <ol>
+            <li><strong>Discovery &amp; intake:</strong> brand assets, photos, copy, goals, and domain access.</li>
+            <li><strong>Build:</strong> custom pages, mobile layout, form, and basic SEO.</li>
+            <li><strong>Review:</strong> Client feedback within included revision rounds.</li>
+            <li><strong>Launch:</strong> point domain, go live, and archive Wix as needed.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>4. Deliverables</h3>
+          <ul>
+            <li>Custom website (design and development), not a Wix rebuild</li>
+            <li>Pages: Home, About, Services, Contact / quote request</li>
+            <li>Mobile responsive layout using Client provided logo and brand direction</li>
+            <li>Contact / quote form wired to Client email</li>
+            <li>Basic on page SEO (titles, meta descriptions, Triangle local keywords)</li>
+            <li>Domain launch assistance for <strong>sfhconstruction.com</strong></li>
+            <li>14 days of post launch bug fixes</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>5. Investment</h3>
+          <ol>
+            <li><strong>Total project fee:</strong> $2,200.00 USD</li>
+            <li><strong>Deposit:</strong> 50% ($1,100.00) due upon acceptance, before work begins</li>
+            <li><strong>Balance:</strong> 50% ($1,100.00) due before domain go live / final release</li>
+            <li>Domain registration for sfhconstruction.com (approx. $10 to $15 per year) is separate and reimbursable if Designer purchases on Client’s behalf</li>
+            <li>Work outside this scope requires a written Change Order</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>6. Acceptance</h3>
+          <p>
+            By signing below, Client accepts this proposal and the Statement of Work &amp; Terms on page 2.
+            Upon acceptance, Designer will invoice the deposit and schedule kickoff. This proposal is valid for
+            <strong>14 days</strong> from August 8, 2026.
+          </p>
+        </div>
+
+        <div class="signature-grid">
+          <div class="signature-block">
+            <h4>Designer</h4>
+            <div class="sig-line" style="border-bottom: none; min-height: auto;">
+              <span class="studio-signature">BFonville</span>
+            </div>
+            <div class="sig-meta">
+              <span>Brandon Fonville · Brandon Fonville Creative Studio</span>
+              <span>Date: August 8, 2026</span>
+            </div>
+          </div>
+          <div class="signature-block">
+            <h4>Client | SFH Construction</h4>
+            <div class="sig-line"></div>
+            <div class="sig-meta">
+              <span>Name / title: Jeremy Smith _________________</span>
+              <span>Date: ____________________________________</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="page-footer">
+          <span><strong>Brandon Fonville Creative Studio</strong> · brandonfonville.com</span>
+          <span>BF.PA.2026.SFH.001 · Page 1 of 2</span>
+        </footer>
+      </section>
+
+      <!-- PAGE 2: SOW + AGREEMENT TERMS -->
+      <section class="doc-page">
+        <header class="doc-header">
+          <div class="brand-block">
+            <div class="brand-mark">BF</div>
+            <div class="brand-text">
+              <h1>Brandon Fonville</h1>
+              <p>Creative Studio</p>
+            </div>
+          </div>
+          <div class="doc-meta">
+            <strong>SOW &amp; Terms</strong>
+            <div class="meta-row"><span>Doc #</span><span>BF.PA.2026.SFH.001</span></div>
+            <div class="meta-row"><span>Project</span><span>SFH Construction Website</span></div>
+            <div class="meta-row"><span>Fee</span><span>$2,200.00</span></div>
+          </div>
+        </header>
+
+        <h2 class="doc-title">Statement of work &amp; terms</h2>
+        <p class="doc-subtitle">
+          Issued under this Proposal &amp; Agreement. Defines scope, revisions, payment, ownership, and
+          website design and development terms (aligned with Studio MSA, SOW, Invoice Terms, and Website
+          Design and Development standards).
+        </p>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <div class="k">Project name</div>
+            <div class="v" style="font-size: 0.95rem;">SFH Construction Website</div>
+          </div>
+          <div class="summary-item">
+            <div class="k">Target delivery</div>
+            <div class="v" style="font-size: 0.95rem;">2 to 3 weeks after kickoff</div>
+          </div>
+          <div class="summary-item">
+            <div class="k">Revisions included</div>
+            <div class="v">2 rounds</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>1. Project overview</h3>
+          <ol>
+            <li>Designer provides custom website design and development for SFH Construction / Jeremy Smith.</li>
+            <li>Primary domain: <strong>sfhconstruction.com</strong>.</li>
+            <li>This SOW is effective upon signature by both parties and receipt of the required deposit.</li>
+            <li>No work begins until the deposit is received.</li>
+          </ol>
+        </div>
+
+        <div class="two-col">
+          <div class="box">
+            <h4>Included</h4>
+            <ul>
+              <li>Home, About, Services, Contact</li>
+              <li>Quote / contact form</li>
+              <li>Mobile responsive build</li>
+              <li>Basic SEO setup</li>
+              <li>Domain launch assistance</li>
+              <li>14 days of post launch bug fixes</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Not included</h4>
+            <ul>
+              <li>New logo or full rebrand</li>
+              <li>Ongoing ads / SEO retainer</li>
+              <li>Full copywriting from scratch</li>
+              <li>Blog / CMS / e commerce</li>
+              <li>Ongoing hosting fees (Client’s account)</li>
+              <li>Wix redesign or Wix maintenance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>2. Timeline &amp; milestones</h3>
+          <ol>
+            <li><strong>Kickoff:</strong> within 3 business days of signed agreement and deposit.</li>
+            <li><strong>First review build:</strong> within approximately 10 business days of kickoff (subject to Client assets).</li>
+            <li><strong>Revision rounds:</strong> 2 rounds included. Additional rounds: $75 each.</li>
+            <li><strong>Final launch:</strong> after Client approval and receipt of final balance.</li>
+            <li>Delays from missing Client content or feedback may shift dates without penalty to Designer.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>3. Client responsibilities</h3>
+          <ol>
+            <li>Provide logo, project photos, phone/email, service list, short About copy, and domain access.</li>
+            <li>Confirm rights to all materials supplied (photos, logos, trademarks, copy).</li>
+            <li>Respond to feedback requests within a reasonable time (target: 2 to 3 business days).</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>4. Payment terms</h3>
+          <ol>
+            <li>Total fee: <strong>$2,200.00</strong>. Deposit <strong>$1,100.00</strong> before work; balance <strong>$1,100.00</strong> before launch.</li>
+            <li>Deposit is not refundable once work has begun.</li>
+            <li>Invoices due within 14 days. Late balances may accrue 1.5% per month (or max allowed by law).</li>
+            <li>Designer may suspend work if payment is more than 7 days past due after written notice.</li>
+            <li>Accepted methods: bank transfer / ACH, card (Stripe), or other methods agreed in writing.</li>
+            <li>Final deliverables and domain go live occur upon payment in full.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>5. Intellectual property</h3>
+          <ol>
+            <li>Until payment in full, all work product remains property of Designer.</li>
+            <li>Upon payment in full, Client receives ownership of the custom site design and page content created for this project (excluding Designer preexisting tools, frameworks, templates, and third party libraries/licenses).</li>
+            <li>Designer retains the right to display the completed work in portfolio, website, and promotional materials.</li>
+            <li>Client is responsible for hosting subscriptions, domain renewals, and third party tool costs.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>6. Website terms</h3>
+          <ol>
+            <li>Scope includes front end development, responsive implementation, basic SEO, and hosting/domain setup assistance.</li>
+            <li>14 days of post launch bug fixes included. Ongoing maintenance available by separate retainer if desired.</li>
+            <li>Client provides copy, images, and any legal pages (privacy, etc.), or approves Designer assisted placeholders.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>7. Termination &amp; liability</h3>
+          <ol>
+            <li>Either party may terminate for material breach not cured within 10 business days of written notice.</li>
+            <li>Upon termination, Client pays for work performed to date. No rights are granted for unpaid deliverables.</li>
+            <li>Designer’s total liability is limited to fees paid for this project, except where prohibited by law.</li>
+            <li>Designer is not responsible for trademark clearance or third party platform changes unless separately contracted.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <h3>8. Governing law</h3>
+          <p>
+            This Agreement is governed by the laws of the State of North Carolina, United States.
+            This document constitutes the entire agreement for this project and supersedes prior discussions
+            on this subject. Amendments must be in writing and signed by both parties. Electronic signatures
+            and PDF copies are acceptable.
+          </p>
+        </div>
+
+        <div class="section">
+          <h3>9. Acknowledgment</h3>
+          <p>
+            Signature on page 1 (or below) accepts the Proposal, this Statement of Work, and these terms in full.
+          </p>
+        </div>
+
+        <div class="signature-grid">
+          <div class="signature-block">
+            <h4>Designer</h4>
+            <div class="sig-line" style="border-bottom: none; min-height: auto;">
+              <span class="studio-signature">BFonville</span>
+            </div>
+            <div class="sig-meta">
+              <span>Brandon Fonville · Brandon Fonville Creative Studio</span>
+              <span>Date: August 8, 2026</span>
+            </div>
+          </div>
+          <div class="signature-block">
+            <h4>Client | SFH Construction</h4>
+            <div class="sig-line"></div>
+            <div class="sig-meta">
+              <span>Name / title: Jeremy Smith _________________</span>
+              <span>Date: ____________________________________</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="page-footer">
+          <span><strong>Brandon Fonville Creative Studio</strong> · hello@brandonfonville.com</span>
+          <span>BF.PA.2026.SFH.001 · Page 2 of 2</span>
+        </footer>
+      </section>
+
+    </article>
+  </div>
+</body>
+</html>

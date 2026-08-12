@@ -4,8 +4,6 @@
  */
 (function () {
   const STORAGE_KEY = "bfc-work-data";
-  const AUTH_KEY = "bfc-ownership-auth";
-  const PASSWORD = "Bask3tba!!";
 
   const LICENSES = [
     {
@@ -65,7 +63,7 @@
         {
           category: "Product",
           src: "assets/work/tv-landing.png",
-          webp: "",
+          webp: "assets/work/tv-landing.webp",
           alt: "TradeVerified marketing landing page with hero and verified badge",
           width: 1024,
           height: 683,
@@ -75,7 +73,7 @@
         {
           category: "Product",
           src: "assets/work/tv-marketplace.png",
-          webp: "",
+          webp: "assets/work/tv-marketplace.webp",
           alt: "TradeVerified worker marketplace search with filters and verified profile cards",
           width: 1024,
           height: 683,
@@ -85,7 +83,7 @@
         {
           category: "Product",
           src: "assets/work/tv-profile.png",
-          webp: "",
+          webp: "assets/work/tv-profile.webp",
           alt: "TradeVerified verified tradesperson profile with credentials and portfolio",
           width: 1024,
           height: 683,
@@ -95,7 +93,7 @@
         {
           category: "Product",
           src: "assets/work/tv-dashboard.png",
-          webp: "",
+          webp: "assets/work/tv-dashboard.webp",
           alt: "TradeVerified employer hiring dashboard with applications and stats",
           width: 1024,
           height: 683,
@@ -128,7 +126,7 @@
         {
           category: "Product",
           src: "assets/work/ss-demo.png",
-          webp: "",
+          webp: "assets/work/ss-demo.webp",
           alt: "ScopeSignal AI risk analysis dashboard showing high risk score and dollars at risk",
           width: 1536,
           height: 1024,
@@ -138,7 +136,7 @@
         {
           category: "Brand Identity",
           src: "assets/work/ss-logo.png",
-          webp: "",
+          webp: "assets/work/ss-logo.webp",
           alt: "ScopeSignal logo and wordmark on black",
           width: 1536,
           height: 1024,
@@ -148,7 +146,7 @@
         {
           category: "Social",
           src: "assets/work/ss-problem.png",
-          webp: "",
+          webp: "assets/work/ss-problem.webp",
           alt: "ScopeSignal social post about unpaid quick changes",
           width: 1536,
           height: 1024,
@@ -158,7 +156,7 @@
         {
           category: "Social",
           src: "assets/work/ss-how-it-works.png",
-          webp: "",
+          webp: "assets/work/ss-how-it-works.webp",
           alt: "ScopeSignal how it works three step explainer graphic",
           width: 1536,
           height: 1024,
@@ -400,7 +398,7 @@
         {
           category: "Digital",
           src: "assets/work/av-home.png",
-          webp: "",
+          webp: "assets/work/av-home.webp",
           alt: "Ashford Vale LLP concept homepage with prestige hero and firm name",
           width: 1536,
           height: 1024,
@@ -410,7 +408,7 @@
         {
           category: "Digital",
           src: "assets/work/av-practices.png",
-          webp: "",
+          webp: "assets/work/av-practices.webp",
           alt: "Ashford Vale practices section with editorial practice list",
           width: 1536,
           height: 1024,
@@ -420,7 +418,7 @@
         {
           category: "Digital",
           src: "assets/work/av-about.png",
-          webp: "",
+          webp: "assets/work/av-about.webp",
           alt: "Ashford Vale about page with quiet authority messaging",
           width: 1536,
           height: 1024,
@@ -453,7 +451,7 @@
         {
           category: "Digital",
           src: "assets/work/hg-home.png",
-          webp: "",
+          webp: "assets/work/hg-home.webp",
           alt: "Harbor Global LLP concept homepage with international hero and firm name",
           width: 1536,
           height: 1024,
@@ -463,7 +461,7 @@
         {
           category: "Digital",
           src: "assets/work/hg-services.png",
-          webp: "",
+          webp: "assets/work/hg-services.webp",
           alt: "Harbor Global productized services navigation grid",
           width: 1536,
           height: 1024,
@@ -473,7 +471,7 @@
         {
           category: "Digital",
           src: "assets/work/hg-about.png",
-          webp: "",
+          webp: "assets/work/hg-about.webp",
           alt: "Harbor Global about page explaining the international firm concept",
           width: 1536,
           height: 1024,
@@ -507,7 +505,7 @@
         {
           category: "Digital",
           src: "assets/work/sm-home.png",
-          webp: "",
+          webp: "assets/work/sm-home.webp",
           alt: "Saltmarsh Co. concept product landing with brand hero and three hot sauce bottles",
           width: 1536,
           height: 1024,
@@ -517,7 +515,7 @@
         {
           category: "Packaging",
           src: "assets/work/sm-packaging.png",
-          webp: "",
+          webp: "assets/work/sm-packaging.webp",
           alt: "Saltmarsh packaging system with bottle, carton, and label suite",
           width: 1536,
           height: 1024,
@@ -527,7 +525,7 @@
         {
           category: "Print",
           src: "assets/work/sm-labels.png",
-          webp: "",
+          webp: "assets/work/sm-labels.webp",
           alt: "Saltmarsh three-flavor label system print faces",
           width: 1536,
           height: 1024,
@@ -537,7 +535,7 @@
         {
           category: "Social",
           src: "assets/work/sm-launch.png",
-          webp: "",
+          webp: "assets/work/sm-launch.webp",
           alt: "Saltmarsh four-frame social launch creative sequence",
           width: 1536,
           height: 1024,
@@ -693,22 +691,6 @@
     container.innerHTML = projects.map(renderProject).join("");
   }
 
-  function isAuthenticated() {
-    return sessionStorage.getItem(AUTH_KEY) === "1";
-  }
-
-  function login(password) {
-    if (password === PASSWORD) {
-      sessionStorage.setItem(AUTH_KEY, "1");
-      return true;
-    }
-    return false;
-  }
-
-  function logout() {
-    sessionStorage.removeItem(AUTH_KEY);
-  }
-
   function newProject() {
     const id = `project-${Date.now()}`;
     return {
@@ -759,8 +741,6 @@
 
   window.WorkStore = {
     STORAGE_KEY,
-    AUTH_KEY,
-    PASSWORD,
     getDefaults,
     load,
     save,
@@ -774,9 +754,6 @@
     renderWorkItem,
     escapeHtml,
     slugify,
-    isAuthenticated,
-    login,
-    logout,
     newProject,
     newWorkItem,
   };

@@ -36,8 +36,20 @@ Project Manager
 HTML  
 CSS  
 JavaScript  
-Netlify  
+Netlify (static hosting, Functions, Edge Functions)  
 Google Fonts (Bebas Neue, DM Sans)
+
+## Ownership auth (required for deploy)
+
+Studio login and `/agreements/*` are protected by Netlify Functions + an Edge Function.
+
+Set these **Netlify environment variables** (Site settings → Environment variables), then redeploy:
+
+- `STUDIO_EMAIL` — your sign-in email (example: `hello@brandonfonville.com`)
+- `STUDIO_PASSWORD` — a strong password (never commit this)
+- `AUTH_SECRET` — long random string used to sign the session cookie
+
+Local reference: see `.env.example` (do not commit a real `.env`).
 
 ## Features
 
