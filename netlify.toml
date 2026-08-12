@@ -1,9 +1,115 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[edge_functions]]
+  function = "protect-agreements"
+  path = "/agreements/*"
+
+[[redirects]]
+  from = "/api/auth/login"
+  to = "/.netlify/functions/auth-login"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth/logout"
+  to = "/.netlify/functions/auth-logout"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth/session"
+  to = "/.netlify/functions/auth-session"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
+
+[[redirects]]
+  from = "/works"
+  to = "/works.html"
+  status = 200
+
+[[redirects]]
+  from = "/write"
+  to = "/write.html"
+  status = 200
+
+[[redirects]]
+  from = "/discovery"
+  to = "/discovery.html"
+  status = 200
+
+[[redirects]]
+  from = "/ownership"
+  to = "/ownership.html"
+  status = 200
+
+# Prefer clean URLs over *.html duplicates
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/services.html"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/works.html"
+  to = "/works"
+  status = 301
+
+[[redirects]]
+  from = "/write.html"
+  to = "/write"
+  status = 301
+
+[[redirects]]
+  from = "/discovery.html"
+  to = "/discovery"
+  status = 301
+
+[[redirects]]
+  from = "/ownership.html"
+  to = "/ownership"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io"
+
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
-  for = "/*.{css,js,ico,png,jpg,webp,svg}"
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.{css,js,ico,png,jpg,webp,svg,woff2}"
   [headers.values]
     Cache-Control = "public, max-age=604800"

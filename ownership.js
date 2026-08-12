@@ -599,50 +599,86 @@ function setLoginStatus(message, kind) {
   loginStatus.className = "form-status" + (kind ? " " + kind : "");
 }
 
-function attemptLogin(e) {
+async function checkSession() {
+  try {
+    const res = await fetch("/api/auth/session", {
+      method: "GET",
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return !!data?.authenticated;
+  } catch (err) {
+    console.error("Session check failed:", err);
+    return false;
+  }
+}
+
+async function attemptLogin(e) {
   e?.preventDefault?.();
   e?.stopPropagation?.();
+  const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
-  const password = (passwordInput?.value || "").trim();
-  if (!password) {
-    setLoginStatus("Enter your password.", "error");
-    passwordInput?.focus();
+  const email = (emailInput?.value || "").trim();
+  const password = passwordInput?.value || "";
+
+  if (!email || !password) {
+    setLoginStatus("Enter your email and password.", "error");
+    (email ? passwordInput : emailInput)?.focus();
     return false;
   }
-  if (typeof WorkStore === "undefined" || typeof WorkStore.login !== "function") {
-    setLoginStatus("Sign-in is unavailable. Hard-refresh the page (Cmd+Shift+R).", "error");
-    return false;
-  }
+
+  const loginBtn = document.getElementById("loginBtn");
+  if (loginBtn) loginBtn.disabled = true;
+  setLoginStatus("Signing in…");
+
   try {
-    if (WorkStore.login(password)) {
-      setLoginStatus("");
-      showAdmin();
-      return true;
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data?.ok) {
+      setLoginStatus(data?.error || "Incorrect email or password.", "error");
+      passwordInput?.focus();
+      return false;
     }
-    setLoginStatus("Incorrect password.", "error");
-    return false;
+    setLoginStatus("");
+    if (passwordInput) passwordInput.value = "";
+    showAdmin();
+    return true;
   } catch (err) {
     console.error("Ownership login failed:", err);
     setLoginStatus("Sign-in hit an error. Refresh and try again.", "error");
     return false;
+  } finally {
+    if (loginBtn) loginBtn.disabled = false;
   }
 }
 
 function wireLoginControls() {
   const loginBtn = document.getElementById("loginBtn");
+  const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   loginBtn?.addEventListener("click", attemptLogin);
-  passwordInput?.addEventListener("keydown", (e) => {
+  const onEnter = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       attemptLogin(e);
     }
-  });
-  // Capture-phase fallback if something else stops the bubble later
+  };
+  emailInput?.addEventListener("keydown", onEnter);
+  passwordInput?.addEventListener("keydown", onEnter);
   loginForm?.addEventListener(
     "keydown",
     (e) => {
-      if (e.key === "Enter" && e.target === passwordInput) {
+      if (e.key === "Enter" && (e.target === emailInput || e.target === passwordInput)) {
         e.preventDefault();
         attemptLogin(e);
       }
@@ -653,23 +689,35 @@ function wireLoginControls() {
 
 wireLoginControls();
 
-logoutBtn?.addEventListener("click", () => {
-  WorkStore.logout();
+logoutBtn?.addEventListener("click", async () => {
+  try {
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+    });
+  } catch (err) {
+    console.error("Logout failed:", err);
+  }
   showLogin();
+  const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
+  if (emailInput) emailInput.value = "";
   if (passwordInput) passwordInput.value = "";
   setLoginStatus("");
 });
 
 bindAdminEvents();
 
-try {
-  if (WorkStore.isAuthenticated()) {
-    showAdmin();
-  } else {
+(async () => {
+  try {
+    if (await checkSession()) {
+      showAdmin();
+    } else {
+      showLogin();
+    }
+  } catch (err) {
+    console.error("Ownership init failed:", err);
     showLogin();
   }
-} catch (err) {
-  console.error("Ownership init failed:", err);
-  showLogin();
-}
+})();

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /ownership
+Disallow: /agreements/
+Disallow: /api/
+Disallow: /raffle-spin-demo.html
+
+Sitemap: https://brandonfonville.com/sitemap.xml

@@ -4,15 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Ownership :  Brandon Fonville Creative Studio</title>
+  <title>Ownership | Brandon Fonville Creative Studio</title>
+  <link rel="canonical" href="https://brandonfonville.com/ownership" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=home-rail-services-1" />
-  <link rel="stylesheet" href="ownership.css?v=login-fix-20260808b" />
+  <link rel="stylesheet" href="styles.css?v=perf-seo-20260812" />
+  <link rel="stylesheet" href="ownership.css?v=auth-email-20260812" />
   <script>document.documentElement.classList.add("js");</script>
 </head>
 <body class="ownership-page">
@@ -60,9 +61,9 @@
             </div>
             <div class="menu-rail" aria-hidden="true">
               <div class="menu-rail-track">
-                <img src="assets/work/work-identity.png" alt="" />
-                <img src="assets/work/ss-demo.png" alt="" />
-                <img src="assets/work/av-home.png" alt="" />
+                <picture><source srcset="assets/work/work-identity.webp" type="image/webp" /><img src="assets/work/work-identity.png" alt="" /></picture>
+                <picture><source srcset="assets/work/ss-demo.webp" type="image/webp" /><img src="assets/work/ss-demo.png" alt="" /></picture>
+                <picture><source srcset="assets/work/av-home.webp" type="image/webp" /><img src="assets/work/av-home.png" alt="" /></picture>
                 <span class="menu-rail-spacer" aria-hidden="true"></span>
               </div>
             </div>
@@ -99,8 +100,12 @@
         <p class="ownership-lead">Update the Work section, preview changes on the live site, and access your full contract library :  no Netlify deploy needed.</p>
         <div id="loginForm" class="ownership-form" role="form" aria-label="Studio ownership sign in">
           <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" autocomplete="username" inputmode="email" required />
+          </div>
+          <div class="field">
             <label for="password">Password</label>
-            <input id="password" type="password" autocomplete="current-password" />
+            <input id="password" type="password" autocomplete="current-password" required />
           </div>
           <button type="button" id="loginBtn" class="btn btn-primary btn-block">Sign in</button>
           <p class="form-status" id="loginStatus" role="status" aria-live="polite"></p>
@@ -184,9 +189,9 @@
     </section>
   </main>
 
-  <script src="work-store.js?v=pw-20260808"></script>
+  <script src="work-store.js?v=perf-seo-20260812"></script>
   <script src="contract-library.js"></script>
-  <script src="script.js?v=home-rail-services-1"></script>
-  <script src="ownership.js?v=login-const-fix-20260808"></script>
+  <script src="script.js?v=perf-seo-20260812"></script>
+  <script src="ownership.js?v=auth-email-20260812"></script>
 </body>
 </html>

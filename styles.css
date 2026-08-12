@@ -355,7 +355,17 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   animation: menuRail 14s steps(7) infinite;
 }
+
+.menu-rail picture,
+.home-work picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.menu-rail picture { aspect-ratio: 0.8; flex-shrink: 0; }
+
 .menu-rail img,
+.menu-rail picture,
 .menu-rail-spacer {
   width: 100%;
   aspect-ratio: 0.8;
@@ -365,6 +375,14 @@ a { color: inherit; text-decoration: none; }
 .menu-rail img {
   object-fit: cover;
   filter: saturate(0);
+  width: 100%;
+  height: 100%;
+}
+.menu-rail picture img {
+  object-fit: cover;
+  filter: saturate(0);
+  width: 100%;
+  height: 100%;
 }
 .menu-rail-spacer {
   visibility: hidden;

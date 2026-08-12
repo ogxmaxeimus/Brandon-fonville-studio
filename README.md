@@ -1,136 +1,94 @@
-# Brandon Fonville — Creative Studio (Website Concept)
+# Brandon Fonville Creative Studio
 
-A single-page website concept for **Brandon Fonville Creative Studio**:
-Product Design • Graphic Design • Brand Visuals.
+Portfolio and client site for Brandon Fonville Creative Studio.
 
-Content is sourced directly from the two studio documents, which are also
-linked for download inside the site.
+## Overview
 
-## Run it
+[brandonfonville.com](https://brandonfonville.com) is the live studio site. It covers selected work (identity, product, packaging, merch), service packages, a discovery questionnaire, and project intake. This BFCS repo is the static HTML, CSS, and JavaScript source, deployed on Netlify.
 
-No build step. Either:
+## Problem
 
-```bash
-# open directly
-open index.html
+A freelance designer’s site has to feel like a real studio and still make it simple for clients to see the work, understand packages, and start a project.
 
-# or serve locally (recommended so the PDF links work)
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
+## Solution
 
-## Structure
+Built a static site with a clear homepage, a works section with case studies, package based services, a discovery form, and a protected ownership area for portfolio and contracts. Netlify handles hosting and pretty URLs.
 
-```
-brandon-fonville-studio/
-├── index.html
-├── styles.css
-├── script.js
-├── favicon.ico
-├── favicon-32.png
-├── apple-touch-icon.png
-├── og-image.jpg          # social link preview (1200×630)
-├── og-image.png
-├── .gitignore
-├── assets/
-│   ├── *.pdf
-│   └── work/             # work-*.webp (+ .png fallback)
-└── README.md
-```
+## My Role
 
-## Sections
+Product Designer  
+UX/UI Designer  
+Frontend Developer  
+Project Manager
 
-1. **Hero**: tagline, headline, key stats, scrolling skills marquee
-2. **About**: bio plus "I specialize in" card plus downloadable About Me PDF
-3. **Services**: Brand & Graphic, Product, Content & Digital
-4. **Work**: selected-work gallery (sample mockups, masonry layout)
-5. **Packages**: all 5 packages with pricing (Product Launch featured)
-6. **Add-ons**: pricing table plus downloadable services & pricing PDF
-7. **Process**: 4-step working method
-8. **Contact**: project-request form wired to Formspree
+## Process
 
-## Light / dark theme
+1. Discovery
+2. Research
+3. Wireframes
+4. Design
+5. Development
+6. Testing
+7. Launch
 
-A toggle (☾ / ☀) lives in the header. It respects the visitor's system
-preference on first visit and remembers their choice via `localStorage`
-(key: `bfc-theme`). No setup required.
+## Tech Stack
 
-## Contact form (Formspree — live)
+HTML  
+CSS  
+JavaScript  
+Netlify (static hosting, Functions, Edge Functions)  
+Google Fonts (Bebas Neue, DM Sans)
 
-The form is connected to the live Formspree endpoint
-`https://formspree.io/f/xwvjkpva` (set in the form `action` in `index.html`).
+## Ownership auth (required for deploy)
 
-This uses the **Vanilla JS / AJAX** approach, where submissions are sent via `fetch`
-(no page reload), with:
+Studio login and `/agreements/*` are protected by Netlify Functions + an Edge Function.
 
-- inline success / error states styled to match the site,
-- a disabled button while sending,
-- a honeypot (`_gotcha`) anti-spam field,
-- a custom email subject line.
+Set these **Netlify environment variables** (Site settings → Environment variables), then redeploy:
 
-> **First-time activation:** Formspree sends a one-time confirmation email to
-> the form owner on the very first submission. Confirm it once and the form is
-> fully active.
->
-> To change the destination, edit the `action` URL in `index.html`. The same
-> markup also works with Getform, Basin, or Web3Forms.
+- `STUDIO_EMAIL` — your sign-in email (example: `hello@brandonfonville.com`)
+- `STUDIO_PASSWORD` — a strong password (never commit this)
+- `AUTH_SECRET` — long random string used to sign the session cookie
 
-## Selected work / portfolio
+Local reference: see `.env.example` (do not commit a real `.env`).
 
-The gallery is populated with **sample mockup images** in `assets/work/`
-(`work-identity.png`, `work-phonecase.png`, etc.). To swap in real projects,
-just replace those files (keep the same names) or update the `src` on each
-`<img class="work-img">` in `index.html` and edit the captions.
+## Features
 
-## Going live (deployment)
+Homepage with work flipper and Start a Project CTA.  
+Works portfolio with case studies including TradeVerified, ScopeSignal, Maxeimus, Blue Collar Millionaire, Knights Play, Ashford Vale, Harbor Global, and Saltmarsh.  
+Saltmarsh Co. product launch concept: packaging, labels, landing page, and social sequence.  
+Services packages for brand, product, digital, retainers, and web.  
+Discovery questionnaire before proposals.  
+Project inquiry on Write.  
+About page.  
+Ownership login for portfolio data and contracts.  
+Theme toggle and site menu with work rail.  
+Open Graph preview images.
 
-This is a plain static site (HTML/CSS/JS) with no build step, so it can be hosted
-free almost anywhere. Recommended options, easiest first:
+## Screenshots
 
-### Option A — Netlify Drop (fastest, ~1 minute, no account commands)
+![Studio Open Graph preview](og-image.jpg)
 
-1. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
-2. Drag the whole `brandon-fonville-studio` folder onto the page.
-3. It deploys instantly to a `*.netlify.app` URL. Done.
+![Saltmarsh concept landing](assets/work/sm-home.png)
 
-To update later, drag the folder again (or connect a Git repo for auto-deploys).
+## Live Demo
 
-### Option B — GitHub Pages (free, version-controlled)
+Production: [https://brandonfonville.com](https://brandonfonville.com)  
 
-From the project folder (the repo is ready to init, so run these in Terminal):
+Repo and Netlify source: `ogxmaxeimus/BFCS` (publish directory is `.`)
+
+### Local preview
 
 ```bash
-cd ~/Projects/brandon-fonville-studio
-git init
-git add .
-git commit -m "Launch-ready Brandon Fonville Creative Studio site"
-# Create an empty repo at github.com, then:
-git branch -M main
-git remote add origin https://github.com/<your-username>/brandon-fonville-studio.git
-git push -u origin main
+cd /Users/brandonfonville/Projects/BFCS
+python3 -m http.server 5200
 ```
 
-Then in the repo: **Settings → Pages → Source: `main` / root → Save**.
-Your site goes live at `https://<you>.github.io/brandon-fonville-studio/`.
+Open [http://127.0.0.1:5200/](http://127.0.0.1:5200/). Use a local server, not `file://`, so routes like `/works` and `/about` resolve.
 
-### Option C — Vercel or Cloudflare Pages
+## Case Study
 
-Install the CLI (`npm i -g vercel`) and run `vercel` in the folder, or connect
-the Git repo in the Vercel / Cloudflare Pages dashboard. Framework preset:
-**Other / None**, build command: none, output dir: the project root.
+[https://brandonfonville.com/works](https://brandonfonville.com/works)
 
-### Custom domain
+## Status
 
-All three providers let you add a custom domain (e.g. `brandonfonville.com`)
-under their domain settings. Point your domain's DNS to their nameservers or
-add the CNAME/A records they show you.
-
-## Before launching — checklist
-
-- [x] Formspree form connected (confirm the activation email once).
-- [x] Gallery has sample mockups (swap for real client work when ready).
-- [x] Favicon, Apple touch icon, and Open Graph image (`og-image.png`) in the site root.
-- [x] Gallery served as WebP with PNG fallback (~95% smaller than originals).
-- [ ] After deploy: set `og:url` and change `og:image` / `twitter:image` to your **full live URL** (required for link previews on social apps).
-- [ ] Add real contact details / social links in the footer.
-- [ ] Push to GitHub and enable Pages (see **Going live** above), or use Netlify Drop.
+Production. Live at [brandonfonville.com](https://brandonfonville.com).
