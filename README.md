@@ -54,7 +54,7 @@ Local reference: see `.env.example` (do not commit a real `.env`).
 ## Features
 
 Homepage with work flipper and Start a Project CTA.  
-Works portfolio with case studies including TradeVerified, ScopeSignal, Maxeimus, Blue Collar Millionaire, Knights Play, Ashford Vale, Harbor Global, and Saltmarsh.  
+Works portfolio with case studies including TradeVerified, ScopeSignal, Maxeimus, Blue Collar Millionaire, Knights Play, Ashford Vale, Harbor Global, Nate McMillan Foundation, and Saltmarsh.  
 Saltmarsh Co. product launch concept: packaging, labels, landing page, and social sequence.  
 Services packages for brand, product, digital, retainers, and web.  
 Discovery questionnaire before proposals.  

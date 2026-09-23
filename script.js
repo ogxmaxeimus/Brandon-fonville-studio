@@ -350,7 +350,7 @@ const FLIPPER_PROJECTS = [
   { id: "tradeverified", title: "TradeVerified", tag: "Product" },
   { id: "knightsplay", title: "Knights Play", tag: "Wayfinding" },
   { id: "ashfordvale", title: "Ashford Vale", tag: "Web" },
-  { id: "harborglobal", title: "Harbor Global", tag: "Web" },
+  { id: "nmf", title: "Nate McMillan Foundation", tag: "Web" },
 ];
 
 function initHomeFlipper() {
@@ -550,6 +550,7 @@ const WORK_PREVIEWS = {
   knightsplay: { src: "assets/work/kp-wayfinding.png", caption: "Knights Play, Wayfinding" },
   ashfordvale: { src: "assets/work/av-home.png", caption: "Ashford Vale, Web" },
   harborglobal: { src: "assets/work/hg-home.png", caption: "Harbor Global, Web" },
+  nmf: { src: "assets/work/nmf-home.png", caption: "Nate McMillan Foundation, Web" },
   saltmarsh: { src: "assets/work/sm-home.png", caption: "Saltmarsh · Product Launch" },
 };
 
