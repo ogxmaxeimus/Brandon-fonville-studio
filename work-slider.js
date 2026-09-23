@@ -70,6 +70,12 @@
       webp: "",
       alt: "Harbor Global LLP international law firm website concept",
     },
+    nmf: {
+      color: "#2A1810",
+      src: "assets/work/hero-nmf.png",
+      webp: "",
+      alt: "Nate McMillan Foundation mentoring website homepage",
+    },
     saltmarsh: {
       color: "#1A4F4E",
       src: "assets/work/sm-home.png",
