@@ -365,6 +365,7 @@ function renderMissingProjects() {
     knightsplay: "Knights Play Golf Center — concept",
     ashfordvale: "Ashford Vale LLP — concept",
     harborglobal: "Harbor Global LLP — concept",
+    nmf: "Nate McMillan Foundation",
     saltmarsh: "Saltmarsh Co. — concept",
   };
 
@@ -390,6 +391,7 @@ function restoreProjectById(id) {
     knightsplay: "Knights Play Golf Center — concept",
     ashfordvale: "Ashford Vale LLP — concept",
     harborglobal: "Harbor Global LLP — concept",
+    nmf: "Nate McMillan Foundation",
     saltmarsh: "Saltmarsh Co. — concept",
   };
   const label = labels[id] || id;
